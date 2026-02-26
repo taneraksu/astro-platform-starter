@@ -1,0 +1,341 @@
+---
+import Layout from '../layouts/Layout.astro';
+
+const hipTimeline = [
+    {
+        period: 'Day 1–3',
+        title: 'Hospital Stay',
+        color: 'bg-blue-500',
+        badge: 'bg-blue-100 text-blue-800',
+        goals: ['Get out of bed with physiotherapist assistance', 'Walk short distances with frame/walker', 'Begin ankle pumps and simple exercises', 'Manage pain with medications', 'Attend occupational therapy assessment'],
+        restrictions: ['No hip flexion beyond 90°', 'No crossing legs', 'No twisting of operated hip'],
+        tips: 'Pain is expected and will be managed with medication. Focus on deep breathing exercises to prevent chest complications. Tell nursing staff about your pain level.',
+    },
+    {
+        period: 'Week 1–2',
+        title: 'Home Recovery Begins',
+        color: 'bg-blue-400',
+        badge: 'bg-blue-100 text-blue-800',
+        goals: ['Walk with frame indoors independently', 'Manage basic personal care with aids', 'Perform prescribed exercises 2–3x daily', 'Wound/dressing care as instructed', 'Attend community physiotherapy or home visits'],
+        restrictions: ['Continue hip precautions (posterior approach)', 'No driving', 'No lifting >2–3 kg', 'No returning to work'],
+        tips: 'Swelling and bruising are normal. Keep the leg elevated when resting. Take pain medication before exercises. Constipation is common with opioids — stay hydrated and use laxatives if prescribed.',
+    },
+    {
+        period: 'Week 3–6',
+        title: 'Progressive Recovery',
+        color: 'bg-teal-500',
+        badge: 'bg-teal-100 text-teal-800',
+        goals: ['Progress to walking stick/crutch outdoors', 'Begin stair climbing with rail', 'Increase walking distances gradually', 'Start light strengthening exercises', 'May begin driving at 6 weeks (left hip automatic) if approved by surgeon'],
+        restrictions: ['Continue hip precautions if posterior approach', 'No impact activities', 'No return to physically demanding work'],
+        tips: 'Fatigue is normal and should gradually improve. Alternate activity with rest. Most people can manage most daily activities by 6 weeks. Swelling may persist for several months.',
+    },
+    {
+        period: 'Week 6–12',
+        title: 'Building Strength',
+        color: 'bg-green-500',
+        badge: 'bg-green-100 text-green-800',
+        goals: ['Walk without walking aid for most activities', 'Return to most sedentary work', 'Continue physiotherapy and strengthening', 'Cleared to drive (check with surgeon)', 'Begin low-impact exercise (swimming, cycling)'],
+        restrictions: ['No running or impact activities yet', 'No squatting deeply', 'No high-impact sports'],
+        tips: 'The operated hip should feel noticeably better than before surgery by 12 weeks. If pain is not improving, discuss with your surgeon.',
+    },
+    {
+        period: '3–6 Months',
+        title: 'Functional Recovery',
+        color: 'bg-emerald-500',
+        badge: 'bg-emerald-100 text-emerald-800',
+        goals: ['Return to full activities of daily living', 'Return to physically active work if appropriate', 'Begin recreational activities (golf, cycling, swimming)', 'Continue muscle strengthening', 'Most precautions lifted by 3 months'],
+        restrictions: ['Avoid high-impact sports (running, contact sports)', 'Avoid extreme hip positions'],
+        tips: 'Most patients feel substantially recovered by 3 months. Full muscle strength recovery takes up to 12 months.',
+    },
+    {
+        period: '6–12 Months',
+        title: 'Full Recovery',
+        color: 'bg-purple-500',
+        badge: 'bg-purple-100 text-purple-800',
+        goals: ['Return to normal recreational activities', 'Full muscle strength restoration', 'Return to low-impact sport (golf, doubles tennis, swimming)', 'Final follow-up X-ray with surgeon'],
+        restrictions: ['Lifelong: avoid high-impact running sports', 'Avoid activities with extreme hip positions'],
+        tips: 'Most patients feel back to their "new normal" by 12 months. Your artificial joint should allow you to resume most activities pain-free.',
+    },
+];
+
+const kneeTimeline = [
+    {
+        period: 'Day 1–3',
+        title: 'Hospital Stay',
+        color: 'bg-blue-500',
+        badge: 'bg-blue-100 text-blue-800',
+        goals: ['Mobilise with physiotherapist assistance', 'Begin continuous passive motion (CPM) if prescribed', 'Achieve 0–90° knee range of motion', 'Ankle pumps and quad sets', 'Ice and elevation for swelling'],
+        restrictions: ['Keep leg elevated when resting', 'No kneeling', 'No twisting'],
+        tips: 'Ice packs applied above and below the bandage help control swelling. Knee replacement is typically more painful than hip replacement in the early period.',
+    },
+    {
+        period: 'Week 1–2',
+        title: 'Home Recovery',
+        color: 'bg-blue-400',
+        badge: 'bg-blue-100 text-blue-800',
+        goals: ['Walk with frame/walker indoors', 'Achieve 90°+ flexion by end of week 2', 'Manage stairs with rail', 'Wound care as instructed', 'Twice daily physiotherapy exercises'],
+        restrictions: ['No kneeling or squatting deeply', 'No driving', 'Ice knee 15 min several times daily'],
+        tips: 'Regaining knee bend (flexion) is critical in the first 6 weeks. Do your exercises consistently. Stiffness that becomes permanent is the most common adverse outcome.',
+    },
+    {
+        period: 'Week 3–6',
+        title: 'Progressive Flexion',
+        color: 'bg-teal-500',
+        badge: 'bg-teal-100 text-teal-800',
+        goals: ['Achieve 100–120° flexion (most activities require 120°)', 'Progress to walking stick', 'Begin outdoor walking program', 'Stationary cycling if range allows', 'Consider hydrotherapy'],
+        restrictions: ['No kneeling or squatting', 'No impact activities', 'Check with surgeon about driving'],
+        tips: 'Stationary cycling is excellent rehabilitation — helps regain range of motion and builds quad strength. Start with the seat high and progress.',
+    },
+    {
+        period: 'Week 6–12',
+        title: 'Strengthening Phase',
+        color: 'bg-green-500',
+        badge: 'bg-green-100 text-green-800',
+        goals: ['Walk without walking aid for short distances', 'Achieve near-full range of motion', 'Return to sedentary work', 'Begin strengthening program', 'Cycling and swimming approved for most patients'],
+        restrictions: ['No running or high-impact activities', 'No kneeling on hard surfaces'],
+        tips: 'Knee replacement has a longer rehabilitation than hip replacement. Continued swelling is normal up to 12 months.',
+    },
+    {
+        period: '3–6 Months',
+        title: 'Functional Recovery',
+        color: 'bg-emerald-500',
+        badge: 'bg-emerald-100 text-emerald-800',
+        goals: ['Return to most daily activities', 'Return to work in most occupations', 'Comfortable walking distances', 'Most swelling resolved', 'Gradual return to recreational activities'],
+        restrictions: ['No running', 'No kneeling on hard floors', 'No contact sports'],
+        tips: 'About 20% of patients have some ongoing discomfort at 3–6 months — this is normal. Discuss concerns with your surgeon.',
+    },
+    {
+        period: '6–12 Months',
+        title: 'Full Recovery',
+        color: 'bg-purple-500',
+        badge: 'bg-purple-100 text-purple-800',
+        goals: ['Full activities of daily living restored', 'Low-impact recreational activities', 'Final review with surgeon', 'Maintenance exercise program established'],
+        restrictions: ['Lifelong: no running or high-impact sports', 'No kneeling on hard surfaces'],
+        tips: 'Full recovery from knee replacement takes longer than hip — most patients feel fully recovered at 12–18 months. Numbness on the outer side of the knee is often permanent due to surgical approach.',
+    },
+];
+---
+
+<Layout
+    title="Recovery Timeline"
+    description="Week-by-week hip and knee replacement recovery timeline with goals and milestones"
+>
+    <div class="page-header">
+        <div class="flex items-center gap-2 text-sm text-slate-500 mb-3">
+            <a href="/" class="hover:text-blue-700 no-underline">Home</a>
+            <span>/</span>
+            <span class="text-slate-700">Recovery Timeline</span>
+        </div>
+        <h1 class="page-title">Recovery Timeline</h1>
+        <p class="page-subtitle text-lg">
+            Understand what to expect week-by-week after your hip or knee replacement.
+        </p>
+    </div>
+
+    <!-- Key Principles -->
+    <div class="grid grid-cols-1 sm:grid-cols-3 gap-4 mb-8">
+        <div class="card">
+            <div class="text-2xl mb-2">💪</div>
+            <h3 class="font-semibold text-slate-900 mb-1">Everyone is Different</h3>
+            <p class="text-sm text-slate-500">Recovery timelines vary based on age, health, fitness, and surgical factors. Your experience may differ from these averages.</p>
+        </div>
+        <div class="card">
+            <div class="text-2xl mb-2">📈</div>
+            <h3 class="font-semibold text-slate-900 mb-1">Consistent Effort</h3>
+            <p class="text-sm text-slate-500">Regular physiotherapy exercises are the single biggest factor in a good outcome. Consistency beats intensity.</p>
+        </div>
+        <div class="card">
+            <div class="text-2xl mb-2">🩺</div>
+            <h3 class="font-semibold text-slate-900 mb-1">Follow Your Team</h3>
+            <p class="text-sm text-slate-500">Always follow your surgeon and physiotherapist's specific advice — it takes priority over these general guidelines.</p>
+        </div>
+    </div>
+
+    <!-- Tab Navigation -->
+    <div class="mb-6">
+        <div class="flex gap-2 border-b border-slate-200">
+            <button
+                id="tab-hip"
+                class="px-4 py-3 text-sm font-semibold border-b-2 border-blue-600 text-blue-700 -mb-px bg-transparent cursor-pointer"
+                onclick="showTab('hip')"
+            >
+                🦴 Hip Replacement
+            </button>
+            <button
+                id="tab-knee"
+                class="px-4 py-3 text-sm font-semibold border-b-2 border-transparent text-slate-500 hover:text-slate-700 -mb-px bg-transparent cursor-pointer"
+                onclick="showTab('knee')"
+            >
+                🦵 Knee Replacement
+            </button>
+        </div>
+    </div>
+
+    <!-- Hip Timeline -->
+    <div id="content-hip">
+        <div class="space-y-0">
+            {hipTimeline.map((phase, index) => (
+                <div class="timeline-item">
+                    <div class={`timeline-dot ${phase.color} text-white`}>
+                        {index + 1}
+                    </div>
+                    <div class="card ml-2">
+                        <div class="flex flex-wrap items-center gap-3 mb-4">
+                            <span class={`badge ${phase.badge} font-semibold`}>{phase.period}</span>
+                            <h3 class="font-semibold text-slate-900">{phase.title}</h3>
+                        </div>
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
+                            <div>
+                                <p class="section-header">Goals & Milestones</p>
+                                <ul class="space-y-1.5">
+                                    {phase.goals.map(g => (
+                                        <li class="flex items-start gap-2 text-sm text-slate-700">
+                                            <svg width="14" height="14" viewBox="0 0 24 24" fill="#16a34a" class="flex-shrink-0 mt-0.5">
+                                                <path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/>
+                                            </svg>
+                                            {g}
+                                        </li>
+                                    ))}
+                                </ul>
+                            </div>
+                            <div>
+                                <p class="section-header">Precautions & Restrictions</p>
+                                <ul class="space-y-1.5">
+                                    {phase.restrictions.map(r => (
+                                        <li class="flex items-start gap-2 text-sm text-slate-700">
+                                            <svg width="14" height="14" viewBox="0 0 24 24" fill="#dc2626" class="flex-shrink-0 mt-0.5">
+                                                <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-2h2v2zm0-4h-2V7h2v6z"/>
+                                            </svg>
+                                            {r}
+                                        </li>
+                                    ))}
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="alert alert-info text-sm">
+                            <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" class="flex-shrink-0 mt-0.5">
+                                <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-6h2v6zm0-8h-2V7h2v2z"/>
+                            </svg>
+                            <p>{phase.tips}</p>
+                        </div>
+                    </div>
+                </div>
+            ))}
+        </div>
+    </div>
+
+    <!-- Knee Timeline -->
+    <div id="content-knee" class="hidden">
+        <div class="space-y-0">
+            {kneeTimeline.map((phase, index) => (
+                <div class="timeline-item">
+                    <div class={`timeline-dot ${phase.color} text-white`}>
+                        {index + 1}
+                    </div>
+                    <div class="card ml-2">
+                        <div class="flex flex-wrap items-center gap-3 mb-4">
+                            <span class={`badge ${phase.badge} font-semibold`}>{phase.period}</span>
+                            <h3 class="font-semibold text-slate-900">{phase.title}</h3>
+                        </div>
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
+                            <div>
+                                <p class="section-header">Goals & Milestones</p>
+                                <ul class="space-y-1.5">
+                                    {phase.goals.map(g => (
+                                        <li class="flex items-start gap-2 text-sm text-slate-700">
+                                            <svg width="14" height="14" viewBox="0 0 24 24" fill="#16a34a" class="flex-shrink-0 mt-0.5">
+                                                <path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/>
+                                            </svg>
+                                            {g}
+                                        </li>
+                                    ))}
+                                </ul>
+                            </div>
+                            <div>
+                                <p class="section-header">Precautions & Restrictions</p>
+                                <ul class="space-y-1.5">
+                                    {phase.restrictions.map(r => (
+                                        <li class="flex items-start gap-2 text-sm text-slate-700">
+                                            <svg width="14" height="14" viewBox="0 0 24 24" fill="#dc2626" class="flex-shrink-0 mt-0.5">
+                                                <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-2h2v2zm0-4h-2V7h2v6z"/>
+                                            </svg>
+                                            {r}
+                                        </li>
+                                    ))}
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="alert alert-info text-sm">
+                            <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" class="flex-shrink-0 mt-0.5">
+                                <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-6h2v6zm0-8h-2V7h2v2z"/>
+                            </svg>
+                            <p>{phase.tips}</p>
+                        </div>
+                    </div>
+                </div>
+            ))}
+        </div>
+    </div>
+
+    <!-- Blood Clot Prevention Info -->
+    <div class="mt-8 card border-l-4 border-l-red-400">
+        <h2 class="font-semibold text-slate-900 mb-3 flex items-center gap-2">
+            <span>🩸</span> Blood Clot (DVT/PE) Prevention
+        </h2>
+        <p class="text-sm text-slate-600 mb-4">
+            Deep vein thrombosis (DVT) and pulmonary embolism (PE) are serious risks after joint replacement. Your surgical team will implement prevention strategies:
+        </p>
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 text-sm">
+            <div>
+                <h3 class="font-medium text-slate-800 mb-2">Prevention measures you'll receive:</h3>
+                <ul class="space-y-1 text-slate-600 list-disc list-inside">
+                    <li>Anticoagulant medication (4–6 weeks)</li>
+                    <li>Compression stockings (TED stockings)</li>
+                    <li>Intermittent pneumatic compression in hospital</li>
+                    <li>Early mobilisation (walking the day of/after surgery)</li>
+                    <li>Adequate hydration</li>
+                </ul>
+            </div>
+            <div>
+                <h3 class="font-medium text-slate-800 mb-2">What you can do:</h3>
+                <ul class="space-y-1 text-slate-600 list-disc list-inside">
+                    <li>Ankle pumps every hour while resting</li>
+                    <li>Walk regularly as instructed</li>
+                    <li>Stay well hydrated (2L water/day)</li>
+                    <li>Avoid long periods of sitting with legs dependent</li>
+                    <li>Report calf pain, swelling, or breathlessness immediately</li>
+                </ul>
+            </div>
+        </div>
+        <div class="mt-4">
+            <a href="/warning-signs#dvt" class="btn btn-danger btn-sm">DVT Warning Signs →</a>
+        </div>
+    </div>
+</Layout>
+
+<script>
+    function showTab(tab: string) {
+        const hipContent = document.getElementById('content-hip');
+        const kneeContent = document.getElementById('content-knee');
+        const hipTab = document.getElementById('tab-hip');
+        const kneeTab = document.getElementById('tab-knee');
+
+        if (tab === 'hip') {
+            hipContent?.classList.remove('hidden');
+            kneeContent?.classList.add('hidden');
+            hipTab?.classList.add('border-blue-600', 'text-blue-700');
+            hipTab?.classList.remove('border-transparent', 'text-slate-500');
+            kneeTab?.classList.remove('border-blue-600', 'text-blue-700');
+            kneeTab?.classList.add('border-transparent', 'text-slate-500');
+        } else {
+            kneeContent?.classList.remove('hidden');
+            hipContent?.classList.add('hidden');
+            kneeTab?.classList.add('border-blue-600', 'text-blue-700');
+            kneeTab?.classList.remove('border-transparent', 'text-slate-500');
+            hipTab?.classList.remove('border-blue-600', 'text-blue-700');
+            hipTab?.classList.add('border-transparent', 'text-slate-500');
+        }
+    }
+
+    (window as any).showTab = showTab;
+</script>

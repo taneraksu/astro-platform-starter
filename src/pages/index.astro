@@ -1,19 +1,199 @@
 ---
 import Layout from '../layouts/Layout.astro';
-import Markdown from '../components/Markdown.astro';
 
-const explainer = `
-An Astro website can go way beyond static pages - on the right platform.
+const featureCards = [
+    {
+        title: 'Pre-Surgery Checklist',
+        description: 'Prepare for your procedure with our comprehensive checklist covering medical clearances, home prep, and day-of instructions.',
+        href: '/pre-surgery',
+        icon: '📋',
+        color: 'blue',
+        badge: 'Preparation',
+    },
+    {
+        title: 'Recovery Timeline',
+        description: 'Understand your recovery journey week-by-week with realistic milestones for hip and knee replacement patients.',
+        href: '/recovery',
+        icon: '📅',
+        color: 'teal',
+        badge: 'Recovery',
+    },
+    {
+        title: 'Exercise Program',
+        description: 'Follow your prescribed rehabilitation exercises with step-by-step instructions and daily completion tracking.',
+        href: '/exercises',
+        icon: '🏃',
+        color: 'green',
+        badge: 'Rehab',
+    },
+    {
+        title: 'Pain & Symptom Tracker',
+        description: 'Log your daily pain levels, symptoms, and medications to share with your healthcare team at appointments.',
+        href: '/pain-tracker',
+        icon: '📊',
+        color: 'purple',
+        badge: 'Tracking',
+    },
+    {
+        title: 'Educational Resources',
+        description: 'Learn about hip and knee arthroplasty procedures, implants, anaesthesia options, and what to expect.',
+        href: '/resources',
+        icon: '📚',
+        color: 'indigo',
+        badge: 'Education',
+    },
+    {
+        title: 'Warning Signs',
+        description: 'Know when to seek urgent help — signs of infection, blood clots, dislocation, and other complications.',
+        href: '/warning-signs',
+        icon: '🚨',
+        color: 'red',
+        badge: 'Safety',
+    },
+];
 
-Netlify supports not only [Streaming SSR](https://docs.astro.build/en/guides/server-side-rendering/#html-streaming) and fast [Edge Middleware](https://docs.astro.build/en/guides/middleware/), but also [on-demand revalidation](https://www.netlify.com/blog/cache-tags-and-purge-api-on-netlify/) and [stale-while-revalidate](https://www.netlify.com/blog/swr-and-fine-grained-cache-control/). 
-Any page or data can be rebuilt only when needed, without site visitors ever getting a performance hit.
-`;
+const colorMap: Record<string, { card: string; badge: string; icon: string }> = {
+    blue:   { card: 'border-blue-200 hover:border-blue-400', badge: 'bg-blue-100 text-blue-800', icon: 'bg-blue-100' },
+    teal:   { card: 'border-teal-200 hover:border-teal-400', badge: 'bg-teal-100 text-teal-800', icon: 'bg-teal-100' },
+    green:  { card: 'border-green-200 hover:border-green-400', badge: 'bg-green-100 text-green-800', icon: 'bg-green-100' },
+    purple: { card: 'border-purple-200 hover:border-purple-400', badge: 'bg-purple-100 text-purple-800', icon: 'bg-purple-100' },
+    indigo: { card: 'border-indigo-200 hover:border-indigo-400', badge: 'bg-indigo-100 text-indigo-800', icon: 'bg-indigo-100' },
+    red:    { card: 'border-red-200 hover:border-red-400', badge: 'bg-red-100 text-red-800', icon: 'bg-red-100' },
+};
 ---
 
-<Layout title="Welcome to Astro.">
-    <h1 class="mb-10">Netlify Platform Starter for Astro</h1>
-    <Markdown content={explainer} class="mb-10 text-lg" />
-    <p>
-        <a href="https://docs.netlify.com/frameworks/astro/" class="btn btn-lg sm:min-w-64">Read the Docs</a>
-    </p>
+<Layout title="Home" description="ArthroCare — Comprehensive orthopaedic arthroplasty patient support">
+    <!-- Hero Section -->
+    <div class="mb-10">
+        <div class="bg-gradient-to-br from-blue-800 to-blue-600 rounded-2xl p-8 sm:p-10 text-white">
+            <div class="flex flex-col sm:flex-row sm:items-center gap-6">
+                <div class="flex-1">
+                    <div class="inline-flex items-center gap-2 bg-blue-700/50 rounded-full px-3 py-1 text-sm mb-4">
+                        <span class="w-2 h-2 bg-green-400 rounded-full"></span>
+                        Your Recovery Companion
+                    </div>
+                    <h1 class="text-3xl sm:text-4xl font-bold text-white mb-3">
+                        Welcome to ArthroCare
+                    </h1>
+                    <p class="text-blue-100 text-lg leading-relaxed mb-6">
+                        Your comprehensive support app for hip and knee arthroplasty — from pre-surgery preparation through to full recovery.
+                    </p>
+                    <div class="flex flex-wrap gap-3">
+                        <a href="/pre-surgery" class="btn bg-white text-blue-800 hover:bg-blue-50 font-semibold">
+                            Get Started
+                        </a>
+                        <a href="/resources" class="btn bg-blue-700 text-white hover:bg-blue-800 border border-blue-500">
+                            Learn More
+                        </a>
+                    </div>
+                </div>
+                <div class="hidden sm:flex flex-col gap-3 text-sm min-w-48">
+                    <div class="bg-white/10 backdrop-blur rounded-xl p-4">
+                        <div class="text-2xl font-bold">6–12</div>
+                        <div class="text-blue-200 text-xs">Months to full recovery</div>
+                    </div>
+                    <div class="bg-white/10 backdrop-blur rounded-xl p-4">
+                        <div class="text-2xl font-bold">95%+</div>
+                        <div class="text-blue-200 text-xs">Patient satisfaction rate</div>
+                    </div>
+                    <div class="bg-white/10 backdrop-blur rounded-xl p-4">
+                        <div class="text-2xl font-bold">20yr+</div>
+                        <div class="text-blue-200 text-xs">Average implant lifespan</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Important Notice -->
+    <div class="alert alert-warning mb-8 rounded-xl">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor" class="flex-shrink-0 mt-0.5">
+            <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-2h2v2zm0-4h-2V7h2v6z"/>
+        </svg>
+        <div>
+            <p class="font-semibold text-sm">Medical Disclaimer</p>
+            <p class="text-sm mt-0.5">This app provides general guidance only. Always follow your surgeon's specific instructions. If you have concerns, contact your healthcare team immediately.</p>
+        </div>
+    </div>
+
+    <!-- Feature Cards -->
+    <div>
+        <h2 class="text-xl font-bold text-slate-900 mb-6">Your Care Sections</h2>
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+            {featureCards.map((card) => {
+                const colors = colorMap[card.color];
+                return (
+                    <a
+                        href={card.href}
+                        class={`group block bg-white rounded-xl border-2 ${colors.card} p-5 transition-all hover:shadow-md no-underline`}
+                    >
+                        <div class="flex items-start justify-between mb-3">
+                            <div class={`w-10 h-10 ${colors.icon} rounded-lg flex items-center justify-center text-xl`}>
+                                {card.icon}
+                            </div>
+                            <span class={`badge ${colors.badge} text-xs`}>
+                                {card.badge}
+                            </span>
+                        </div>
+                        <h3 class="font-semibold text-slate-900 mb-1 group-hover:text-blue-700 transition-colors">
+                            {card.title}
+                        </h3>
+                        <p class="text-sm text-slate-500 leading-relaxed">
+                            {card.description}
+                        </p>
+                        <div class="mt-3 flex items-center gap-1 text-sm font-medium text-blue-700">
+                            Open section
+                            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" class="group-hover:translate-x-0.5 transition-transform">
+                                <path d="M5 12h14M12 5l7 7-7 7"/>
+                            </svg>
+                        </div>
+                    </a>
+                );
+            })}
+        </div>
+    </div>
+
+    <!-- Quick Stats Row -->
+    <div class="mt-10 grid grid-cols-2 sm:grid-cols-4 gap-4">
+        <div class="card text-center">
+            <div class="text-3xl mb-1">🦴</div>
+            <div class="font-semibold text-slate-800">Hip Replacement</div>
+            <div class="text-xs text-slate-500 mt-0.5">Total hip arthroplasty</div>
+        </div>
+        <div class="card text-center">
+            <div class="text-3xl mb-1">🦵</div>
+            <div class="font-semibold text-slate-800">Knee Replacement</div>
+            <div class="text-xs text-slate-500 mt-0.5">Total knee arthroplasty</div>
+        </div>
+        <div class="card text-center">
+            <div class="text-3xl mb-1">💊</div>
+            <div class="font-semibold text-slate-800">Pain Management</div>
+            <div class="text-xs text-slate-500 mt-0.5">Track medications & symptoms</div>
+        </div>
+        <div class="card text-center">
+            <div class="text-3xl mb-1">🏥</div>
+            <div class="font-semibold text-slate-800">Post-Op Care</div>
+            <div class="text-xs text-slate-500 mt-0.5">Wound & mobility guidance</div>
+        </div>
+    </div>
+
+    <!-- Emergency Banner -->
+    <div class="mt-8 bg-red-50 border-2 border-red-200 rounded-xl p-5">
+        <div class="flex items-start gap-4">
+            <div class="w-10 h-10 bg-red-100 rounded-lg flex items-center justify-center flex-shrink-0">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="#dc2626">
+                    <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-2h2v2zm0-4h-2V7h2v6z"/>
+                </svg>
+            </div>
+            <div class="flex-1">
+                <h3 class="font-semibold text-red-800 mb-1">Know Your Warning Signs</h3>
+                <p class="text-sm text-red-700 mb-3">
+                    Certain symptoms after joint replacement require <strong>immediate medical attention</strong>: high fever, severe swelling, signs of blood clot, sudden severe pain, or wound drainage.
+                </p>
+                <a href="/warning-signs" class="btn btn-danger btn-sm">
+                    View Warning Signs →
+                </a>
+            </div>
+        </div>
+    </div>
 </Layout>

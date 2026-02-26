@@ -1,0 +1,348 @@
+---
+import Layout from '../layouts/Layout.astro';
+---
+
+<Layout
+    title="Warning Signs & Emergency Info"
+    description="Know when to seek urgent medical help after hip or knee replacement surgery"
+>
+    <div class="page-header">
+        <div class="flex items-center gap-2 text-sm text-slate-500 mb-3">
+            <a href="/" class="hover:text-blue-700 no-underline">Home</a>
+            <span>/</span>
+            <span class="text-slate-700">Warning Signs</span>
+        </div>
+        <h1 class="page-title">Warning Signs & When to Seek Help</h1>
+        <p class="page-subtitle text-lg">
+            Know the warning signs that require immediate medical attention after joint replacement surgery.
+        </p>
+    </div>
+
+    <!-- Emergency Banner -->
+    <div class="bg-red-600 text-white rounded-2xl p-6 mb-8">
+        <div class="flex items-center gap-4">
+            <div class="text-4xl">🚨</div>
+            <div>
+                <h2 class="text-xl font-bold mb-1">If you are unsure — always seek help</h2>
+                <p class="text-red-100 mb-4">
+                    After joint replacement surgery, it is always better to seek assessment and be told everything is fine, than to wait at home with a potentially serious complication.
+                </p>
+                <div class="flex flex-wrap gap-3">
+                    <a href="tel:000" class="btn bg-white text-red-700 hover:bg-red-50 font-bold">
+                        📞 Call 000 (Emergency)
+                    </a>
+                    <a href="tel:1800022222" class="btn bg-red-700 text-white hover:bg-red-800 border border-red-500 font-bold">
+                        📞 Healthdirect: 1800 022 222
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Go to ED NOW -->
+    <div class="mb-6">
+        <h2 class="text-lg font-bold text-red-700 mb-3 flex items-center gap-2">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="#dc2626">
+                <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-2h2v2zm0-4h-2V7h2v6z"/>
+            </svg>
+            Call 000 or Go to Emergency Department Immediately
+        </h2>
+        <div class="space-y-3">
+
+            <!-- Pulmonary Embolism -->
+            <div id="pe" class="alert alert-danger rounded-xl">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="#dc2626" class="flex-shrink-0">
+                    <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-2h2v2zm0-4h-2V7h2v6z"/>
+                </svg>
+                <div>
+                    <h3 class="font-bold text-red-900">Pulmonary Embolism (Blood Clot in Lungs)</h3>
+                    <p class="text-sm text-red-800 mt-1 mb-2">A blood clot that travels to the lungs is life-threatening. Call 000 immediately if you have:</p>
+                    <ul class="text-sm text-red-800 space-y-1 list-disc list-inside">
+                        <li>Sudden shortness of breath (not related to exertion)</li>
+                        <li>Chest pain, especially when breathing in</li>
+                        <li>Coughing up blood</li>
+                        <li>Rapid heart rate or palpitations</li>
+                        <li>Feeling faint, dizzy, or like you might pass out</li>
+                        <li>Bluish tinge to lips or fingertips</li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- Hip Dislocation -->
+            <div id="dislocation" class="alert alert-danger rounded-xl">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="#dc2626" class="flex-shrink-0">
+                    <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-2h2v2zm0-4h-2V7h2v6z"/>
+                </svg>
+                <div>
+                    <h3 class="font-bold text-red-900">Hip Dislocation</h3>
+                    <p class="text-sm text-red-800 mt-1 mb-2">The artificial ball can pop out of the socket (dislocation). Do not try to put it back yourself. Call 000 or go to ED if you experience:</p>
+                    <ul class="text-sm text-red-800 space-y-1 list-disc list-inside">
+                        <li>Sudden severe pain in the operated hip, often after bending or twisting</li>
+                        <li>Inability to bear weight on the leg</li>
+                        <li>Leg appears shorter or rotated (turned outward or inward) compared to the other side</li>
+                        <li>A 'clunk' or 'pop' sensation followed by inability to move</li>
+                    </ul>
+                    <div class="mt-2 p-2 bg-red-100 rounded-lg">
+                        <p class="text-xs text-red-900 font-semibold">Prevention: Follow hip precautions in early recovery — no bending hip past 90°, no crossing legs, no twisting.</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Severe bleeding -->
+            <div class="alert alert-danger rounded-xl">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="#dc2626" class="flex-shrink-0">
+                    <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-2h2v2zm0-4h-2V7h2v6z"/>
+                </svg>
+                <div>
+                    <h3 class="font-bold text-red-900">Severe Wound Bleeding</h3>
+                    <ul class="text-sm text-red-800 space-y-1 mt-1 list-disc list-inside">
+                        <li>Active bleeding not controlled by applying firm pressure for 15 minutes</li>
+                        <li>Large rapidly expanding haematoma (blood collection under skin)</li>
+                        <li>Signs of significant blood loss: pale, faint, rapid pulse</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Contact Your Surgeon / Go to ED Same Day -->
+    <div class="mb-6">
+        <h2 class="text-lg font-bold text-amber-700 mb-3 flex items-center gap-2">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="#d97706">
+                <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-2h2v2zm0-4h-2V7h2v6z"/>
+            </svg>
+            Contact Your Surgeon or Go to ED Today
+        </h2>
+        <div class="space-y-3">
+
+            <!-- Infection Signs -->
+            <div id="infection" class="bg-amber-50 border-2 border-amber-200 rounded-xl p-4">
+                <h3 class="font-bold text-amber-900 mb-2">⚠ Signs of Joint Infection</h3>
+                <p class="text-sm text-amber-800 mb-2">
+                    Periprosthetic joint infection (PJI) is a serious complication. Early detection is critical for successful treatment.
+                </p>
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                    <div>
+                        <p class="text-xs font-semibold text-amber-900 mb-1">Early signs (any of these warrant urgent review):</p>
+                        <ul class="text-sm text-amber-800 space-y-1 list-disc list-inside">
+                            <li>Fever above 38.5°C (101.3°F)</li>
+                            <li>Increasing redness around the wound</li>
+                            <li>Increasing warmth or heat over the joint</li>
+                            <li>Increasing swelling (especially after initial improvement)</li>
+                            <li>Wound discharge that is cloudy, yellow, green, or foul-smelling</li>
+                            <li>Wound edges that are not healing or are separating</li>
+                        </ul>
+                    </div>
+                    <div>
+                        <p class="text-xs font-semibold text-amber-900 mb-1">Later signs of deeper infection:</p>
+                        <ul class="text-sm text-amber-800 space-y-1 list-disc list-inside">
+                            <li>Pain that increases after initially improving</li>
+                            <li>Pain at rest and at night</li>
+                            <li>Stiffness and loss of previously gained movement</li>
+                            <li>General unwellness, rigors (shaking), or severe fatigue</li>
+                            <li>High persistent fever</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="mt-3 p-3 bg-amber-100 rounded-lg">
+                    <p class="text-xs text-amber-900">
+                        <strong>Note:</strong> Some wound ooze in the first few days is normal. It's the <em>progression</em> — increasing redness, new fever, foul smell, or worsening pain — that warrants urgent review.
+                    </p>
+                </div>
+            </div>
+
+            <!-- DVT -->
+            <div id="dvt" class="bg-amber-50 border-2 border-amber-200 rounded-xl p-4">
+                <h3 class="font-bold text-amber-900 mb-2">⚠ Deep Vein Thrombosis (Blood Clot in Leg)</h3>
+                <p class="text-sm text-amber-800 mb-2">
+                    DVT occurs when a blood clot forms in a deep vein, most commonly in the calf or thigh. It can be life-threatening if the clot breaks off and travels to the lungs (pulmonary embolism).
+                </p>
+                <ul class="text-sm text-amber-800 space-y-1 list-disc list-inside mb-3">
+                    <li>Calf pain, tenderness, or aching (often described as a cramp that doesn't go away)</li>
+                    <li>Swelling of the calf or entire leg (compare both sides)</li>
+                    <li>Warmth or redness over the calf or inner thigh</li>
+                    <li>Pain in back of the knee</li>
+                    <li>Leg feels heavy or different from the other leg</li>
+                </ul>
+                <div class="p-3 bg-amber-100 rounded-lg">
+                    <p class="text-xs text-amber-900">
+                        <strong>Important:</strong> DVT can occur despite anticoagulation treatment. If you develop new calf or leg symptoms not present the day before, seek same-day assessment. Do not wait.
+                    </p>
+                </div>
+            </div>
+
+            <!-- Periprosthetic Fracture -->
+            <div class="bg-amber-50 border-2 border-amber-200 rounded-xl p-4">
+                <h3 class="font-bold text-amber-900 mb-2">⚠ Possible Fracture Around the Implant</h3>
+                <ul class="text-sm text-amber-800 space-y-1 list-disc list-inside">
+                    <li>Sudden severe pain after a fall or impact</li>
+                    <li>Unable to bear weight after a fall</li>
+                    <li>Visible deformity of the limb</li>
+                    <li>Sudden new inability to perform movements that were previously possible</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <!-- Contact Your Surgeon (Non-urgent) -->
+    <div class="mb-6">
+        <h2 class="text-lg font-bold text-blue-700 mb-3 flex items-center gap-2">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="#1d4ed8">
+                <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-6h2v6zm0-8h-2V7h2v2z"/>
+            </svg>
+            Contact Your Surgical Team Within 24–48 Hours
+        </h2>
+        <div class="card">
+            <ul class="space-y-3">
+                {[
+                    { text: "Pain score consistently above 7/10 despite medications", concern: "May indicate inadequate analgesia or developing complication" },
+                    { text: "Wound not healing, or steri-strips/staples coming away early", concern: "Wound review may be needed" },
+                    { text: "Unable to perform exercises due to pain", concern: "Pain management review needed to allow rehabilitation" },
+                    { text: "Significant increase in swelling after initial improvement", concern: "May indicate haematoma or early infection" },
+                    { text: "Any clicking, clunking, or instability of the joint", concern: "Early dislocation or mechanical issue may need assessment" },
+                    { text: "Leg length difference that seems exaggerated or worsening", concern: "May indicate component problem or muscle weakness" },
+                    { text: "Urinary retention (unable to pass urine)", concern: "Spinal anaesthesia side effect — contact team" },
+                    { text: "Severe constipation unresponsive to laxatives for >3 days", concern: "Opioid bowel dysfunction — may need medication review" },
+                    { text: "Confusion, memory problems, or delirium (especially in elderly)", concern: "Postoperative delirium — needs prompt assessment" },
+                ].map(item => (
+                    <li class="flex items-start gap-3 p-3 bg-blue-50 rounded-lg">
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="#1d4ed8" class="flex-shrink-0 mt-0.5">
+                            <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-6h2v6zm0-8h-2V7h2v2z"/>
+                        </svg>
+                        <div>
+                            <p class="text-sm font-medium text-slate-800">{item.text}</p>
+                            <p class="text-xs text-slate-500 mt-0.5">{item.concern}</p>
+                        </div>
+                    </li>
+                ))}
+            </ul>
+        </div>
+    </div>
+
+    <!-- Normal vs Abnormal -->
+    <div class="card mb-6">
+        <h2 class="font-semibold text-slate-900 mb-4">Normal vs Concerning Symptoms</h2>
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
+            <div>
+                <h3 class="font-semibold text-green-700 mb-3 flex items-center gap-2">
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="#16a34a">
+                        <path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/>
+                    </svg>
+                    Normal after surgery
+                </h3>
+                <ul class="space-y-2 text-sm text-slate-600">
+                    {[
+                        "Pain and discomfort at the incision and joint (should gradually improve)",
+                        "Bruising around the incision and down the leg (may worsen for 1–2 weeks then resolve)",
+                        "Swelling of the joint and limb (normal for up to 3–6 months)",
+                        "Tiredness and fatigue (major surgery is draining)",
+                        "Feeling emotionally flat or tearful in first 2 weeks",
+                        "Mild wound ooze on first 1–2 dressing changes",
+                        "Numbness around the incision area (often permanent)",
+                        "Some clicking or soft tissue sensations with movement",
+                        "Mild fever (up to 38°C) for first 2–3 days post-op",
+                        "Constipation (from opioid medications and reduced mobility)",
+                        "Difficulty sleeping — pain and hospital environment disrupt sleep",
+                    ].map(item => (
+                        <li class="flex items-start gap-2">
+                            <svg width="14" height="14" viewBox="0 0 24 24" fill="#16a34a" class="flex-shrink-0 mt-0.5">
+                                <path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/>
+                            </svg>
+                            {item}
+                        </li>
+                    ))}
+                </ul>
+            </div>
+            <div>
+                <h3 class="font-semibold text-red-700 mb-3 flex items-center gap-2">
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="#dc2626">
+                        <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-2h2v2zm0-4h-2V7h2v6z"/>
+                    </svg>
+                    Concerning — seek advice
+                </h3>
+                <ul class="space-y-2 text-sm text-slate-600">
+                    {[
+                        "Fever above 38.5°C beyond 72 hours after surgery",
+                        "Pain that is getting progressively WORSE after initial improvement",
+                        "Wound redness, warmth, or swelling that is spreading",
+                        "Any discharge that is cloudy, green, or foul-smelling",
+                        "New calf pain or marked calf swelling",
+                        "Shortness of breath at rest or with minimal exertion",
+                        "Sudden severe pain in the hip (possible dislocation)",
+                        "Leg appears obviously shorter or deformed",
+                        "High fever (above 39°C) at any time",
+                        "Inability to pass urine",
+                        "Confusion or sudden deterioration in mental state",
+                    ].map(item => (
+                        <li class="flex items-start gap-2">
+                            <svg width="14" height="14" viewBox="0 0 24 24" fill="#dc2626" class="flex-shrink-0 mt-0.5">
+                                <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-2h2v2zm0-4h-2V7h2v6z"/>
+                            </svg>
+                            {item}
+                        </li>
+                    ))}
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <!-- Falls Risk -->
+    <div class="card mb-6 border-l-4 border-l-amber-400">
+        <h2 class="font-semibold text-slate-900 mb-3">🤕 If You Fall</h2>
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 text-sm text-slate-700">
+            <div>
+                <p class="font-medium mb-2">Immediately after falling:</p>
+                <ol class="space-y-1.5 list-decimal list-inside text-slate-600">
+                    <li>Stay calm and do not try to get up immediately</li>
+                    <li>Call for help if you cannot get up safely</li>
+                    <li>If you can, roll onto your side slowly, then push up</li>
+                    <li>Assess for severe pain, inability to weight bear, or deformity</li>
+                    <li>If unable to weight bear or severe pain → go to Emergency</li>
+                    <li>If weight-bearing with mild pain → contact your surgical team</li>
+                    <li>Even with no apparent injury, notify your surgeon</li>
+                </ol>
+            </div>
+            <div>
+                <p class="font-medium mb-2">Fall prevention tips:</p>
+                <ul class="space-y-1.5 list-disc list-inside text-slate-600">
+                    <li>Always use your walking aid as prescribed</li>
+                    <li>Ensure adequate lighting, especially at night</li>
+                    <li>Remove all trip hazards from your home</li>
+                    <li>Wear non-slip footwear at all times</li>
+                    <li>Allow extra time for movements — don't rush</li>
+                    <li>Beware pets that can get underfoot</li>
+                    <li>Beware of wet or slippery surfaces</li>
+                    <li>Consider a personal alert device (medical alarm)</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <!-- Emergency Contacts Template -->
+    <div class="card">
+        <h2 class="font-semibold text-slate-900 mb-4">📞 Important Contacts</h2>
+        <p class="text-sm text-slate-600 mb-4">Save these numbers in your phone before surgery:</p>
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 text-sm">
+            {[
+                { label: "Emergency (Police, Fire, Ambulance)", number: "000", urgent: true },
+                { label: "Healthdirect Nurse Helpline (24/7)", number: "1800 022 222", urgent: false },
+                { label: "Your Surgeon's Rooms", number: "Write your number here →", urgent: false },
+                { label: "Surgeon's After-Hours / On-Call", number: "Ask at your appointment", urgent: false },
+                { label: "Your GP / Family Doctor", number: "Write your number here →", urgent: false },
+                { label: "Hospital Ward (post-op)", number: "Ask nursing staff", urgent: false },
+                { label: "Physiotherapist", number: "Write your number here →", urgent: false },
+                { label: "Nearest Emergency Department", number: "Know the address", urgent: false },
+            ].map(contact => (
+                <div class={`flex items-start gap-3 p-3 rounded-lg ${contact.urgent ? 'bg-red-50 border border-red-200' : 'bg-slate-50'}`}>
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill={contact.urgent ? "#dc2626" : "#64748b"} class="flex-shrink-0 mt-0.5">
+                        <path d="M6.62 10.79c1.44 2.83 3.76 5.14 6.59 6.59l2.2-2.2c.27-.27.67-.36 1.02-.24 1.12.37 2.33.57 3.57.57.55 0 1 .45 1 1V20c0 .55-.45 1-1 1-9.39 0-17-7.61-17-17 0-.55.45-1 1-1h3.5c.55 0 1 .45 1 1 0 1.25.2 2.45.57 3.57.11.35.03.74-.25 1.02l-2.2 2.2z"/>
+                    </svg>
+                    <div>
+                        <p class={`font-medium ${contact.urgent ? 'text-red-800' : 'text-slate-700'}`}>{contact.label}</p>
+                        <p class={`text-xs mt-0.5 ${contact.urgent ? 'text-red-600 font-bold' : 'text-slate-500'}`}>{contact.number}</p>
+                    </div>
+                </div>
+            ))}
+        </div>
+    </div>
+</Layout>

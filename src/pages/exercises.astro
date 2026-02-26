@@ -1,0 +1,135 @@
+---
+import Layout from '../layouts/Layout.astro';
+import ExerciseTracker from '../components/ExerciseTracker';
+---
+
+<Layout
+    title="Exercise Program"
+    description="Daily rehabilitation exercises for hip and knee arthroplasty recovery"
+>
+    <div class="page-header">
+        <div class="flex items-center gap-2 text-sm text-slate-500 mb-3">
+            <a href="/" class="hover:text-blue-700 no-underline">Home</a>
+            <span>/</span>
+            <span class="text-slate-700">Exercises</span>
+        </div>
+        <h1 class="page-title">Exercise & Rehabilitation Program</h1>
+        <p class="page-subtitle text-lg">
+            Track your daily physiotherapy exercises. Select your surgery type and recovery phase to see your recommended exercises.
+        </p>
+    </div>
+
+    <!-- Key Principles -->
+    <div class="grid grid-cols-1 sm:grid-cols-4 gap-4 mb-8">
+        <div class="card text-center">
+            <div class="text-2xl mb-1">📅</div>
+            <div class="font-semibold text-sm text-slate-800">Daily</div>
+            <div class="text-xs text-slate-500 mt-0.5">Aim to exercise at least once daily, ideally 2–3 times</div>
+        </div>
+        <div class="card text-center">
+            <div class="text-2xl mb-1">🔄</div>
+            <div class="font-semibold text-sm text-slate-800">Consistent</div>
+            <div class="text-xs text-slate-500 mt-0.5">Consistency is more important than intensity</div>
+        </div>
+        <div class="card text-center">
+            <div class="text-2xl mb-1">🧊</div>
+            <div class="font-semibold text-sm text-slate-800">Ice After</div>
+            <div class="text-xs text-slate-500 mt-0.5">Apply ice 15–20 min after exercises to control swelling</div>
+        </div>
+        <div class="card text-center">
+            <div class="text-2xl mb-1">📞</div>
+            <div class="font-semibold text-sm text-slate-800">Ask Your Physio</div>
+            <div class="text-xs text-slate-500 mt-0.5">Always follow your physiotherapist's specific program</div>
+        </div>
+    </div>
+
+    <!-- Interactive Exercise Tracker (React) -->
+    <ExerciseTracker client:load />
+
+    <!-- Exercise Frequency Guide -->
+    <div class="mt-8 card">
+        <h2 class="font-semibold text-slate-900 mb-4">Exercise Frequency Guide</h2>
+        <div class="overflow-x-auto">
+            <table class="w-full text-sm">
+                <thead>
+                    <tr class="border-b border-slate-200">
+                        <th class="text-left py-3 pr-4 text-slate-600 font-semibold">Phase</th>
+                        <th class="text-left py-3 pr-4 text-slate-600 font-semibold">Frequency</th>
+                        <th class="text-left py-3 text-slate-600 font-semibold">Focus</th>
+                    </tr>
+                </thead>
+                <tbody class="divide-y divide-slate-100">
+                    <tr>
+                        <td class="py-3 pr-4"><span class="badge badge-blue">Early (0–6 weeks)</span></td>
+                        <td class="py-3 pr-4 text-slate-700">2–3 times daily</td>
+                        <td class="py-3 text-slate-600">Circulation, basic activation, range of motion</td>
+                    </tr>
+                    <tr>
+                        <td class="py-3 pr-4"><span class="badge badge-green">Mid (6–12 weeks)</span></td>
+                        <td class="py-3 pr-4 text-slate-700">1–2 times daily</td>
+                        <td class="py-3 text-slate-600">Strengthening, walking program, cycling</td>
+                    </tr>
+                    <tr>
+                        <td class="py-3 pr-4"><span class="badge" style="background:#f0fdf4;color:#166534;">Late (3 months+)</span></td>
+                        <td class="py-3 pr-4 text-slate-700">Once daily or alternate days</td>
+                        <td class="py-3 text-slate-600">Functional training, return to activity</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <!-- Important Exercise Notes -->
+    <div class="mt-6 grid grid-cols-1 sm:grid-cols-2 gap-4">
+        <div class="card border-l-4 border-l-amber-400">
+            <h3 class="font-semibold text-slate-900 mb-2">When to Stop Exercising</h3>
+            <ul class="text-sm text-slate-600 space-y-1.5">
+                <li class="flex items-start gap-2">
+                    <span class="text-red-500 mt-0.5">⚠</span>
+                    Sharp or severe pain (not just discomfort)
+                </li>
+                <li class="flex items-start gap-2">
+                    <span class="text-red-500 mt-0.5">⚠</span>
+                    Sudden increase in swelling or warmth
+                </li>
+                <li class="flex items-start gap-2">
+                    <span class="text-red-500 mt-0.5">⚠</span>
+                    Signs of wound problems or drainage
+                </li>
+                <li class="flex items-start gap-2">
+                    <span class="text-red-500 mt-0.5">⚠</span>
+                    Fever or feeling unwell
+                </li>
+                <li class="flex items-start gap-2">
+                    <span class="text-red-500 mt-0.5">⚠</span>
+                    Any clicking, clunking, or instability
+                </li>
+            </ul>
+        </div>
+        <div class="card border-l-4 border-l-green-400">
+            <h3 class="font-semibold text-slate-900 mb-2">Activities to Avoid Long-Term</h3>
+            <ul class="text-sm text-slate-600 space-y-1.5">
+                <li class="flex items-start gap-2">
+                    <span class="text-slate-400">•</span>
+                    Running or jogging (increases implant wear)
+                </li>
+                <li class="flex items-start gap-2">
+                    <span class="text-slate-400">•</span>
+                    Contact sports (risk of dislocation/fracture)
+                </li>
+                <li class="flex items-start gap-2">
+                    <span class="text-slate-400">•</span>
+                    Heavy impact activities (jumping)
+                </li>
+                <li class="flex items-start gap-2">
+                    <span class="text-slate-400">•</span>
+                    Kneeling on hard surfaces (knee replacement)
+                </li>
+                <li class="flex items-start gap-2">
+                    <span class="text-slate-400">•</span>
+                    Deep hip flexion beyond 90° (hip, early period)
+                </li>
+            </ul>
+        </div>
+    </div>
+</Layout>
