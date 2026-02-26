@@ -222,3 +222,35 @@
         @apply absolute left-0 top-1 w-6 h-6 rounded-full border-2 border-white flex items-center justify-center text-xs font-bold;
     }
 }
+
+@media print {
+    header, footer, .no-print, nav {
+        display: none !important;
+    }
+
+    body {
+        background: white !important;
+        color: black !important;
+        font-size: 11pt;
+    }
+
+    .card {
+        border: 1px solid #ccc !important;
+        box-shadow: none !important;
+        break-inside: avoid;
+    }
+
+    .print-section {
+        display: block !important;
+    }
+
+    a {
+        text-decoration: none !important;
+        color: black !important;
+    }
+
+    main {
+        padding: 0 !important;
+        max-width: 100% !important;
+    }
+}

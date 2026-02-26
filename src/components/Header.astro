@@ -2,13 +2,15 @@
 const currentPath = Astro.url.pathname;
 
 const navItems = [
-    { linkText: 'Dashboard', href: '/' },
-    { linkText: 'Pre-Surgery', href: '/pre-surgery' },
-    { linkText: 'Recovery', href: '/recovery' },
-    { linkText: 'Exercises', href: '/exercises' },
-    { linkText: 'Pain Tracker', href: '/pain-tracker' },
-    { linkText: 'Resources', href: '/resources' },
-    { linkText: 'Warning Signs', href: '/warning-signs' },
+    { linkText: 'Ana Sayfa', href: '/' },
+    { linkText: 'Ameliyat Öncesi', href: '/pre-surgery' },
+    { linkText: 'İyileşme', href: '/recovery' },
+    { linkText: 'Egzersizler', href: '/exercises' },
+    { linkText: 'Ağrı Takibi', href: '/pain-tracker' },
+    { linkText: 'Randevular', href: '/randevular' },
+    { linkText: 'İlaçlar', href: '/ilaclar' },
+    { linkText: 'Kaynaklar', href: '/resources' },
+    { linkText: '⚠ Uyarılar', href: '/warning-signs' },
 ];
 ---
 
@@ -16,47 +18,36 @@ const navItems = [
     <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
         <div class="flex items-center justify-between h-16">
             <!-- Logo / Brand -->
-            <a href="/" class="flex items-center gap-2 no-underline group" aria-label="ArthroCare Home">
+            <a href="/" class="flex items-center gap-2 no-underline group flex-shrink-0" aria-label="ArthroCare Ana Sayfa">
                 <div class="w-8 h-8 bg-blue-700 rounded-lg flex items-center justify-center flex-shrink-0">
                     <svg width="18" height="18" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                        <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 14H9V8h2v8zm4 0h-2V8h2v8z" fill="white" opacity="0"/>
-                        <path d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm-7 14l-5-5 1.41-1.41L12 14.17l7.59-7.59L21 8l-9 9z" fill="white" opacity="0"/>
                         <path d="M12 2a10 10 0 1 0 0 20A10 10 0 0 0 12 2zm1 15h-2v-6h2v6zm0-8h-2V7h2v2z" fill="white"/>
                     </svg>
                 </div>
-                <div>
+                <div class="hidden sm:block">
                     <span class="font-bold text-blue-800 text-lg leading-none">ArthroCare</span>
-                    <span class="block text-xs text-slate-500 leading-none">Arthroplasty Patient App</span>
+                    <span class="block text-xs text-slate-500 leading-none">Artroplasti Hasta Uygulaması</span>
                 </div>
+                <span class="sm:hidden font-bold text-blue-800 text-lg">ArthroCare</span>
             </a>
 
             <!-- Desktop Navigation -->
-            <nav class="hidden lg:flex items-center gap-1" aria-label="Main navigation">
+            <nav class="hidden xl:flex items-center gap-0.5 overflow-x-auto" aria-label="Ana navigasyon">
                 {navItems.map((item) => (
                     <a
                         href={item.href}
-                        class={`nav-link ${currentPath === item.href || (item.href !== '/' && currentPath.startsWith(item.href)) ? 'nav-link-active' : ''}`}
+                        class={`flex-shrink-0 px-2.5 py-2 rounded-lg text-xs font-medium transition-colors no-underline ${item.href === '/warning-signs' ? 'text-red-600 hover:bg-red-50' : 'text-slate-600 hover:text-blue-700 hover:bg-blue-50'} ${currentPath === item.href || (item.href !== '/' && currentPath.startsWith(item.href)) ? (item.href === '/warning-signs' ? 'bg-red-50 text-red-700' : 'text-blue-700 bg-blue-50') : ''}`}
                     >
                         {item.linkText}
                     </a>
                 ))}
             </nav>
 
-            <!-- Emergency button (desktop) -->
-            <div class="hidden lg:flex items-center gap-3">
-                <a href="/warning-signs" class="btn btn-danger btn-sm">
-                    <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor">
-                        <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-2h2v2zm0-4h-2V7h2v6z"/>
-                    </svg>
-                    Emergency
-                </a>
-            </div>
-
             <!-- Mobile menu button -->
             <button
                 id="mobile-menu-btn"
-                class="lg:hidden p-2 rounded-lg text-slate-600 hover:text-blue-700 hover:bg-blue-50 transition-colors"
-                aria-label="Toggle mobile menu"
+                class="xl:hidden p-2 rounded-lg text-slate-600 hover:text-blue-700 hover:bg-blue-50 transition-colors"
+                aria-label="Menüyü aç/kapat"
                 aria-expanded="false"
             >
                 <svg id="menu-icon" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
@@ -72,19 +63,16 @@ const navItems = [
         </div>
 
         <!-- Mobile Navigation -->
-        <nav id="mobile-menu" class="lg:hidden hidden pb-4" aria-label="Mobile navigation">
-            <div class="flex flex-col gap-1">
+        <nav id="mobile-menu" class="xl:hidden hidden pb-4" aria-label="Mobil navigasyon">
+            <div class="grid grid-cols-2 gap-1">
                 {navItems.map((item) => (
                     <a
                         href={item.href}
-                        class={`nav-link ${currentPath === item.href || (item.href !== '/' && currentPath.startsWith(item.href)) ? 'nav-link-active' : ''}`}
+                        class={`px-3 py-2 rounded-lg text-sm font-medium no-underline transition-colors ${item.href === '/warning-signs' ? 'text-red-600 hover:bg-red-50' : 'text-slate-600 hover:text-blue-700 hover:bg-blue-50'} ${currentPath === item.href || (item.href !== '/' && currentPath.startsWith(item.href)) ? (item.href === '/warning-signs' ? 'bg-red-50 text-red-700' : 'text-blue-700 bg-blue-50') : ''}`}
                     >
                         {item.linkText}
                     </a>
                 ))}
-                <a href="/warning-signs" class="btn btn-danger btn-sm mt-2 w-full">
-                    Emergency Info
-                </a>
             </div>
         </nav>
     </div>

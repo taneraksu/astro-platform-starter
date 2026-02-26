@@ -1,0 +1,136 @@
+---
+import Layout from '../layouts/Layout.astro';
+import IlacTakip from '../components/IlacTakip';
+---
+
+<Layout
+    title="İlaç Takibi"
+    description="Ameliyat sonrası ilaçlarınızı, dozlarınızı ve kullanım saatlerinizi takip edin"
+>
+    <div class="page-header">
+        <div class="flex items-center gap-2 text-sm text-slate-500 mb-3">
+            <a href="/" class="hover:text-blue-700 no-underline">Ana Sayfa</a>
+            <span>/</span>
+            <span class="text-slate-700">İlaçlar</span>
+        </div>
+        <h1 class="page-title">İlaç Takibi</h1>
+        <p class="page-subtitle text-lg">
+            Ameliyat sonrası ilaçlarınızı, dozlarınızı ve günlük kullanımınızı takip edin.
+        </p>
+    </div>
+
+    <!-- Warning -->
+    <div class="alert alert-danger mb-6">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor" class="flex-shrink-0">
+            <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-2h2v2zm0-4h-2V7h2v6z"/>
+        </svg>
+        <div>
+            <p class="font-semibold text-sm">Önemli Uyarı</p>
+            <p class="text-sm mt-0.5">Bu uygulama ilaç hatırlatıcı amaçlıdır. İlaçlarınızda herhangi bir değişiklik yapmadan önce <strong>her zaman doktorunuza danışın</strong>. İzin almadan ilaç kesmeyin.</p>
+        </div>
+    </div>
+
+    <!-- Info Cards -->
+    <div class="grid grid-cols-1 sm:grid-cols-3 gap-4 mb-8">
+        <div class="card">
+            <div class="text-2xl mb-2">💊</div>
+            <h3 class="font-semibold text-slate-900 mb-1">İlaç Yönetimi</h3>
+            <p class="text-sm text-slate-500">Tüm ameliyat sonrası ilaçlarınızı doz ve kullanım sıklığıyla kaydedin.</p>
+        </div>
+        <div class="card">
+            <div class="text-2xl mb-2">✓</div>
+            <h3 class="font-semibold text-slate-900 mb-1">Doz Takibi</h3>
+            <p class="text-sm text-slate-500">Bugün aldığınız dozları kaydedin; unuttuğunuzda veya iki kez almaktan kaçının.</p>
+        </div>
+        <div class="card">
+            <div class="text-2xl mb-2">📊</div>
+            <h3 class="font-semibold text-slate-900 mb-1">Geçmiş</h3>
+            <p class="text-sm text-slate-500">Son 7 günün doz geçmişini doktorunuza gösterin.</p>
+        </div>
+    </div>
+
+    <!-- Common Medications -->
+    <div class="card mb-8">
+        <h2 class="font-semibold text-slate-900 mb-4">Ameliyat Sonrası Yaygın İlaçlar</h2>
+        <div class="overflow-x-auto">
+            <table class="w-full text-sm">
+                <thead>
+                    <tr class="border-b border-slate-200">
+                        <th class="text-left py-3 pr-4 text-slate-600 font-semibold">İlaç Türü</th>
+                        <th class="text-left py-3 pr-4 text-slate-600 font-semibold">Örnekler</th>
+                        <th class="text-left py-3 text-slate-600 font-semibold">Amaç</th>
+                    </tr>
+                </thead>
+                <tbody class="divide-y divide-slate-100">
+                    {[
+                        { type: 'Parasetamol', examples: 'Parol, Minoset, Tylol', purpose: 'Temel ağrı kesici. Düzenli kullanım opioid ihtiyacını azaltır.' },
+                        { type: 'NSAİİ', examples: 'İbuprofen, Naproksen, Diklofenak, Etorikoksib', purpose: 'Anti-inflamatuar ve ağrı kesici. Kısa süreli kullanılır.' },
+                        { type: 'Opioidler', examples: 'Tramadol, Kodein, Morfin', purpose: 'Şiddetli ağrı için. Kısa süreli kullanın, bağımlılık yapabilir.' },
+                        { type: 'Antikoagülan', examples: 'Varfarin, Rivaroksaban, Apiksaban', purpose: 'DVT ve PE önlemek için. Genellikle 2–6 hafta kullanılır.' },
+                        { type: 'Mide Koruyucu', examples: 'Lansoprazol, Omeprazol, Pantoprazol', purpose: 'NSAİİ ve opioidlerin mide hasarını önler.' },
+                        { type: 'Laksatif', examples: 'Macrogol, Laktuloze, Bisacodyl', purpose: 'Opioidlerin neden olduğu kabızlığı önler.' },
+                    ].map(row => (
+                        <tr>
+                            <td class="py-3 pr-4 font-medium text-slate-800">{row.type}</td>
+                            <td class="py-3 pr-4 text-slate-600">{row.examples}</td>
+                            <td class="py-3 text-slate-500 text-xs">{row.purpose}</td>
+                        </tr>
+                    ))}
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <!-- Important Drug Advice -->
+    <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-8">
+        <div class="card border-l-4 border-l-red-400">
+            <h3 class="font-semibold text-slate-900 mb-3">⛔ Bu İlaçlardan Kaçının</h3>
+            <ul class="text-sm text-slate-600 space-y-2">
+                <li class="flex items-start gap-2">
+                    <span class="text-red-500 font-bold mt-0.5">✕</span>
+                    <div><strong>NSAİİ'ler (ameliyattan 1 hafta önce)</strong> — İbuprofen, naproksen — kanama riskini artırır</div>
+                </li>
+                <li class="flex items-start gap-2">
+                    <span class="text-red-500 font-bold mt-0.5">✕</span>
+                    <div><strong>Aspirin (cerrah onayı olmadan)</strong> — Kan inceltici etkisi var</div>
+                </li>
+                <li class="flex items-start gap-2">
+                    <span class="text-red-500 font-bold mt-0.5">✕</span>
+                    <div><strong>Bitkisel takviyeler</strong> — Sarımsak, ginkgo, balık yağı — kanama süresini uzatır</div>
+                </li>
+                <li class="flex items-start gap-2">
+                    <span class="text-red-500 font-bold mt-0.5">✕</span>
+                    <div><strong>Alkol</strong> — Opioidler ve antikoagülanlarla tehlikeli etkileşim</div>
+                </li>
+            </ul>
+        </div>
+        <div class="card border-l-4 border-l-amber-400">
+            <h3 class="font-semibold text-slate-900 mb-3">⚠ Antikoagülan Kullanıcıları İçin</h3>
+            <ul class="text-sm text-slate-600 space-y-2">
+                <li class="flex items-start gap-2">
+                    <span class="text-amber-500 mt-0.5">•</span>
+                    Her gün aynı saatte alın
+                </li>
+                <li class="flex items-start gap-2">
+                    <span class="text-amber-500 mt-0.5">•</span>
+                    Doz atladıysanız çift doz almayın — doktorunuzu arayın
+                </li>
+                <li class="flex items-start gap-2">
+                    <span class="text-amber-500 mt-0.5">•</span>
+                    Diş hekimine gitmeden önce doktorunuza bildirin
+                </li>
+                <li class="flex items-start gap-2">
+                    <span class="text-amber-500 mt-0.5">•</span>
+                    Olağandışı kanama veya morluk bildirin
+                </li>
+                <li class="flex items-start gap-2">
+                    <span class="text-amber-500 mt-0.5">•</span>
+                    Varfarin kullanıyorsanız K vitamini içeren besinlerden kaçının (ıspanak, brokoli)
+                </li>
+            </ul>
+        </div>
+    </div>
+
+    <!-- Interactive Medication Tracker (React) -->
+    <IlacTakip client:load />
+</Layout>
