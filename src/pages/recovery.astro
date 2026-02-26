@@ -3,132 +3,132 @@ import Layout from '../layouts/Layout.astro';
 
 const hipTimeline = [
     {
-        period: 'Day 1–3',
-        title: 'Hospital Stay',
+        period: '1–3. Gün',
+        title: 'Hastanede Yatış',
         color: 'bg-blue-500',
         badge: 'bg-blue-100 text-blue-800',
-        goals: ['Get out of bed with physiotherapist assistance', 'Walk short distances with frame/walker', 'Begin ankle pumps and simple exercises', 'Manage pain with medications', 'Attend occupational therapy assessment'],
-        restrictions: ['No hip flexion beyond 90°', 'No crossing legs', 'No twisting of operated hip'],
-        tips: 'Pain is expected and will be managed with medication. Focus on deep breathing exercises to prevent chest complications. Tell nursing staff about your pain level.',
+        goals: ['Fizyoterapist eşliğinde yataktan kalkın', 'Yürüteç/baston ile kısa mesafelerde yürüyün', 'Ayak bileği pompalama ve basit egzersizlere başlayın', 'İlaçlarla ağrıyı yönetin', 'Ergoterapi değerlendirmesine katılın'],
+        restrictions: ['Kalçayı 90°\'den fazla bükmeyin', 'Bacakları çaprazlamayın', 'Ameliyatlı kalçayı döndürmeyin'],
+        tips: 'Ağrı beklenen bir durumdur ve ilaçla yönetilecektir. Akciğer komplikasyonlarını önlemek için derin nefes egzersizlerine odaklanın. Hemşireye ağrı düzeyinizi bildirin.',
     },
     {
-        period: 'Week 1–2',
-        title: 'Home Recovery Begins',
+        period: '1–2. Hafta',
+        title: 'Evde İyileşme Başlıyor',
         color: 'bg-blue-400',
         badge: 'bg-blue-100 text-blue-800',
-        goals: ['Walk with frame indoors independently', 'Manage basic personal care with aids', 'Perform prescribed exercises 2–3x daily', 'Wound/dressing care as instructed', 'Attend community physiotherapy or home visits'],
-        restrictions: ['Continue hip precautions (posterior approach)', 'No driving', 'No lifting >2–3 kg', 'No returning to work'],
-        tips: 'Swelling and bruising are normal. Keep the leg elevated when resting. Take pain medication before exercises. Constipation is common with opioids — stay hydrated and use laxatives if prescribed.',
+        goals: ['Yürüteçle ev içinde bağımsız yürüyün', 'Yardımcı araçlarla temel kişisel bakımı yönetin', 'Günde 2–3 kez reçete edilen egzersizleri yapın', 'Yara/pansuman bakımını talimatlara göre yapın', 'Toplum fizyoterapisi veya ev ziyaretlerine katılın'],
+        restrictions: ['Kalça kısıtlamalarına devam edin (arka yaklaşım)', 'Araba kullanmayın', '2–3 kg\'dan fazla kaldırmayın', 'İşe dönmeyin'],
+        tips: 'Şişlik ve morluk normaldir. Dinlenirken bacağı yüksek tutun. Egzersizlerden önce ağrı kesici alın. Opioidlerle kabızlık yaygındır — bol su için ve reçete edildiyse laksatif kullanın.',
     },
     {
-        period: 'Week 3–6',
-        title: 'Progressive Recovery',
+        period: '3–6. Hafta',
+        title: 'Aşamalı İyileşme',
         color: 'bg-teal-500',
         badge: 'bg-teal-100 text-teal-800',
-        goals: ['Progress to walking stick/crutch outdoors', 'Begin stair climbing with rail', 'Increase walking distances gradually', 'Start light strengthening exercises', 'May begin driving at 6 weeks (left hip automatic) if approved by surgeon'],
-        restrictions: ['Continue hip precautions if posterior approach', 'No impact activities', 'No return to physically demanding work'],
-        tips: 'Fatigue is normal and should gradually improve. Alternate activity with rest. Most people can manage most daily activities by 6 weeks. Swelling may persist for several months.',
+        goals: ['Dışarıda yürüyüş bastonu/koltuk değneğine geçin', 'Korkulukla merdiven inip çıkmaya başlayın', 'Yürüyüş mesafesini kademeli artırın', 'Hafif güçlendirme egzersizlerine başlayın', 'Cerrahın onayıyla 6. haftada araba kullanmaya başlayabilirsiniz'],
+        restrictions: ['Arka yaklaşımda kalça kısıtlamalarına devam edin', 'Darbeli aktivitelerden kaçının', 'Fiziksel olarak ağır işe dönmeyin'],
+        tips: 'Yorgunluk normaldir ve kademeli olarak azalmalıdır. Aktivite ile dinlenmeyi dönüşümlü yapın. Çoğu kişi 6. haftada günlük aktivitelerin büyük bölümünü yönetebilir. Şişlik aylarca devam edebilir.',
     },
     {
-        period: 'Week 6–12',
-        title: 'Building Strength',
+        period: '6–12. Hafta',
+        title: 'Güç Kazanma',
         color: 'bg-green-500',
         badge: 'bg-green-100 text-green-800',
-        goals: ['Walk without walking aid for most activities', 'Return to most sedentary work', 'Continue physiotherapy and strengthening', 'Cleared to drive (check with surgeon)', 'Begin low-impact exercise (swimming, cycling)'],
-        restrictions: ['No running or impact activities yet', 'No squatting deeply', 'No high-impact sports'],
-        tips: 'The operated hip should feel noticeably better than before surgery by 12 weeks. If pain is not improving, discuss with your surgeon.',
+        goals: ['Çoğu aktivitede yürüyüş yardımcısı olmadan yürüyün', 'Masa başı işlere dönün', 'Fizyoterapi ve güçlendirmeye devam edin', 'Araba kullanmaya izin verildi (cerrahınızla teyit edin)', 'Düşük darbeli egzersize başlayın (yüzme, bisiklet)'],
+        restrictions: ['Henüz koşmayın veya darbeli aktivite yapmayın', 'Derin çömelmeyin', 'Yüksek darbeli sporlardan kaçının'],
+        tips: '12. haftada ameliyatlı kalça ameliyat öncesine göre belirgin şekilde daha iyi hissettirmelidir. Ağrı azalmıyorsa cerrahınızla görüşün.',
     },
     {
-        period: '3–6 Months',
-        title: 'Functional Recovery',
+        period: '3–6. Ay',
+        title: 'Fonksiyonel İyileşme',
         color: 'bg-emerald-500',
         badge: 'bg-emerald-100 text-emerald-800',
-        goals: ['Return to full activities of daily living', 'Return to physically active work if appropriate', 'Begin recreational activities (golf, cycling, swimming)', 'Continue muscle strengthening', 'Most precautions lifted by 3 months'],
-        restrictions: ['Avoid high-impact sports (running, contact sports)', 'Avoid extreme hip positions'],
-        tips: 'Most patients feel substantially recovered by 3 months. Full muscle strength recovery takes up to 12 months.',
+        goals: ['Günlük yaşam aktivitelerine tam dönüş', 'Uygunsa fiziksel olarak aktif işlere dönüş', 'Rekreasyonel aktivitelere başlayın (golf, bisiklet, yüzme)', 'Kas güçlendirmeye devam edin', '3. ayda çoğu kısıtlama kaldırılır'],
+        restrictions: ['Yüksek darbeli sporlardan kaçının (koşu, temaslı sporlar)', 'Aşırı kalça pozisyonlarından kaçının'],
+        tips: 'Çoğu hasta 3. ayda önemli ölçüde iyileşmiş hisseder. Tam kas gücü kazanımı 12 aya kadar sürebilir.',
     },
     {
-        period: '6–12 Months',
-        title: 'Full Recovery',
+        period: '6–12. Ay',
+        title: 'Tam İyileşme',
         color: 'bg-purple-500',
         badge: 'bg-purple-100 text-purple-800',
-        goals: ['Return to normal recreational activities', 'Full muscle strength restoration', 'Return to low-impact sport (golf, doubles tennis, swimming)', 'Final follow-up X-ray with surgeon'],
-        restrictions: ['Lifelong: avoid high-impact running sports', 'Avoid activities with extreme hip positions'],
-        tips: 'Most patients feel back to their "new normal" by 12 months. Your artificial joint should allow you to resume most activities pain-free.',
+        goals: ['Normal rekreasyonel aktivitelere dönüş', 'Tam kas gücünü yeniden kazanma', 'Düşük darbeli sporlara dönüş (golf, çiftler tenis, yüzme)', 'Cerrahınızla son kontrol röntgeni'],
+        restrictions: ['Yaşam boyu: yüksek darbeli koşu sporlarından kaçının', 'Aşırı kalça pozisyonlarından kaçının'],
+        tips: 'Çoğu hasta 12. ayda "yeni normaline" kavuşmuş hisseder. Yapay eklem, çoğu aktiviteyi ağrısız sürdürmenize olanak sağlamalıdır.',
     },
 ];
 
 const kneeTimeline = [
     {
-        period: 'Day 1–3',
-        title: 'Hospital Stay',
+        period: '1–3. Gün',
+        title: 'Hastanede Yatış',
         color: 'bg-blue-500',
         badge: 'bg-blue-100 text-blue-800',
-        goals: ['Mobilise with physiotherapist assistance', 'Begin continuous passive motion (CPM) if prescribed', 'Achieve 0–90° knee range of motion', 'Ankle pumps and quad sets', 'Ice and elevation for swelling'],
-        restrictions: ['Keep leg elevated when resting', 'No kneeling', 'No twisting'],
-        tips: 'Ice packs applied above and below the bandage help control swelling. Knee replacement is typically more painful than hip replacement in the early period.',
+        goals: ['Fizyoterapist eşliğinde mobilize olun', 'Reçete edildiyse sürekli pasif hareket (CPM) cihazı kullanın', '0–90° diz hareket açıklığına ulaşın', 'Ayak bileği pompası ve kuadriseps kasılması yapın', 'Şişlik için buz ve elevasyon uygulayın'],
+        restrictions: ['Dinlenirken bacağı yüksek tutun', 'Diz çökmekten kaçının', 'Dönme hareketi yapmayın'],
+        tips: 'Bandajın üst ve altına buz uygulamak şişliği kontrol eder. Diz protezi genellikle erken dönemde kalça proteziyle karşılaştırıldığında daha ağrılıdır.',
     },
     {
-        period: 'Week 1–2',
-        title: 'Home Recovery',
+        period: '1–2. Hafta',
+        title: 'Evde İyileşme',
         color: 'bg-blue-400',
         badge: 'bg-blue-100 text-blue-800',
-        goals: ['Walk with frame/walker indoors', 'Achieve 90°+ flexion by end of week 2', 'Manage stairs with rail', 'Wound care as instructed', 'Twice daily physiotherapy exercises'],
-        restrictions: ['No kneeling or squatting deeply', 'No driving', 'Ice knee 15 min several times daily'],
-        tips: 'Regaining knee bend (flexion) is critical in the first 6 weeks. Do your exercises consistently. Stiffness that becomes permanent is the most common adverse outcome.',
+        goals: ['Yürüteç/baston ile ev içinde yürüyün', '2. haftanın sonunda 90°+ fleksiyona ulaşın', 'Korkulukla merdiven inin ve çıkın', 'Talimatlara göre yara bakımı yapın', 'Günde iki kez fizyoterapi egzersizleri yapın'],
+        restrictions: ['Diz çökmekten veya derin çömelmekten kaçının', 'Araba kullanmayın', 'Günde birkaç kez 15 dk buz uygulayın'],
+        tips: 'İlk 6 haftada diz bükülmesini (fleksiyon) yeniden kazanmak kritik önemdedir. Egzersizleri tutarlı yapın. Kalıcı hale gelen sertlik en yaygın olumsuz sonuçtur.',
     },
     {
-        period: 'Week 3–6',
-        title: 'Progressive Flexion',
+        period: '3–6. Hafta',
+        title: 'Aşamalı Fleksiyon',
         color: 'bg-teal-500',
         badge: 'bg-teal-100 text-teal-800',
-        goals: ['Achieve 100–120° flexion (most activities require 120°)', 'Progress to walking stick', 'Begin outdoor walking program', 'Stationary cycling if range allows', 'Consider hydrotherapy'],
-        restrictions: ['No kneeling or squatting', 'No impact activities', 'Check with surgeon about driving'],
-        tips: 'Stationary cycling is excellent rehabilitation — helps regain range of motion and builds quad strength. Start with the seat high and progress.',
+        goals: ['100–120° fleksiyona ulaşın (çoğu aktivite 120° gerektirir)', 'Yürüyüş bastonu kullanmaya geçin', 'Dış ortamda yürüyüş programına başlayın', 'Hareket açıklığı izin verirse sabit bisiklet', 'Hidroterapi düşünün'],
+        restrictions: ['Diz çökmekten veya çömelmekten kaçının', 'Darbeli aktivitelerden kaçının', 'Araba kullanma için cerrahınıza danışın'],
+        tips: 'Sabit bisiklet mükemmel bir rehabilitasyon aracıdır — hareket açıklığı kazanımına ve kuadriseps güçlenmesine yardımcı olur. Başlangıçta oturağı yüksek tutun ve kademeli indirin.',
     },
     {
-        period: 'Week 6–12',
-        title: 'Strengthening Phase',
+        period: '6–12. Hafta',
+        title: 'Güçlendirme Fazı',
         color: 'bg-green-500',
         badge: 'bg-green-100 text-green-800',
-        goals: ['Walk without walking aid for short distances', 'Achieve near-full range of motion', 'Return to sedentary work', 'Begin strengthening program', 'Cycling and swimming approved for most patients'],
-        restrictions: ['No running or high-impact activities', 'No kneeling on hard surfaces'],
-        tips: 'Knee replacement has a longer rehabilitation than hip replacement. Continued swelling is normal up to 12 months.',
+        goals: ['Kısa mesafelerde yürüyüş yardımcısı olmadan yürüyün', 'Neredeyse tam hareket açıklığına ulaşın', 'Masa başı işlere dönün', 'Güçlendirme programına başlayın', 'Çoğu hasta için bisiklet ve yüzme onaylandı'],
+        restrictions: ['Koşmayın veya yüksek darbeli aktivite yapmayın', 'Sert yüzeylerde diz çökmekten kaçının'],
+        tips: 'Diz protezi iyileşmesi kalça proteziyle karşılaştırıldığında daha uzun sürer. Devam eden şişlik 12 aya kadar normaldir.',
     },
     {
-        period: '3–6 Months',
-        title: 'Functional Recovery',
+        period: '3–6. Ay',
+        title: 'Fonksiyonel İyileşme',
         color: 'bg-emerald-500',
         badge: 'bg-emerald-100 text-emerald-800',
-        goals: ['Return to most daily activities', 'Return to work in most occupations', 'Comfortable walking distances', 'Most swelling resolved', 'Gradual return to recreational activities'],
-        restrictions: ['No running', 'No kneeling on hard floors', 'No contact sports'],
-        tips: 'About 20% of patients have some ongoing discomfort at 3–6 months — this is normal. Discuss concerns with your surgeon.',
+        goals: ['Günlük aktivitelerin çoğuna dönüş', 'Çoğu meslekte işe dönüş', 'Rahat yürüyüş mesafeleri', 'Şişliğin büyük bölümü geçti', 'Rekreasyonel aktivitelere kademeli dönüş'],
+        restrictions: ['Koşmayın', 'Sert zeminlerde diz çökmekten kaçının', 'Temaslı sporlardan kaçının'],
+        tips: 'Hastaların yaklaşık %20\'si 3–6. aylarda hafif rahatsızlık yaşar — bu normaldir. Endişelerinizi cerrahınızla paylaşın.',
     },
     {
-        period: '6–12 Months',
-        title: 'Full Recovery',
+        period: '6–12. Ay',
+        title: 'Tam İyileşme',
         color: 'bg-purple-500',
         badge: 'bg-purple-100 text-purple-800',
-        goals: ['Full activities of daily living restored', 'Low-impact recreational activities', 'Final review with surgeon', 'Maintenance exercise program established'],
-        restrictions: ['Lifelong: no running or high-impact sports', 'No kneeling on hard surfaces'],
-        tips: 'Full recovery from knee replacement takes longer than hip — most patients feel fully recovered at 12–18 months. Numbness on the outer side of the knee is often permanent due to surgical approach.',
+        goals: ['Günlük yaşam aktivitelerine tam dönüş', 'Düşük darbeli rekreasyonel aktiviteler', 'Cerrahınızla son değerlendirme', 'Bakım egzersiz programı oluşturuldu'],
+        restrictions: ['Yaşam boyu: koşmayın veya yüksek darbeli sporlardan kaçının', 'Sert yüzeylerde diz çökmekten kaçının'],
+        tips: 'Diz proteziyle tam iyileşme kalçadan daha uzun sürer — çoğu hasta 12–18. ayda tamamen iyileşmiş hisseder. Cerrahi yaklaşım nedeniyle dizin dış tarafında uyuşukluk çoğunlukla kalıcıdır.',
     },
 ];
 ---
 
 <Layout
-    title="Recovery Timeline"
-    description="Week-by-week hip and knee replacement recovery timeline with goals and milestones"
+    title="İyileşme Takvimi"
+    description="Kalça ve diz protezi ameliyatı sonrasında haftalık iyileşme takvimi, hedefler ve kilometre taşları"
 >
     <div class="page-header">
         <div class="flex items-center gap-2 text-sm text-slate-500 mb-3">
-            <a href="/" class="hover:text-blue-700 no-underline">Home</a>
+            <a href="/" class="hover:text-blue-700 no-underline">Ana Sayfa</a>
             <span>/</span>
-            <span class="text-slate-700">Recovery Timeline</span>
+            <span class="text-slate-700">İyileşme Takvimi</span>
         </div>
-        <h1 class="page-title">Recovery Timeline</h1>
+        <h1 class="page-title">İyileşme Takvimi</h1>
         <p class="page-subtitle text-lg">
-            Understand what to expect week-by-week after your hip or knee replacement.
+            Kalça veya diz protezi ameliyatı sonrasında hafta hafta neler beklediğinizi öğrenin.
         </p>
     </div>
 
@@ -136,18 +136,18 @@ const kneeTimeline = [
     <div class="grid grid-cols-1 sm:grid-cols-3 gap-4 mb-8">
         <div class="card">
             <div class="text-2xl mb-2">💪</div>
-            <h3 class="font-semibold text-slate-900 mb-1">Everyone is Different</h3>
-            <p class="text-sm text-slate-500">Recovery timelines vary based on age, health, fitness, and surgical factors. Your experience may differ from these averages.</p>
+            <h3 class="font-semibold text-slate-900 mb-1">Herkes Farklıdır</h3>
+            <p class="text-sm text-slate-500">İyileşme takvimi yaş, sağlık durumu, fiziksel uyum ve cerrahi faktörlere göre değişir. Deneyiminiz bu ortalamalardan farklı olabilir.</p>
         </div>
         <div class="card">
             <div class="text-2xl mb-2">📈</div>
-            <h3 class="font-semibold text-slate-900 mb-1">Consistent Effort</h3>
-            <p class="text-sm text-slate-500">Regular physiotherapy exercises are the single biggest factor in a good outcome. Consistency beats intensity.</p>
+            <h3 class="font-semibold text-slate-900 mb-1">Tutarlı Çaba</h3>
+            <p class="text-sm text-slate-500">Düzenli fizyoterapi egzersizleri, iyi bir sonuç için en belirleyici tek faktördür. Tutarlılık, yoğunluktan daha önemlidir.</p>
         </div>
         <div class="card">
             <div class="text-2xl mb-2">🩺</div>
-            <h3 class="font-semibold text-slate-900 mb-1">Follow Your Team</h3>
-            <p class="text-sm text-slate-500">Always follow your surgeon and physiotherapist's specific advice — it takes priority over these general guidelines.</p>
+            <h3 class="font-semibold text-slate-900 mb-1">Ekibinizi Takip Edin</h3>
+            <p class="text-sm text-slate-500">Her zaman cerrahınız ve fizyoterapistinizin özel tavsiyelerini izleyin — bu genel yönergelere göre önceliklidir.</p>
         </div>
     </div>
 
@@ -159,14 +159,14 @@ const kneeTimeline = [
                 class="px-4 py-3 text-sm font-semibold border-b-2 border-blue-600 text-blue-700 -mb-px bg-transparent cursor-pointer"
                 onclick="showTab('hip')"
             >
-                🦴 Hip Replacement
+                🦴 Kalça Protezi
             </button>
             <button
                 id="tab-knee"
                 class="px-4 py-3 text-sm font-semibold border-b-2 border-transparent text-slate-500 hover:text-slate-700 -mb-px bg-transparent cursor-pointer"
                 onclick="showTab('knee')"
             >
-                🦵 Knee Replacement
+                🦵 Diz Protezi
             </button>
         </div>
     </div>
@@ -186,7 +186,7 @@ const kneeTimeline = [
                         </div>
                         <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
                             <div>
-                                <p class="section-header">Goals & Milestones</p>
+                                <p class="section-header">Hedefler ve Kilometre Taşları</p>
                                 <ul class="space-y-1.5">
                                     {phase.goals.map(g => (
                                         <li class="flex items-start gap-2 text-sm text-slate-700">
@@ -199,7 +199,7 @@ const kneeTimeline = [
                                 </ul>
                             </div>
                             <div>
-                                <p class="section-header">Precautions & Restrictions</p>
+                                <p class="section-header">Önlemler ve Kısıtlamalar</p>
                                 <ul class="space-y-1.5">
                                     {phase.restrictions.map(r => (
                                         <li class="flex items-start gap-2 text-sm text-slate-700">
@@ -239,7 +239,7 @@ const kneeTimeline = [
                         </div>
                         <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
                             <div>
-                                <p class="section-header">Goals & Milestones</p>
+                                <p class="section-header">Hedefler ve Kilometre Taşları</p>
                                 <ul class="space-y-1.5">
                                     {phase.goals.map(g => (
                                         <li class="flex items-start gap-2 text-sm text-slate-700">
@@ -252,7 +252,7 @@ const kneeTimeline = [
                                 </ul>
                             </div>
                             <div>
-                                <p class="section-header">Precautions & Restrictions</p>
+                                <p class="section-header">Önlemler ve Kısıtlamalar</p>
                                 <ul class="space-y-1.5">
                                     {phase.restrictions.map(r => (
                                         <li class="flex items-start gap-2 text-sm text-slate-700">
@@ -280,35 +280,35 @@ const kneeTimeline = [
     <!-- Blood Clot Prevention Info -->
     <div class="mt-8 card border-l-4 border-l-red-400">
         <h2 class="font-semibold text-slate-900 mb-3 flex items-center gap-2">
-            <span>🩸</span> Blood Clot (DVT/PE) Prevention
+            <span>🩸</span> Kan Pıhtısı (DVT/PE) Önleme
         </h2>
         <p class="text-sm text-slate-600 mb-4">
-            Deep vein thrombosis (DVT) and pulmonary embolism (PE) are serious risks after joint replacement. Your surgical team will implement prevention strategies:
+            Derin ven trombozu (DVT) ve pulmoner emboli (PE), eklem replasmanı sonrasında ciddi risklerdir. Cerrahi ekibiniz önleme stratejileri uygulayacaktır:
         </p>
         <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 text-sm">
             <div>
-                <h3 class="font-medium text-slate-800 mb-2">Prevention measures you'll receive:</h3>
+                <h3 class="font-medium text-slate-800 mb-2">Size uygulanacak önlemler:</h3>
                 <ul class="space-y-1 text-slate-600 list-disc list-inside">
-                    <li>Anticoagulant medication (4–6 weeks)</li>
-                    <li>Compression stockings (TED stockings)</li>
-                    <li>Intermittent pneumatic compression in hospital</li>
-                    <li>Early mobilisation (walking the day of/after surgery)</li>
-                    <li>Adequate hydration</li>
+                    <li>Antikoagülan ilaç (4–6 hafta)</li>
+                    <li>Kompresyon çorabı (TED çorabı)</li>
+                    <li>Hastanede aralıklı pnömatik kompresyon cihazı</li>
+                    <li>Erken mobilizasyon (ameliyat günü veya ertesi yürümek)</li>
+                    <li>Yeterli sıvı alımı</li>
                 </ul>
             </div>
             <div>
-                <h3 class="font-medium text-slate-800 mb-2">What you can do:</h3>
+                <h3 class="font-medium text-slate-800 mb-2">Sizin yapabilecekleriniz:</h3>
                 <ul class="space-y-1 text-slate-600 list-disc list-inside">
-                    <li>Ankle pumps every hour while resting</li>
-                    <li>Walk regularly as instructed</li>
-                    <li>Stay well hydrated (2L water/day)</li>
-                    <li>Avoid long periods of sitting with legs dependent</li>
-                    <li>Report calf pain, swelling, or breathlessness immediately</li>
+                    <li>Dinlenirken saatte bir ayak bileği pompalaması</li>
+                    <li>Talimatlara göre düzenli yürüyüş</li>
+                    <li>Günde 2 litre su için</li>
+                    <li>Bacakları sarkık uzun süre oturmaktan kaçının</li>
+                    <li>Baldır ağrısı, şişlik veya nefes darlığını hemen bildirin</li>
                 </ul>
             </div>
         </div>
         <div class="mt-4">
-            <a href="/warning-signs#dvt" class="btn btn-danger btn-sm">DVT Warning Signs →</a>
+            <a href="/warning-signs#dvt" class="btn btn-danger btn-sm">DVT Uyarı İşaretleri →</a>
         </div>
     </div>
 </Layout>
