@@ -385,7 +385,7 @@ export default function PainTracker() {
                         </p>
                         {last7Days.length > 0 ? (
                             <div className="bg-slate-50 rounded-lg p-4 font-mono text-xs text-slate-700 space-y-1">
-                                <p className="font-bold text-slate-900">ArthroCare Ağrı Raporu — Son 7 Gün</p>
+                                <p className="font-bold text-slate-900">Op Dr Taner Aksu Protez Takip Ağrı Raporu — Son 7 Gün</p>
                                 <p>Oluşturma tarihi: {new Date().toLocaleDateString('tr-TR', { day: 'numeric', month: 'long', year: 'numeric' })}</p>
                                 <p>Toplam kayıt: {last7Days.length}</p>
                                 <p>Ortalama ağrı: {avgPain}/10 | En yüksek: {maxPain}/10 | En düşük: {minPain}/10</p>
