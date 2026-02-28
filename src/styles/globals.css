@@ -11,6 +11,12 @@
             color-mix(in oklab, var(--color-gray-950) 100%, transparent)
         ),
         url('/images/noise.png');
+    /* Elderly App Theme */
+    --color-med-blue: #1b5e8a;
+    --color-med-blue-dark: #134571;
+    --color-med-green: #1e6b46;
+    --color-med-amber: #c4600e;
+    --color-med-bg: #eef3f9;
 }
 
 @layer base {
@@ -74,5 +80,83 @@
         --btn-font-size: 1.125rem;
         --btn-px: 1.5rem;
         --btn-py: 1.125rem;
+    }
+
+    /* ===== ELDERLY APP COMPONENTS ===== */
+    .elder-card {
+        @apply bg-white rounded-2xl shadow-md p-6 lg:p-8;
+    }
+
+    .elder-card-hover {
+        @apply bg-white rounded-2xl shadow-md p-6 lg:p-8 transition-all duration-200 hover:-translate-y-1 hover:shadow-xl cursor-pointer;
+    }
+
+    .elder-btn-primary {
+        @apply inline-flex items-center justify-center gap-2 px-6 py-4 bg-blue-800 text-white font-bold rounded-xl text-lg no-underline transition-all duration-200 hover:bg-blue-900 active:scale-95 cursor-pointer select-none;
+        min-height: 3.5rem;
+    }
+
+    .elder-btn-secondary {
+        @apply inline-flex items-center justify-center gap-2 px-6 py-4 bg-emerald-700 text-white font-bold rounded-xl text-lg no-underline transition-all duration-200 hover:bg-emerald-800 active:scale-95 cursor-pointer select-none;
+        min-height: 3.5rem;
+    }
+
+    .elder-btn-accent {
+        @apply inline-flex items-center justify-center gap-2 px-6 py-4 bg-amber-600 text-white font-bold rounded-xl text-lg no-underline transition-all duration-200 hover:bg-amber-700 active:scale-95 cursor-pointer select-none;
+        min-height: 3.5rem;
+    }
+
+    .elder-btn-outline {
+        @apply inline-flex items-center justify-center gap-2 px-6 py-4 border-2 border-blue-800 text-blue-800 bg-white font-bold rounded-xl text-lg no-underline transition-all duration-200 hover:bg-blue-800 hover:text-white active:scale-95 cursor-pointer select-none;
+        min-height: 3.5rem;
+    }
+
+    .elder-btn-danger {
+        @apply inline-flex items-center justify-center gap-2 px-6 py-4 bg-red-700 text-white font-bold rounded-xl text-lg no-underline transition-all duration-200 hover:bg-red-800 active:scale-95 cursor-pointer select-none;
+        min-height: 3.5rem;
+    }
+
+    .elder-input {
+        @apply w-full border-2 border-gray-300 rounded-xl px-4 py-3 text-lg text-slate-800 bg-white focus:outline-none focus:border-blue-700 focus:ring-2 focus:ring-blue-200 transition-colors;
+    }
+
+    .elder-label {
+        @apply block text-lg font-semibold text-slate-700 mb-2;
+    }
+
+    .elder-section-title {
+        @apply text-2xl sm:text-3xl font-bold text-blue-900 mb-4;
+    }
+
+    .risk-low {
+        @apply bg-green-50 text-green-900 border-2 border-green-400 rounded-xl px-5 py-4;
+    }
+
+    .risk-moderate {
+        @apply bg-yellow-50 text-yellow-900 border-2 border-yellow-400 rounded-xl px-5 py-4;
+    }
+
+    .risk-high {
+        @apply bg-red-50 text-red-900 border-2 border-red-400 rounded-xl px-5 py-4;
+    }
+
+    .elder-radio-option {
+        @apply flex items-start gap-4 p-4 border-2 border-gray-200 rounded-xl cursor-pointer hover:border-blue-500 hover:bg-blue-50 transition-all text-lg text-slate-800;
+    }
+
+    .elder-tab-active {
+        @apply px-5 py-3 rounded-xl font-semibold text-base sm:text-lg transition-all cursor-pointer border-2 bg-blue-800 text-white border-blue-800;
+    }
+
+    .elder-tab-inactive {
+        @apply px-5 py-3 rounded-xl font-semibold text-base sm:text-lg transition-all cursor-pointer border-2 bg-white text-blue-800 border-blue-300 hover:border-blue-600 hover:bg-blue-50;
+    }
+
+    .elder-nav-link {
+        @apply flex flex-col items-center gap-1 px-3 py-2 rounded-xl text-white font-semibold text-sm transition-all hover:bg-white/20 no-underline;
+    }
+
+    .elder-badge {
+        @apply inline-flex items-center gap-1 px-3 py-1 rounded-full text-sm font-semibold;
     }
 }

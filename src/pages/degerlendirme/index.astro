@@ -1,0 +1,62 @@
+---
+import ElderlyLayout from '../../layouts/ElderlyLayout.astro';
+import AssessmentHub from '../../components/assessments/AssessmentHub.tsx';
+---
+
+<ElderlyLayout title="Sağlık Değerlendirmesi" activeNav="degerlendirme">
+    <!-- Page Header -->
+    <div class="bg-gradient-to-r from-blue-900 to-blue-700 text-white rounded-3xl p-8 mb-8">
+        <div class="flex items-center gap-4 mb-4">
+            <div class="w-16 h-16 bg-white/20 rounded-2xl flex items-center justify-center text-4xl">📊</div>
+            <div>
+                <h1 class="text-3xl sm:text-4xl font-bold text-white mb-1">Sağlık Değerlendirmesi</h1>
+                <p class="text-blue-200 text-lg">Bilimsel ölçeklerle kas iskelet sistemi sağlığınızı değerlendirin</p>
+            </div>
+        </div>
+        <div class="flex flex-wrap gap-3 mt-4">
+            {['SARC-F', 'TUG Testi', 'FES-I', 'Charlson CCI', 'FRAX'].map(tool => (
+                <span class="bg-white/20 text-white px-4 py-2 rounded-xl text-base font-medium border border-white/30">
+                    {tool}
+                </span>
+            ))}
+        </div>
+    </div>
+
+    <!-- Info Cards -->
+    <div class="grid grid-cols-1 sm:grid-cols-3 gap-5 mb-8">
+        <div class="bg-blue-50 border-2 border-blue-200 rounded-2xl p-5">
+            <div class="text-3xl mb-2">🎯</div>
+            <h3 class="font-bold text-lg text-blue-900 mb-1">Amaç</h3>
+            <p class="text-blue-800 text-base">Sarkopeni, osteoporoz ve düşme riskini erken tespit ederek önlem almak</p>
+        </div>
+        <div class="bg-emerald-50 border-2 border-emerald-200 rounded-2xl p-5">
+            <div class="text-3xl mb-2">🔬</div>
+            <h3 class="font-bold text-lg text-emerald-900 mb-1">Bilimsel Temelli</h3>
+            <p class="text-emerald-800 text-base">Uluslararası geçerliliği kanıtlanmış ölçekler kullanılmaktadır</p>
+        </div>
+        <div class="bg-amber-50 border-2 border-amber-200 rounded-2xl p-5">
+            <div class="text-3xl mb-2">💾</div>
+            <h3 class="font-bold text-lg text-amber-900 mb-1">Kayıt</h3>
+            <p class="text-amber-800 text-base">Sonuçlar otomatik kaydedilir, ilerlemenizi takip edebilirsiniz</p>
+        </div>
+    </div>
+
+    <!-- Assessment Hub (React Interactive) -->
+    <div class="bg-white rounded-3xl shadow-lg p-6 lg:p-8">
+        <AssessmentHub client:load />
+    </div>
+
+    <!-- Disclaimer -->
+    <div class="mt-8 bg-slate-100 border-2 border-slate-200 rounded-2xl p-6">
+        <div class="flex items-start gap-4">
+            <span class="text-3xl">⚕️</span>
+            <div>
+                <h3 class="text-xl font-bold text-slate-800 mb-2">Önemli Uyarı</h3>
+                <p class="text-slate-600 text-base leading-relaxed">
+                    Bu değerlendirmeler tarama amacıyla tasarlanmıştır. Kesin tanı ve tedavi için Op Dr Taner Aksu veya sağlık uzmanınıza başvurmanız gerekmektedir.
+                    Sonuçlar tıbbi değerlendirmenin yerini tutmaz.
+                </p>
+            </div>
+        </div>
+    </div>
+</ElderlyLayout>
