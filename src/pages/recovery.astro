@@ -1,0 +1,341 @@
+---
+import Layout from '../layouts/Layout.astro';
+
+const hipTimeline = [
+    {
+        period: '1–3. Gün',
+        title: 'Hastanede Yatış',
+        color: 'bg-blue-500',
+        badge: 'bg-blue-100 text-blue-800',
+        goals: ['Fizyoterapist eşliğinde yataktan kalkın', 'Yürüteç/baston ile kısa mesafelerde yürüyün', 'Ayak bileği pompalama ve basit egzersizlere başlayın', 'İlaçlarla ağrıyı yönetin', 'Ergoterapi değerlendirmesine katılın'],
+        restrictions: ['Kalçayı 90°\'den fazla bükmeyin', 'Bacakları çaprazlamayın', 'Ameliyatlı kalçayı döndürmeyin'],
+        tips: 'Ağrı beklenen bir durumdur ve ilaçla yönetilecektir. Akciğer komplikasyonlarını önlemek için derin nefes egzersizlerine odaklanın. Hemşireye ağrı düzeyinizi bildirin.',
+    },
+    {
+        period: '1–2. Hafta',
+        title: 'Evde İyileşme Başlıyor',
+        color: 'bg-blue-400',
+        badge: 'bg-blue-100 text-blue-800',
+        goals: ['Yürüteçle ev içinde bağımsız yürüyün', 'Yardımcı araçlarla temel kişisel bakımı yönetin', 'Günde 2–3 kez reçete edilen egzersizleri yapın', 'Yara/pansuman bakımını talimatlara göre yapın', 'Toplum fizyoterapisi veya ev ziyaretlerine katılın'],
+        restrictions: ['Kalça kısıtlamalarına devam edin (arka yaklaşım)', 'Araba kullanmayın', '2–3 kg\'dan fazla kaldırmayın', 'İşe dönmeyin'],
+        tips: 'Şişlik ve morluk normaldir. Dinlenirken bacağı yüksek tutun. Egzersizlerden önce ağrı kesici alın. Opioidlerle kabızlık yaygındır — bol su için ve reçete edildiyse laksatif kullanın.',
+    },
+    {
+        period: '3–6. Hafta',
+        title: 'Aşamalı İyileşme',
+        color: 'bg-teal-500',
+        badge: 'bg-teal-100 text-teal-800',
+        goals: ['Dışarıda yürüyüş bastonu/koltuk değneğine geçin', 'Korkulukla merdiven inip çıkmaya başlayın', 'Yürüyüş mesafesini kademeli artırın', 'Hafif güçlendirme egzersizlerine başlayın', 'Cerrahın onayıyla 6. haftada araba kullanmaya başlayabilirsiniz'],
+        restrictions: ['Arka yaklaşımda kalça kısıtlamalarına devam edin', 'Darbeli aktivitelerden kaçının', 'Fiziksel olarak ağır işe dönmeyin'],
+        tips: 'Yorgunluk normaldir ve kademeli olarak azalmalıdır. Aktivite ile dinlenmeyi dönüşümlü yapın. Çoğu kişi 6. haftada günlük aktivitelerin büyük bölümünü yönetebilir. Şişlik aylarca devam edebilir.',
+    },
+    {
+        period: '6–12. Hafta',
+        title: 'Güç Kazanma',
+        color: 'bg-green-500',
+        badge: 'bg-green-100 text-green-800',
+        goals: ['Çoğu aktivitede yürüyüş yardımcısı olmadan yürüyün', 'Masa başı işlere dönün', 'Fizyoterapi ve güçlendirmeye devam edin', 'Araba kullanmaya izin verildi (cerrahınızla teyit edin)', 'Düşük darbeli egzersize başlayın (yüzme, bisiklet)'],
+        restrictions: ['Henüz koşmayın veya darbeli aktivite yapmayın', 'Derin çömelmeyin', 'Yüksek darbeli sporlardan kaçının'],
+        tips: '12. haftada ameliyatlı kalça ameliyat öncesine göre belirgin şekilde daha iyi hissettirmelidir. Ağrı azalmıyorsa cerrahınızla görüşün.',
+    },
+    {
+        period: '3–6. Ay',
+        title: 'Fonksiyonel İyileşme',
+        color: 'bg-emerald-500',
+        badge: 'bg-emerald-100 text-emerald-800',
+        goals: ['Günlük yaşam aktivitelerine tam dönüş', 'Uygunsa fiziksel olarak aktif işlere dönüş', 'Rekreasyonel aktivitelere başlayın (golf, bisiklet, yüzme)', 'Kas güçlendirmeye devam edin', '3. ayda çoğu kısıtlama kaldırılır'],
+        restrictions: ['Yüksek darbeli sporlardan kaçının (koşu, temaslı sporlar)', 'Aşırı kalça pozisyonlarından kaçının'],
+        tips: 'Çoğu hasta 3. ayda önemli ölçüde iyileşmiş hisseder. Tam kas gücü kazanımı 12 aya kadar sürebilir.',
+    },
+    {
+        period: '6–12. Ay',
+        title: 'Tam İyileşme',
+        color: 'bg-purple-500',
+        badge: 'bg-purple-100 text-purple-800',
+        goals: ['Normal rekreasyonel aktivitelere dönüş', 'Tam kas gücünü yeniden kazanma', 'Düşük darbeli sporlara dönüş (golf, çiftler tenis, yüzme)', 'Cerrahınızla son kontrol röntgeni'],
+        restrictions: ['Yaşam boyu: yüksek darbeli koşu sporlarından kaçının', 'Aşırı kalça pozisyonlarından kaçının'],
+        tips: 'Çoğu hasta 12. ayda "yeni normaline" kavuşmuş hisseder. Yapay eklem, çoğu aktiviteyi ağrısız sürdürmenize olanak sağlamalıdır.',
+    },
+];
+
+const kneeTimeline = [
+    {
+        period: '1–3. Gün',
+        title: 'Hastanede Yatış',
+        color: 'bg-blue-500',
+        badge: 'bg-blue-100 text-blue-800',
+        goals: ['Fizyoterapist eşliğinde mobilize olun', 'Reçete edildiyse sürekli pasif hareket (CPM) cihazı kullanın', '0–90° diz hareket açıklığına ulaşın', 'Ayak bileği pompası ve kuadriseps kasılması yapın', 'Şişlik için buz ve elevasyon uygulayın'],
+        restrictions: ['Dinlenirken bacağı yüksek tutun', 'Diz çökmekten kaçının', 'Dönme hareketi yapmayın'],
+        tips: 'Bandajın üst ve altına buz uygulamak şişliği kontrol eder. Diz protezi genellikle erken dönemde kalça proteziyle karşılaştırıldığında daha ağrılıdır.',
+    },
+    {
+        period: '1–2. Hafta',
+        title: 'Evde İyileşme',
+        color: 'bg-blue-400',
+        badge: 'bg-blue-100 text-blue-800',
+        goals: ['Yürüteç/baston ile ev içinde yürüyün', '2. haftanın sonunda 90°+ fleksiyona ulaşın', 'Korkulukla merdiven inin ve çıkın', 'Talimatlara göre yara bakımı yapın', 'Günde iki kez fizyoterapi egzersizleri yapın'],
+        restrictions: ['Diz çökmekten veya derin çömelmekten kaçının', 'Araba kullanmayın', 'Günde birkaç kez 15 dk buz uygulayın'],
+        tips: 'İlk 6 haftada diz bükülmesini (fleksiyon) yeniden kazanmak kritik önemdedir. Egzersizleri tutarlı yapın. Kalıcı hale gelen sertlik en yaygın olumsuz sonuçtur.',
+    },
+    {
+        period: '3–6. Hafta',
+        title: 'Aşamalı Fleksiyon',
+        color: 'bg-teal-500',
+        badge: 'bg-teal-100 text-teal-800',
+        goals: ['100–120° fleksiyona ulaşın (çoğu aktivite 120° gerektirir)', 'Yürüyüş bastonu kullanmaya geçin', 'Dış ortamda yürüyüş programına başlayın', 'Hareket açıklığı izin verirse sabit bisiklet', 'Hidroterapi düşünün'],
+        restrictions: ['Diz çökmekten veya çömelmekten kaçının', 'Darbeli aktivitelerden kaçının', 'Araba kullanma için cerrahınıza danışın'],
+        tips: 'Sabit bisiklet mükemmel bir rehabilitasyon aracıdır — hareket açıklığı kazanımına ve kuadriseps güçlenmesine yardımcı olur. Başlangıçta oturağı yüksek tutun ve kademeli indirin.',
+    },
+    {
+        period: '6–12. Hafta',
+        title: 'Güçlendirme Fazı',
+        color: 'bg-green-500',
+        badge: 'bg-green-100 text-green-800',
+        goals: ['Kısa mesafelerde yürüyüş yardımcısı olmadan yürüyün', 'Neredeyse tam hareket açıklığına ulaşın', 'Masa başı işlere dönün', 'Güçlendirme programına başlayın', 'Çoğu hasta için bisiklet ve yüzme onaylandı'],
+        restrictions: ['Koşmayın veya yüksek darbeli aktivite yapmayın', 'Sert yüzeylerde diz çökmekten kaçının'],
+        tips: 'Diz protezi iyileşmesi kalça proteziyle karşılaştırıldığında daha uzun sürer. Devam eden şişlik 12 aya kadar normaldir.',
+    },
+    {
+        period: '3–6. Ay',
+        title: 'Fonksiyonel İyileşme',
+        color: 'bg-emerald-500',
+        badge: 'bg-emerald-100 text-emerald-800',
+        goals: ['Günlük aktivitelerin çoğuna dönüş', 'Çoğu meslekte işe dönüş', 'Rahat yürüyüş mesafeleri', 'Şişliğin büyük bölümü geçti', 'Rekreasyonel aktivitelere kademeli dönüş'],
+        restrictions: ['Koşmayın', 'Sert zeminlerde diz çökmekten kaçının', 'Temaslı sporlardan kaçının'],
+        tips: 'Hastaların yaklaşık %20\'si 3–6. aylarda hafif rahatsızlık yaşar — bu normaldir. Endişelerinizi cerrahınızla paylaşın.',
+    },
+    {
+        period: '6–12. Ay',
+        title: 'Tam İyileşme',
+        color: 'bg-purple-500',
+        badge: 'bg-purple-100 text-purple-800',
+        goals: ['Günlük yaşam aktivitelerine tam dönüş', 'Düşük darbeli rekreasyonel aktiviteler', 'Cerrahınızla son değerlendirme', 'Bakım egzersiz programı oluşturuldu'],
+        restrictions: ['Yaşam boyu: koşmayın veya yüksek darbeli sporlardan kaçının', 'Sert yüzeylerde diz çökmekten kaçının'],
+        tips: 'Diz proteziyle tam iyileşme kalçadan daha uzun sürer — çoğu hasta 12–18. ayda tamamen iyileşmiş hisseder. Cerrahi yaklaşım nedeniyle dizin dış tarafında uyuşukluk çoğunlukla kalıcıdır.',
+    },
+];
+---
+
+<Layout
+    title="İyileşme Takvimi"
+    description="Kalça ve diz protezi ameliyatı sonrasında haftalık iyileşme takvimi, hedefler ve kilometre taşları"
+>
+    <div class="page-header">
+        <div class="flex items-center gap-2 text-sm text-slate-500 mb-3">
+            <a href="/" class="hover:text-blue-700 no-underline">Ana Sayfa</a>
+            <span>/</span>
+            <span class="text-slate-700">İyileşme Takvimi</span>
+        </div>
+        <h1 class="page-title">İyileşme Takvimi</h1>
+        <p class="page-subtitle text-lg">
+            Kalça veya diz protezi ameliyatı sonrasında hafta hafta neler beklediğinizi öğrenin.
+        </p>
+    </div>
+
+    <!-- Key Principles -->
+    <div class="grid grid-cols-1 sm:grid-cols-3 gap-4 mb-8">
+        <div class="card">
+            <div class="text-2xl mb-2">💪</div>
+            <h3 class="font-semibold text-slate-900 mb-1">Herkes Farklıdır</h3>
+            <p class="text-sm text-slate-500">İyileşme takvimi yaş, sağlık durumu, fiziksel uyum ve cerrahi faktörlere göre değişir. Deneyiminiz bu ortalamalardan farklı olabilir.</p>
+        </div>
+        <div class="card">
+            <div class="text-2xl mb-2">📈</div>
+            <h3 class="font-semibold text-slate-900 mb-1">Tutarlı Çaba</h3>
+            <p class="text-sm text-slate-500">Düzenli fizyoterapi egzersizleri, iyi bir sonuç için en belirleyici tek faktördür. Tutarlılık, yoğunluktan daha önemlidir.</p>
+        </div>
+        <div class="card">
+            <div class="text-2xl mb-2">🩺</div>
+            <h3 class="font-semibold text-slate-900 mb-1">Ekibinizi Takip Edin</h3>
+            <p class="text-sm text-slate-500">Her zaman cerrahınız ve fizyoterapistinizin özel tavsiyelerini izleyin — bu genel yönergelere göre önceliklidir.</p>
+        </div>
+    </div>
+
+    <!-- Tab Navigation -->
+    <div class="mb-6">
+        <div class="flex gap-2 border-b border-slate-200">
+            <button
+                id="tab-hip"
+                class="px-4 py-3 text-sm font-semibold border-b-2 border-blue-600 text-blue-700 -mb-px bg-transparent cursor-pointer"
+                onclick="showTab('hip')"
+            >
+                🦴 Kalça Protezi
+            </button>
+            <button
+                id="tab-knee"
+                class="px-4 py-3 text-sm font-semibold border-b-2 border-transparent text-slate-500 hover:text-slate-700 -mb-px bg-transparent cursor-pointer"
+                onclick="showTab('knee')"
+            >
+                🦵 Diz Protezi
+            </button>
+        </div>
+    </div>
+
+    <!-- Hip Timeline -->
+    <div id="content-hip">
+        <div class="space-y-0">
+            {hipTimeline.map((phase, index) => (
+                <div class="timeline-item">
+                    <div class={`timeline-dot ${phase.color} text-white`}>
+                        {index + 1}
+                    </div>
+                    <div class="card ml-2">
+                        <div class="flex flex-wrap items-center gap-3 mb-4">
+                            <span class={`badge ${phase.badge} font-semibold`}>{phase.period}</span>
+                            <h3 class="font-semibold text-slate-900">{phase.title}</h3>
+                        </div>
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
+                            <div>
+                                <p class="section-header">Hedefler ve Kilometre Taşları</p>
+                                <ul class="space-y-1.5">
+                                    {phase.goals.map(g => (
+                                        <li class="flex items-start gap-2 text-sm text-slate-700">
+                                            <svg width="14" height="14" viewBox="0 0 24 24" fill="#16a34a" class="flex-shrink-0 mt-0.5">
+                                                <path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/>
+                                            </svg>
+                                            {g}
+                                        </li>
+                                    ))}
+                                </ul>
+                            </div>
+                            <div>
+                                <p class="section-header">Önlemler ve Kısıtlamalar</p>
+                                <ul class="space-y-1.5">
+                                    {phase.restrictions.map(r => (
+                                        <li class="flex items-start gap-2 text-sm text-slate-700">
+                                            <svg width="14" height="14" viewBox="0 0 24 24" fill="#dc2626" class="flex-shrink-0 mt-0.5">
+                                                <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-2h2v2zm0-4h-2V7h2v6z"/>
+                                            </svg>
+                                            {r}
+                                        </li>
+                                    ))}
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="alert alert-info text-sm">
+                            <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" class="flex-shrink-0 mt-0.5">
+                                <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-6h2v6zm0-8h-2V7h2v2z"/>
+                            </svg>
+                            <p>{phase.tips}</p>
+                        </div>
+                    </div>
+                </div>
+            ))}
+        </div>
+    </div>
+
+    <!-- Knee Timeline -->
+    <div id="content-knee" class="hidden">
+        <div class="space-y-0">
+            {kneeTimeline.map((phase, index) => (
+                <div class="timeline-item">
+                    <div class={`timeline-dot ${phase.color} text-white`}>
+                        {index + 1}
+                    </div>
+                    <div class="card ml-2">
+                        <div class="flex flex-wrap items-center gap-3 mb-4">
+                            <span class={`badge ${phase.badge} font-semibold`}>{phase.period}</span>
+                            <h3 class="font-semibold text-slate-900">{phase.title}</h3>
+                        </div>
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
+                            <div>
+                                <p class="section-header">Hedefler ve Kilometre Taşları</p>
+                                <ul class="space-y-1.5">
+                                    {phase.goals.map(g => (
+                                        <li class="flex items-start gap-2 text-sm text-slate-700">
+                                            <svg width="14" height="14" viewBox="0 0 24 24" fill="#16a34a" class="flex-shrink-0 mt-0.5">
+                                                <path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/>
+                                            </svg>
+                                            {g}
+                                        </li>
+                                    ))}
+                                </ul>
+                            </div>
+                            <div>
+                                <p class="section-header">Önlemler ve Kısıtlamalar</p>
+                                <ul class="space-y-1.5">
+                                    {phase.restrictions.map(r => (
+                                        <li class="flex items-start gap-2 text-sm text-slate-700">
+                                            <svg width="14" height="14" viewBox="0 0 24 24" fill="#dc2626" class="flex-shrink-0 mt-0.5">
+                                                <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-2h2v2zm0-4h-2V7h2v6z"/>
+                                            </svg>
+                                            {r}
+                                        </li>
+                                    ))}
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="alert alert-info text-sm">
+                            <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" class="flex-shrink-0 mt-0.5">
+                                <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-6h2v6zm0-8h-2V7h2v2z"/>
+                            </svg>
+                            <p>{phase.tips}</p>
+                        </div>
+                    </div>
+                </div>
+            ))}
+        </div>
+    </div>
+
+    <!-- Blood Clot Prevention Info -->
+    <div class="mt-8 card border-l-4 border-l-red-400">
+        <h2 class="font-semibold text-slate-900 mb-3 flex items-center gap-2">
+            <span>🩸</span> Kan Pıhtısı (DVT/PE) Önleme
+        </h2>
+        <p class="text-sm text-slate-600 mb-4">
+            Derin ven trombozu (DVT) ve pulmoner emboli (PE), eklem replasmanı sonrasında ciddi risklerdir. Cerrahi ekibiniz önleme stratejileri uygulayacaktır:
+        </p>
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 text-sm">
+            <div>
+                <h3 class="font-medium text-slate-800 mb-2">Size uygulanacak önlemler:</h3>
+                <ul class="space-y-1 text-slate-600 list-disc list-inside">
+                    <li>Antikoagülan ilaç (4–6 hafta)</li>
+                    <li>Kompresyon çorabı (TED çorabı)</li>
+                    <li>Hastanede aralıklı pnömatik kompresyon cihazı</li>
+                    <li>Erken mobilizasyon (ameliyat günü veya ertesi yürümek)</li>
+                    <li>Yeterli sıvı alımı</li>
+                </ul>
+            </div>
+            <div>
+                <h3 class="font-medium text-slate-800 mb-2">Sizin yapabilecekleriniz:</h3>
+                <ul class="space-y-1 text-slate-600 list-disc list-inside">
+                    <li>Dinlenirken saatte bir ayak bileği pompalaması</li>
+                    <li>Talimatlara göre düzenli yürüyüş</li>
+                    <li>Günde 2 litre su için</li>
+                    <li>Bacakları sarkık uzun süre oturmaktan kaçının</li>
+                    <li>Baldır ağrısı, şişlik veya nefes darlığını hemen bildirin</li>
+                </ul>
+            </div>
+        </div>
+        <div class="mt-4">
+            <a href="/warning-signs#dvt" class="btn btn-danger btn-sm">DVT Uyarı İşaretleri →</a>
+        </div>
+    </div>
+</Layout>
+
+<script>
+    function showTab(tab: string) {
+        const hipContent = document.getElementById('content-hip');
+        const kneeContent = document.getElementById('content-knee');
+        const hipTab = document.getElementById('tab-hip');
+        const kneeTab = document.getElementById('tab-knee');
+
+        if (tab === 'hip') {
+            hipContent?.classList.remove('hidden');
+            kneeContent?.classList.add('hidden');
+            hipTab?.classList.add('border-blue-600', 'text-blue-700');
+            hipTab?.classList.remove('border-transparent', 'text-slate-500');
+            kneeTab?.classList.remove('border-blue-600', 'text-blue-700');
+            kneeTab?.classList.add('border-transparent', 'text-slate-500');
+        } else {
+            kneeContent?.classList.remove('hidden');
+            hipContent?.classList.add('hidden');
+            kneeTab?.classList.add('border-blue-600', 'text-blue-700');
+            kneeTab?.classList.remove('border-transparent', 'text-slate-500');
+            hipTab?.classList.remove('border-blue-600', 'text-blue-700');
+            hipTab?.classList.add('border-transparent', 'text-slate-500');
+        }
+    }
+
+    (window as any).showTab = showTab;
+</script>

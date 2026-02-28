@@ -1,0 +1,97 @@
+---
+import Layout from '../layouts/Layout.astro';
+import PainTracker from '../components/PainTracker';
+---
+
+<Layout
+    title="Ağrı ve Belirti Takibi"
+    description="Kalça veya diz protezi ameliyatı sonrasında ağrı düzeylerini, belirtileri ve ilaçları takip edin"
+>
+    <div class="page-header">
+        <div class="flex items-center gap-2 text-sm text-slate-500 mb-3">
+            <a href="/" class="hover:text-blue-700 no-underline">Ana Sayfa</a>
+            <span>/</span>
+            <span class="text-slate-700">Ağrı Takibi</span>
+        </div>
+        <h1 class="page-title">Ağrı ve Belirti Takibi</h1>
+        <p class="page-subtitle text-lg">
+            Günlük ağrı düzeylerini, ilaçları ve belirtileri kaydedin. İyileşme sürecinizi takip edin ve doktorunuza rapor gösterin.
+        </p>
+    </div>
+
+    <!-- Info Cards -->
+    <div class="grid grid-cols-1 sm:grid-cols-3 gap-4 mb-8">
+        <div class="card">
+            <div class="text-2xl mb-2">📈</div>
+            <h3 class="font-semibold text-slate-900 mb-1">İlerlemeyi Takip Edin</h3>
+            <p class="text-sm text-slate-500">Düzenli kayıt tutmak, sizin ve doktorunuzun iyileşmenin nasıl gittiğini zaman içinde anlamasına yardımcı olur.</p>
+        </div>
+        <div class="card">
+            <div class="text-2xl mb-2">🔒</div>
+            <h3 class="font-semibold text-slate-900 mb-1">Gizli ve Yerel</h3>
+            <p class="text-sm text-slate-500">Tüm veriler yalnızca bu cihazda saklanır. Hiçbir sunucuya yüklenmez.</p>
+        </div>
+        <div class="card">
+            <div class="text-2xl mb-2">🖨️</div>
+            <h3 class="font-semibold text-slate-900 mb-1">PDF Rapor Alın</h3>
+            <p class="text-sm text-slate-500">Rapor sekmesinden PDF raporu oluşturun ve cerrahınıza veya pratisyen hekiminize randevularda gösterin.</p>
+        </div>
+    </div>
+
+    <!-- Pain Scale Reference -->
+    <div class="card mb-6">
+        <h2 class="font-semibold text-slate-900 mb-3">Sayısal Ağrı Skalası Referansı</h2>
+        <div class="overflow-x-auto">
+            <table class="w-full text-sm">
+                <thead>
+                    <tr class="border-b border-slate-200">
+                        <th class="text-left py-2 pr-4 text-slate-500 font-medium">Skor</th>
+                        <th class="text-left py-2 pr-4 text-slate-500 font-medium">Tanım</th>
+                        <th class="text-left py-2 text-slate-500 font-medium">Önerilen Yaklaşım</th>
+                    </tr>
+                </thead>
+                <tbody class="divide-y divide-slate-100 text-sm">
+                    <tr>
+                        <td class="py-2 pr-4"><span class="badge font-bold" style="background:#dcfce7;color:#15803d;">0</span></td>
+                        <td class="py-2 pr-4 text-slate-700">Ağrı yok</td>
+                        <td class="py-2 text-slate-500">Aktivitelere normal devam edin</td>
+                    </tr>
+                    <tr>
+                        <td class="py-2 pr-4"><span class="badge font-bold" style="background:#fef9c3;color:#854d0e;">1–3</span></td>
+                        <td class="py-2 pr-4 text-slate-700">Hafif ağrı — fark edilir ama sınırlayıcı değil</td>
+                        <td class="py-2 text-slate-500">Egzersizlere devam edin; gerekirse parasetamol</td>
+                    </tr>
+                    <tr>
+                        <td class="py-2 pr-4"><span class="badge font-bold" style="background:#fed7aa;color:#9a3412;">4–6</span></td>
+                        <td class="py-2 pr-4 text-slate-700">Orta düzey ağrı — aktiviteyi etkiler</td>
+                        <td class="py-2 text-slate-500">Dinlenin, buz uygulayın, reçete edilen ilaçları alın</td>
+                    </tr>
+                    <tr>
+                        <td class="py-2 pr-4"><span class="badge font-bold" style="background:#fee2e2;color:#991b1b;">7–9</span></td>
+                        <td class="py-2 pr-4 text-slate-700">Şiddetli ağrı — çoğu aktiviteyi engeller</td>
+                        <td class="py-2 text-slate-500">Fizyoterapist veya pratisyen hekiminize başvurun</td>
+                    </tr>
+                    <tr>
+                        <td class="py-2 pr-4"><span class="badge font-bold" style="background:#991b1b;color:#ffffff;">10</span></td>
+                        <td class="py-2 pr-4 text-slate-700">Dayanılmaz ağrı</td>
+                        <td class="py-2 text-slate-500 font-semibold text-red-600">Acilen tıbbi yardım alın</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <!-- Warning -->
+    <div class="alert alert-warning mb-6 text-sm">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" class="flex-shrink-0">
+            <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-2h2v2zm0-4h-2V7h2v6z"/>
+        </svg>
+        <div>
+            <p class="font-semibold">Acil yardım gerektiren durumlar</p>
+            <p class="mt-0.5">8/10 ve üzeri ağrı skoru, ani şiddetli ağrı, ateşli ağrı, baldır ağrısı ile şişlik (olası DVT) veya göğüs ağrısı/nefes darlığı (olası PE) durumunda hemen tıbbi yardım alın. <a href="/warning-signs" class="font-semibold">Uyarı İşaretleri →</a></p>
+        </div>
+    </div>
+
+    <!-- Interactive Pain Tracker (React) -->
+    <PainTracker client:load />
+</Layout>

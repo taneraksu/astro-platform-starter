@@ -1,0 +1,106 @@
+---
+import Layout from '../layouts/Layout.astro';
+import RandevuTakip from '../components/RandevuTakip';
+---
+
+<Layout
+    title="Randevu Takibi"
+    description="Ortopedi, fizyoterapi ve diğer ameliyat sonrası randevularınızı yönetin"
+>
+    <div class="page-header">
+        <div class="flex items-center gap-2 text-sm text-slate-500 mb-3">
+            <a href="/" class="hover:text-blue-700 no-underline">Ana Sayfa</a>
+            <span>/</span>
+            <span class="text-slate-700">Randevular</span>
+        </div>
+        <h1 class="page-title">Randevu Takibi</h1>
+        <p class="page-subtitle text-lg">
+            Tüm ameliyat sonrası randevularınızı tek bir yerde takip edin. Tarih, doktor ve notlarınızı kaydedin.
+        </p>
+    </div>
+
+    <!-- Info Cards -->
+    <div class="grid grid-cols-1 sm:grid-cols-3 gap-4 mb-8">
+        <div class="card">
+            <div class="text-2xl mb-2">🗓️</div>
+            <h3 class="font-semibold text-slate-900 mb-1">Tüm Randevular</h3>
+            <p class="text-sm text-slate-500">Ortopedi, fizyoterapi, kan testi, görüntüleme ve diğer randevularınızı kaydedin.</p>
+        </div>
+        <div class="card">
+            <div class="text-2xl mb-2">⏰</div>
+            <h3 class="font-semibold text-slate-900 mb-1">Hatırlatıcı Notlar</h3>
+            <p class="text-sm text-slate-500">Her randevu için sormak istediğiniz soruları ve hazırlık notlarını ekleyin.</p>
+        </div>
+        <div class="card">
+            <div class="text-2xl mb-2">✓</div>
+            <h3 class="font-semibold text-slate-900 mb-1">Tamamlanma Takibi</h3>
+            <p class="text-sm text-slate-500">Katıldığınız randevuları tamamlandı olarak işaretleyin, geçmişi görüntüleyin.</p>
+        </div>
+    </div>
+
+    <!-- Typical Appointment Schedule -->
+    <div class="card mb-8">
+        <h2 class="font-semibold text-slate-900 mb-4">Tipik Takip Randevu Programı</h2>
+        <div class="overflow-x-auto">
+            <table class="w-full text-sm">
+                <thead>
+                    <tr class="border-b border-slate-200">
+                        <th class="text-left py-3 pr-4 text-slate-600 font-semibold">Zaman</th>
+                        <th class="text-left py-3 pr-4 text-slate-600 font-semibold">Randevu</th>
+                        <th class="text-left py-3 text-slate-600 font-semibold">Amaç</th>
+                    </tr>
+                </thead>
+                <tbody class="divide-y divide-slate-100">
+                    {[
+                        { time: 'Ameliyat öncesi', type: 'Pre-op değerlendirme', purpose: 'Kan testleri, anestezi konsültasyonu, röntgen' },
+                        { time: '2. hafta', type: 'Yara kontrolü', purpose: 'Dikiş / staple alımı, yara değerlendirmesi' },
+                        { time: '6. hafta', type: 'Cerrah kontrolü', purpose: 'Röntgen, iyileşme değerlendirmesi, kısıtlama kaldırma' },
+                        { time: '3. ay', type: 'Cerrah kontrolü', purpose: 'Fonksiyonel değerlendirme, aktivite onayı' },
+                        { time: '6. ay', type: 'Cerrah kontrolü', purpose: 'İyileşme değerlendirmesi, röntgen' },
+                        { time: '12. ay', type: 'Cerrah kontrolü', purpose: 'Yıllık kontrol, implant değerlendirmesi' },
+                        { time: 'Süregelen', type: 'Fizyoterapi', purpose: 'Haftalık rehabilitasyon seansları (genellikle 6–12 hafta)' },
+                    ].map(row => (
+                        <tr>
+                            <td class="py-3 pr-4"><span class="badge badge-blue whitespace-nowrap">{row.time}</span></td>
+                            <td class="py-3 pr-4 font-medium text-slate-800">{row.type}</td>
+                            <td class="py-3 text-slate-600">{row.purpose}</td>
+                        </tr>
+                    ))}
+                </tbody>
+            </table>
+        </div>
+        <p class="text-xs text-slate-400 mt-3">* Randevu takvimi cerrahınıza ve kliniğinize göre değişebilir.</p>
+    </div>
+
+    <!-- Prepare for Appointment Tips -->
+    <div class="card mb-8">
+        <h2 class="font-semibold text-slate-900 mb-4">Randevuya Hazırlık İpuçları</h2>
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 text-sm">
+            <div>
+                <h3 class="font-medium text-slate-800 mb-2">Her randevuya şunları götürün:</h3>
+                <ul class="space-y-1.5 list-disc list-inside text-slate-600">
+                    <li>Kimlik ve sağlık sigortası kartı</li>
+                    <li>İlaç listesi (doz ve kullanım sıklığıyla)</li>
+                    <li>Op Dr Taner Aksu Protez Takip ağrı takibi raporu</li>
+                    <li>Sorularınızın listesi</li>
+                    <li>Önceki röntgenler ve testler (sorulursa)</li>
+                    <li>İmplant kartınız (uzun seyahatlerde özellikle)</li>
+                </ul>
+            </div>
+            <div>
+                <h3 class="font-medium text-slate-800 mb-2">Cerrahinize sorabilecekleriniz:</h3>
+                <ul class="space-y-1.5 list-disc list-inside text-slate-600">
+                    <li>İyileşmem beklentilere uygun mu?</li>
+                    <li>Hâlâ ne zaman araba kullanabilirim?</li>
+                    <li>Kısıtlamalar kaldırıldı mı?</li>
+                    <li>Hangi aktivitelere başlayabilirim?</li>
+                    <li>Ne zaman işe dönebilirim?</li>
+                    <li>Bir sonraki kontrol ne zaman?</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <!-- Interactive Appointment Tracker (React) -->
+    <RandevuTakip client:load />
+</Layout>

@@ -1,0 +1,308 @@
+---
+import Layout from '../layouts/Layout.astro';
+
+const faqs = [
+    {
+        q: "Eklem replasmanı sonrasında hastanede ne kadar kalacağım?",
+        a: "Çoğu kalça veya diz protezi hastası 2–5 gün hastanede kalır. Bazı hastaneler hızlandırılmış iyileşme programları sunmakta olup hastalar 1–2 gün sonra eve dönebilmektedir. Kalış süreniz sağlık durumunuza, mobilite ilerlemenize ve ev koşullarınıza bağlıdır."
+    },
+    {
+        q: "Ameliyattan sonra ne zaman araba kullanabilirim?",
+        a: "Bu durum hangi bacağın ameliyat edildiğine ve manuel/otomatik araç kullandığınıza bağlıdır. Genel olarak: Sağ bacak ameliyatı (otomatik): en az 6 hafta. Sol bacak ameliyatı (otomatik): genellikle 4–6 hafta. Sağ bacak ameliyatı (manuel): 8–12 hafta. Araba kullanmadan önce her zaman cerrahınızın onayını alın. Acil fren yapabilecek durumda olmanız gerekir."
+    },
+    {
+        q: "Ne zaman işe dönebilirim?",
+        a: "Masa başı / oturarak yapılan iş: genellikle 6–8 hafta. Hafif fiziksel iş: 8–12 hafta. Ağır fiziksel iş veya uzun süre ayakta durma: 3–6 ay veya daha uzun. Bu süre bireyler arasında önemli ölçüde değişir — cerrahınızla görüşün."
+    },
+    {
+        q: "Eklem replasmanımla uzun vadede hangi aktiviteleri yapabilirim?",
+        a: "Önerilen: yürüyüş, yüzme, bisiklet, golf, çiftler tenis, dans, hafif bahçe işleri. Kabul edilebilir: doğa yürüyüşü, kayak (deneyimli kayakçılar), eliptik bisiklet. Önerilmeyen: koşu, jogging, temaslı sporlar, squash, implant aşınmasını artıran yüksek darbeli aktiviteler."
+    },
+    {
+        q: "Havalimanı metal dedektörlerini tetikler miyim?",
+        a: "Modern metal dedektörler implantınızı algılayabilir, ancak bu yeni güvenlik sistemlerinde daha az yaygındır. Seyahat ederken cerrahınızdan alacağınız implant kartınızı yanınızda taşıyın. Dedektörü tetiklerseniz alternatif arama yöntemi isteyin. Bu durum uçuşunuzu engellememelidir."
+    },
+    {
+        q: "Diş işlemlerinden önce antibiyotik almam gerekiyor mu?",
+        a: "Bu konu tartışmalı olup rehberler değişmiştir. Güncel Türk Ortopedi ve Travmatoloji Derneği (TOTBID) görüşleri genellikle tüm eklem replasmanı hastaları için rutin diş antibiyotik profilaksisi önermemektedir. Ancak bazı cerrahlar hâlâ önermektedir. Herhangi bir diş işleminden önce bu konuyu özellikle cerrahınızla görüşün."
+    },
+    {
+        q: "Eklem replasmanı ne kadar süre dayanır?",
+        a: "Modern implantlar 15–25+ yıl dayanacak şekilde tasarlanmıştır. Araştırmalar, total diz replasmanlarının %90+'ının 20 yıldan fazla sürdüğünü göstermekte olup kalça replasmanları için de benzer oranlar geçerlidir. Uzun ömrü etkileyen faktörler arasında hastanın yaşı, kilosu, aktivite düzeyi ve implant seçimi yer alır. İmplant yıpranırsa revizyon ameliyatı mümkündür."
+    },
+    {
+        q: "'Revizyon' ameliyatı nedir?",
+        a: "Revizyon ameliyatı, başarısız olan önceki bir eklem replasmanının değiştirilmesi veya onarımıdır. Nedenler arasında aşınma, gevşeme, enfeksiyon, dislokasyon veya implant çevresinde kırık sayılabilir. Revizyon ameliyatı primer replasmanından daha karmaşıktır. Oranlar, primer diz replasmanlarında 10 yılda yaklaşık %1–2'dir."
+    },
+    {
+        q: "Replasmanın ardından dizim neden hâlâ tıklıyor veya farklı hissettiriyor?",
+        a: "Yapay eklemde bazı tıklamalar veya ince hisler normaldir. Yeni materyaller biyolojik kıkırdaktan farklı davranır. Kesinin çevresinde (özellikle diz dış kısmında) uyuşukluk da yaygındır ve ameliyat sırasında kesilen küçük sinir dalları nedeniyle çoğunlukla kalıcıdır."
+    },
+    {
+        q: "Diz replasmanından sonra memnuniyetsiz olmak normal mi?",
+        a: "Hastaların yaklaşık %15–20'si diz replasmanından sonra belirli düzeyde memnuniyetsizlik bildirmektedir; bu oran kalça replasmanından (~%5) daha yüksektir. Nedenler arasında ısrarcı ağrı, sertlik veya karşılanmayan beklentiler yer alır. Sonuçlar genel olarak en iyi, ameliyat doğru endikasyonlar için yapıldığında (şiddetli artrit + uygun görüntüleme bulguları) ve gerçekçi beklentilerle yaklaşıldığında elde edilir."
+    },
+];
+---
+
+<Layout
+    title="Eğitim Kaynakları"
+    description="Kalça ve diz protezi ameliyatları, implantlar ve süreç hakkında bilgi edinin"
+>
+    <div class="page-header">
+        <div class="flex items-center gap-2 text-sm text-slate-500 mb-3">
+            <a href="/" class="hover:text-blue-700 no-underline">Ana Sayfa</a>
+            <span>/</span>
+            <span class="text-slate-700">Kaynaklar</span>
+        </div>
+        <h1 class="page-title">Eğitim Kaynakları</h1>
+        <p class="page-subtitle text-lg">
+            Durumunuzu ve ameliyatınızı anlamak daha iyi sonuçlara yol açar. Artroplasti ameliyatı hakkında bilgi edinin.
+        </p>
+    </div>
+
+    <!-- What is Arthroplasty -->
+    <div class="card mb-6">
+        <div class="flex items-center gap-3 mb-4">
+            <div class="w-10 h-10 bg-blue-100 rounded-lg flex items-center justify-center text-xl">🦴</div>
+            <h2 class="font-semibold text-slate-900 text-xl">Artroplasti Nedir?</h2>
+        </div>
+        <p class="text-slate-700 mb-4 leading-relaxed">
+            <strong>Artroplasti</strong>, bir eklemin cerrahi olarak yeniden yapılandırılması veya değiştirilmesi anlamına gelir. <strong>Total artroplasti</strong> (total eklem replasmanı), hasarlı eklem yüzeylerinin çıkarılarak metal, seramik ve/veya plastik (polietilen) yapay bileşenlerle değiştirilmesini içerir.
+        </p>
+        <p class="text-slate-700 leading-relaxed">
+            Temel amaç <strong>ağrıyı gidermek</strong> ve <strong>fonksiyonu yeniden kazandırmaktır</strong>. Eklem replasmanı genellikle şu durumlarda değerlendirilir:
+        </p>
+        <ul class="mt-3 space-y-1.5 text-slate-600 text-sm ml-4">
+            <li>• Şiddetli artrit (osteoartrit, romatoid artrit veya diğer nedenler)</li>
+            <li>• Konservatif tedavinin yetersiz kalması (fizyoterapi, ilaçlar, enjeksiyonlar)</li>
+            <li>• Ağrı ve yetersizliğin yaşam kalitesini önemli ölçüde etkilemesi</li>
+            <li>• Görüntülemede şiddetli eklem hasarının belgelenmesi</li>
+        </ul>
+    </div>
+
+    <!-- Hip vs Knee Split -->
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
+        <!-- Hip Replacement -->
+        <div class="card">
+            <div class="flex items-center gap-3 mb-4">
+                <div class="w-10 h-10 bg-blue-100 rounded-lg flex items-center justify-center text-xl">🦴</div>
+                <h2 class="font-semibold text-slate-900">Total Kalça Replasmanı (TKR)</h2>
+            </div>
+            <p class="text-sm text-slate-600 mb-4 leading-relaxed">
+                Total kalça replasmanında, hasarlı top-yuva kalça eklemi yapay implantla değiştirilir. Femoral baş (top), femura yerleştirilen metal sap üzerindeki metal veya seramik topla değiştirilir. Asetabulum (yuva), metal kap ve plastik/seramik astar ile yenilenir.
+            </p>
+            <div class="space-y-3">
+                <div class="bg-blue-50 rounded-lg p-3">
+                    <p class="text-xs font-semibold text-blue-800 mb-1">Cerrahi Yaklaşımlar</p>
+                    <ul class="text-xs text-blue-700 space-y-0.5">
+                        <li><strong>Posterior:</strong> En yaygın. Kalçanın arka/yan tarafından kesi. Tarihsel olarak kalça kısıtlamaları gerektirir.</li>
+                        <li><strong>Anterior (ÖKY):</strong> Kalçanın ön tarafından. Genellikle daha hızlı iyileşme, daha az kısıtlama. Kullanımı giderek artıyor.</li>
+                        <li><strong>Lateral:</strong> Yan yaklaşım. Daha az yaygın.</li>
+                    </ul>
+                </div>
+                <div class="bg-slate-50 rounded-lg p-3">
+                    <p class="text-xs font-semibold text-slate-700 mb-1">İmplant Sabitleme</p>
+                    <ul class="text-xs text-slate-600 space-y-0.5">
+                        <li><strong>Çimentolu:</strong> Kemik çimentosu bileşenleri sabitler. Yaşlı hastalarda yaygın.</li>
+                        <li><strong>Çimentosuz:</strong> Bileşenler kemik büyümesi için pürüzlü yüzeye sahiptir. Genç, aktif hastalarda yaygın.</li>
+                        <li><strong>Hibrit:</strong> Çimentolu sap, çimentosuz kap (veya tam tersi).</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <!-- Knee Replacement -->
+        <div class="card">
+            <div class="flex items-center gap-3 mb-4">
+                <div class="w-10 h-10 bg-teal-100 rounded-lg flex items-center justify-center text-xl">🦵</div>
+                <h2 class="font-semibold text-slate-900">Total Diz Replasmanı (TDR)</h2>
+            </div>
+            <p class="text-sm text-slate-600 mb-4 leading-relaxed">
+                Total diz replasmanında, femur, tibia ve genellikle patellanın (diz kapağı) hasarlı yüzeyleri metal ve plastik bileşenlerle değiştirilir. Femoral ve tibial bileşenler arasına polietilen (plastik) bir insert yerleştirilerek pürüzsüz hareket sağlanır.
+            </p>
+            <div class="space-y-3">
+                <div class="bg-teal-50 rounded-lg p-3">
+                    <p class="text-xs font-semibold text-teal-800 mb-1">Diz Replasmanı Tipleri</p>
+                    <ul class="text-xs text-teal-700 space-y-0.5">
+                        <li><strong>Total (TDR):</strong> Tüm kompartmanlar değiştirilir. En yaygın.</li>
+                        <li><strong>Unikompartmantal (UKR):</strong> Yalnızca bir kompartman (medial, lateral veya patellofemoral) değiştirilir. Daha hızlı iyileşme, sınırlı hastalık için uygun.</li>
+                        <li><strong>Revizyon:</strong> Önceki replasmanın yeniden ameliyatı.</li>
+                    </ul>
+                </div>
+                <div class="bg-slate-50 rounded-lg p-3">
+                    <p class="text-xs font-semibold text-slate-700 mb-1">Kalça Replasmanından Temel Fark</p>
+                    <p class="text-xs text-slate-600">
+                        Diz replasmanı genellikle daha uzun ve daha zorlu bir rehabilitasyon gerektirir. Diz bükülmesini (fleksiyon) ve tam ekstansiyonu yeniden kazanmak kritik önemdedir. Sonuçlar büyük ölçüde rehabilitasyon çabasına bağlıdır.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Anaesthesia Options -->
+    <div class="card mb-6">
+        <div class="flex items-center gap-3 mb-4">
+            <div class="w-10 h-10 bg-purple-100 rounded-lg flex items-center justify-center text-xl">💉</div>
+            <h2 class="font-semibold text-slate-900">Anestezi Seçenekleri</h2>
+        </div>
+        <div class="grid grid-cols-1 sm:grid-cols-3 gap-4">
+            <div class="bg-purple-50 rounded-lg p-4">
+                <h3 class="font-semibold text-purple-900 text-sm mb-2">Spinal Anestezi</h3>
+                <p class="text-xs text-purple-700 leading-relaxed">
+                    Omurga sıvısına enjeksiyon belden aşağısını uyuşturur. Uyanık kalırsınız (sedasyon seçeneği mevcut). Eklem replasmanı için genellikle tercih edilir — daha az kan kaybı, düşük DVT riski ve daha hızlı iyileşme ile ilişkilidir. Boğaz ağrısı veya solunum yolu riski yoktur.
+                </p>
+            </div>
+            <div class="bg-indigo-50 rounded-lg p-4">
+                <h3 class="font-semibold text-indigo-900 text-sm mb-2">Genel Anestezi</h3>
+                <p class="text-xs text-indigo-700 leading-relaxed">
+                    İşlem boyunca tamamen uyuduğunuz anestezi tipidir. Ağrı kontrolü için bölgesel sinir blokajıyla birleştirilebilir. Spinal mümkün olmadığında veya hasta tercihi olduğunda uygundur. Özellikle yaşlı hastalarda bulantı, boğaz ağrısı ve bilişsel etkilerde hafifçe daha yüksek riskle ilişkilidir.
+                </p>
+            </div>
+            <div class="bg-teal-50 rounded-lg p-4">
+                <h3 class="font-semibold text-teal-900 text-sm mb-2">Bölgesel Sinir Blokajı</h3>
+                <p class="text-xs text-teal-700 leading-relaxed">
+                    Spinal veya genel anesteziye ek olarak sıklıkla kullanılır. Ultrason kılavuzluğunda enjeksiyonla belirli sinirler uyuşturulur (örn. diz için femoral sinir blokajı, kalça için fasya iliaka blokajı). Mükemmel ameliyat sonrası ağrı kontrolü sağlar.
+                </p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Pain Management -->
+    <div class="card mb-6">
+        <div class="flex items-center gap-3 mb-4">
+            <div class="w-10 h-10 bg-green-100 rounded-lg flex items-center justify-center text-xl">💊</div>
+            <h2 class="font-semibold text-slate-900">Ameliyat Sonrası Ağrı Yönetimi</h2>
+        </div>
+        <p class="text-sm text-slate-600 mb-4">
+            Modern çok modlu ağrı yönetimi, yalnızca opioidlere dayanmaktan daha az yan etki ile iyi ağrı kontrolü sağlamak için birçok ilacı birlikte kullanır.
+        </p>
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 text-sm">
+            <div>
+                <h3 class="font-medium text-slate-800 mb-2">Sıkça kullanılan ilaçlar:</h3>
+                <ul class="space-y-2 text-slate-600">
+                    <li class="flex items-start gap-2">
+                        <span class="text-green-500 mt-0.5">•</span>
+                        <div><strong>Parasetamol:</strong> Temel ilaç — düzenli kullanım opioid ihtiyacını azaltır</div>
+                    </li>
+                    <li class="flex items-start gap-2">
+                        <span class="text-green-500 mt-0.5">•</span>
+                        <div><strong>NSAİİ'ler</strong> (selekoksib, ibuprofen): Anti-inflamatuar; ameliyat sonrası kısa süreli kullanılır</div>
+                    </li>
+                    <li class="flex items-start gap-2">
+                        <span class="text-green-500 mt-0.5">•</span>
+                        <div><strong>Opioidler</strong> (oksikodon, tramadol): Ani ağrı için kısa süreli kullanım; hızla azaltılmayı hedefleyin</div>
+                    </li>
+                    <li class="flex items-start gap-2">
+                        <span class="text-green-500 mt-0.5">•</span>
+                        <div><strong>Gabapentinoidler</strong> (pregabalin, gabapentin): Sinir tipi ağrıya yardımcı olur; kısa süreli kullanım</div>
+                    </li>
+                </ul>
+            </div>
+            <div>
+                <h3 class="font-medium text-slate-800 mb-2">İlaç dışı yaklaşımlar:</h3>
+                <ul class="space-y-2 text-slate-600">
+                    <li class="flex items-start gap-2">
+                        <span class="text-blue-500 mt-0.5">•</span>
+                        <div><strong>Buz tedavisi:</strong> Günde birkaç kez 15–20 dk eklem üzerine buz — şişlik ve ağrıyı azaltır</div>
+                    </li>
+                    <li class="flex items-start gap-2">
+                        <span class="text-blue-500 mt-0.5">•</span>
+                        <div><strong>Elevasyon:</strong> Bacağı yüksekte tutarak bağımlı ödemi (şişliği) azaltır</div>
+                    </li>
+                    <li class="flex items-start gap-2">
+                        <span class="text-blue-500 mt-0.5">•</span>
+                        <div><strong>TENS cihazı:</strong> Transkutanöz elektriksel sinir stimülasyonu</div>
+                    </li>
+                    <li class="flex items-start gap-2">
+                        <span class="text-blue-500 mt-0.5">•</span>
+                        <div><strong>Hidroterapi:</strong> Sıcak su egzersizi ağrıyı azaltır ve hareketi kolaylaştırır</div>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <!-- Complications Overview -->
+    <div class="card mb-6">
+        <div class="flex items-center gap-3 mb-4">
+            <div class="w-10 h-10 bg-amber-100 rounded-lg flex items-center justify-center text-xl">⚠️</div>
+            <h2 class="font-semibold text-slate-900">Olası Komplikasyonlar</h2>
+        </div>
+        <p class="text-sm text-slate-600 mb-4">
+            Eklem replasmanı, genel komplikasyon oranı düşük, güvenli bir ameliyattır. Ancak her büyük ameliyatta olduğu gibi riskler mevcuttur. Cerrahınız bu konuları sizinle görüşecektir.
+        </p>
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 text-sm">
+            <div>
+                <h3 class="font-medium text-slate-800 mb-2">Kısa vadeli riskler:</h3>
+                <ul class="space-y-1.5 text-slate-600">
+                    <li class="flex items-start gap-2"><span class="badge badge-red text-xs">~%1</span> Derin enfeksiyon (periprostetik eklem enfeksiyonu)</li>
+                    <li class="flex items-start gap-2"><span class="badge badge-yellow text-xs">~%1–2</span> Derin ven trombozu (DVT)</li>
+                    <li class="flex items-start gap-2"><span class="badge badge-yellow text-xs">&lt;%0,1</span> Pulmoner emboli (PE)</li>
+                    <li class="flex items-start gap-2"><span class="badge badge-blue text-xs">~%2</span> Kalça dislokasyonu (arka yaklaşımda daha yüksek)</li>
+                    <li class="flex items-start gap-2"><span class="badge badge-blue text-xs">&lt;%1</span> Sinir veya damar yaralanması</li>
+                    <li class="flex items-start gap-2"><span class="badge badge-blue text-xs">&lt;%1</span> Periprostetik kırık</li>
+                </ul>
+            </div>
+            <div>
+                <h3 class="font-medium text-slate-800 mb-2">Uzun vadeli değerlendirmeler:</h3>
+                <ul class="space-y-1.5 text-slate-600">
+                    <li class="flex items-start gap-2"><span class="badge badge-blue text-xs">~%1–2/yıl</span> Bileşen aşınması (polietilen)</li>
+                    <li class="flex items-start gap-2"><span class="badge badge-blue text-xs">~%1–3/10yıl</span> Aseptik gevşeme</li>
+                    <li class="flex items-start gap-2"><span class="badge badge-yellow text-xs">~%15–20</span> Hasta memnuniyetsizliği (diz replasmanı)</li>
+                    <li class="flex items-start gap-2"><span class="badge badge-blue text-xs">~%5</span> Hasta memnuniyetsizliği (kalça replasmanı)</li>
+                    <li class="flex items-start gap-2"><span class="badge badge-blue text-xs">yaygın</span> Kesi çevresinde ısrarcı uyuşukluk</li>
+                </ul>
+            </div>
+        </div>
+        <div class="mt-4">
+            <a href="/warning-signs" class="btn btn-danger btn-sm">Uyarı İşaretlerini ve Ne Zaman Yardım Alacağınızı Görüntüleyin →</a>
+        </div>
+    </div>
+
+    <!-- FAQ Section -->
+    <div class="card">
+        <div class="flex items-center gap-3 mb-6">
+            <div class="w-10 h-10 bg-indigo-100 rounded-lg flex items-center justify-center text-xl">❓</div>
+            <h2 class="font-semibold text-slate-900 text-xl">Sık Sorulan Sorular</h2>
+        </div>
+        <div class="space-y-4" id="faq-list">
+            {faqs.map((faq, index) => (
+                <div class="border border-slate-200 rounded-xl overflow-hidden">
+                    <button
+                        class="w-full text-left p-4 flex items-start gap-3 hover:bg-slate-50 transition-colors font-medium text-slate-800 text-sm"
+                        onclick={`toggleFaq(${index})`}
+                        aria-expanded="false"
+                        aria-controls={`faq-${index}`}
+                    >
+                        <span class="text-blue-500 flex-shrink-0 mt-0.5 font-bold">S.</span>
+                        <span class="flex-1">{faq.q}</span>
+                        <svg id={`faq-icon-${index}`} width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" class="flex-shrink-0 mt-0.5 transition-transform text-slate-400">
+                            <path d="M6 9l6 6 6-6"/>
+                        </svg>
+                    </button>
+                    <div id={`faq-${index}`} class="hidden px-4 pb-4 pt-0">
+                        <div class="pl-6 border-l-2 border-blue-200">
+                            <p class="text-sm text-slate-600 leading-relaxed">{faq.a}</p>
+                        </div>
+                    </div>
+                </div>
+            ))}
+        </div>
+    </div>
+</Layout>
+
+<script>
+    function toggleFaq(index: number) {
+        const content = document.getElementById(`faq-${index}`);
+        const icon = document.getElementById(`faq-icon-${index}`);
+        const btn = content?.previousElementSibling as HTMLButtonElement;
+
+        if (!content) return;
+        const isHidden = content.classList.contains('hidden');
+        content.classList.toggle('hidden', !isHidden);
+        icon?.classList.toggle('rotate-180', isHidden);
+        btn?.setAttribute('aria-expanded', String(isHidden));
+    }
+    (window as any).toggleFaq = toggleFaq;
+</script>

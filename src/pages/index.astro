@@ -1,19 +1,217 @@
 ---
 import Layout from '../layouts/Layout.astro';
-import Markdown from '../components/Markdown.astro';
 
-const explainer = `
-An Astro website can go way beyond static pages - on the right platform.
+const featureCards = [
+    {
+        title: 'Ameliyat Öncesi Kontrol Listesi',
+        description: 'Tıbbi onaylardan, ev hazırlığına ve ameliyat günü talimatlarına kadar kapsamlı hazırlık listesi.',
+        href: '/pre-surgery',
+        icon: '📋',
+        color: 'blue',
+        badge: 'Hazırlık',
+    },
+    {
+        title: 'İyileşme Takvimi',
+        description: 'Kalça ve diz protezi hastalarına yönelik gerçekçi hedeflerle haftalık iyileşme takviminizi öğrenin.',
+        href: '/recovery',
+        icon: '📅',
+        color: 'teal',
+        badge: 'İyileşme',
+    },
+    {
+        title: 'Egzersiz Programı',
+        description: 'Adım adım talimatlar ve günlük tamamlama takibi ile reçete edilen rehabilitasyon egzersizlerinizi uygulayın.',
+        href: '/exercises',
+        icon: '🏃',
+        color: 'green',
+        badge: 'Rehabilitasyon',
+    },
+    {
+        title: 'Ağrı ve Belirti Takibi',
+        description: 'Günlük ağrı seviyelerinizi, belirtilerinizi ve ilaçlarınızı kaydedin; doktorunuza randevularda gösterin.',
+        href: '/pain-tracker',
+        icon: '📊',
+        color: 'purple',
+        badge: 'Takip',
+    },
+    {
+        title: 'Randevu Takibi',
+        description: 'Ameliyat, kontrol ve fizyoterapi randevularınızı kolayca yönetin ve hatırlatıcı notlar ekleyin.',
+        href: '/randevular',
+        icon: '🗓️',
+        color: 'indigo',
+        badge: 'Randevular',
+    },
+    {
+        title: 'İlaç Takibi',
+        description: 'İlaçlarınızı, dozlarınızı ve kullanım saatlerini takip edin; günlük kullanım geçmişinizi görün.',
+        href: '/ilaclar',
+        icon: '💊',
+        color: 'cyan',
+        badge: 'İlaçlar',
+    },
+    {
+        title: 'Eğitim Kaynakları',
+        description: 'Kalça ve diz protezi ameliyatları, implantlar, anestezi seçenekleri ve sonrası hakkında bilgi edinin.',
+        href: '/resources',
+        icon: '📚',
+        color: 'orange',
+        badge: 'Eğitim',
+    },
+    {
+        title: 'Uyarı İşaretleri',
+        description: 'Acil yardım gerektiren belirtileri öğrenin: enfeksiyon, pıhtılaşma, çıkık ve diğer komplikasyonlar.',
+        href: '/warning-signs',
+        icon: '🚨',
+        color: 'red',
+        badge: 'Güvenlik',
+    },
+];
 
-Netlify supports not only [Streaming SSR](https://docs.astro.build/en/guides/server-side-rendering/#html-streaming) and fast [Edge Middleware](https://docs.astro.build/en/guides/middleware/), but also [on-demand revalidation](https://www.netlify.com/blog/cache-tags-and-purge-api-on-netlify/) and [stale-while-revalidate](https://www.netlify.com/blog/swr-and-fine-grained-cache-control/). 
-Any page or data can be rebuilt only when needed, without site visitors ever getting a performance hit.
-`;
+const colorMap: Record<string, { card: string; badge: string; icon: string }> = {
+    blue:   { card: 'border-blue-200 hover:border-blue-400',   badge: 'bg-blue-100 text-blue-800',   icon: 'bg-blue-100' },
+    teal:   { card: 'border-teal-200 hover:border-teal-400',   badge: 'bg-teal-100 text-teal-800',   icon: 'bg-teal-100' },
+    green:  { card: 'border-green-200 hover:border-green-400', badge: 'bg-green-100 text-green-800', icon: 'bg-green-100' },
+    purple: { card: 'border-purple-200 hover:border-purple-400', badge: 'bg-purple-100 text-purple-800', icon: 'bg-purple-100' },
+    indigo: { card: 'border-indigo-200 hover:border-indigo-400', badge: 'bg-indigo-100 text-indigo-800', icon: 'bg-indigo-100' },
+    cyan:   { card: 'border-cyan-200 hover:border-cyan-400',   badge: 'bg-cyan-100 text-cyan-800',   icon: 'bg-cyan-100' },
+    orange: { card: 'border-orange-200 hover:border-orange-400', badge: 'bg-orange-100 text-orange-800', icon: 'bg-orange-100' },
+    red:    { card: 'border-red-200 hover:border-red-400',     badge: 'bg-red-100 text-red-800',     icon: 'bg-red-100' },
+};
 ---
 
-<Layout title="Welcome to Astro.">
-    <h1 class="mb-10">Netlify Platform Starter for Astro</h1>
-    <Markdown content={explainer} class="mb-10 text-lg" />
-    <p>
-        <a href="https://docs.netlify.com/frameworks/astro/" class="btn btn-lg sm:min-w-64">Read the Docs</a>
-    </p>
+<Layout title="Ana Sayfa" description="Op Dr Taner Aksu Protez Takip — Kapsamlı ortopedik artroplasti hasta destek uygulaması">
+    <!-- Hero Section -->
+    <div class="mb-10">
+        <div class="bg-gradient-to-br from-blue-800 to-blue-600 rounded-2xl p-8 sm:p-10 text-white">
+            <div class="flex flex-col sm:flex-row sm:items-center gap-6">
+                <div class="flex-1">
+                    <div class="inline-flex items-center gap-2 bg-blue-700/50 rounded-full px-3 py-1 text-sm mb-4">
+                        <span class="w-2 h-2 bg-green-400 rounded-full"></span>
+                        İyileşme Yol Arkadaşınız
+                    </div>
+                    <h1 class="text-3xl sm:text-4xl font-bold text-white mb-3">
+                        Op Dr Taner Aksu Protez Takip'e Hoş Geldiniz
+                    </h1>
+                    <p class="text-blue-100 text-lg leading-relaxed mb-6">
+                        Kalça ve diz protezi ameliyatı öncesinden tam iyileşmeye kadar kapsamlı hasta destek uygulaması.
+                    </p>
+                    <div class="flex flex-wrap gap-3">
+                        <a href="/pre-surgery" class="btn bg-white text-blue-800 hover:bg-blue-50 font-semibold">
+                            Başlayın
+                        </a>
+                        <a href="/resources" class="btn bg-blue-700 text-white hover:bg-blue-800 border border-blue-500">
+                            Daha Fazla Bilgi
+                        </a>
+                    </div>
+                </div>
+                <div class="hidden sm:flex flex-col gap-3 text-sm min-w-48">
+                    <div class="bg-white/10 backdrop-blur rounded-xl p-4">
+                        <div class="text-2xl font-bold">6–12</div>
+                        <div class="text-blue-200 text-xs">Ay tam iyileşme süresi</div>
+                    </div>
+                    <div class="bg-white/10 backdrop-blur rounded-xl p-4">
+                        <div class="text-2xl font-bold">%95+</div>
+                        <div class="text-blue-200 text-xs">Hasta memnuniyeti oranı</div>
+                    </div>
+                    <div class="bg-white/10 backdrop-blur rounded-xl p-4">
+                        <div class="text-2xl font-bold">20+ Yıl</div>
+                        <div class="text-blue-200 text-xs">Ortalama implant ömrü</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Important Notice -->
+    <div class="alert alert-warning mb-8 rounded-xl">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor" class="flex-shrink-0 mt-0.5">
+            <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-2h2v2zm0-4h-2V7h2v6z"/>
+        </svg>
+        <div>
+            <p class="font-semibold text-sm">Tıbbi Sorumluluk Reddi</p>
+            <p class="text-sm mt-0.5">Bu uygulama yalnızca genel bilgi sağlar. Her zaman cerrahınızın özel talimatlarını izleyin. Endişeleriniz varsa sağlık ekibinizle iletişime geçin.</p>
+        </div>
+    </div>
+
+    <!-- Feature Cards -->
+    <div>
+        <h2 class="text-xl font-bold text-slate-900 mb-6">Bakım Bölümleriniz</h2>
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+            {featureCards.map((card) => {
+                const colors = colorMap[card.color];
+                return (
+                    <a
+                        href={card.href}
+                        class={`group block bg-white rounded-xl border-2 ${colors.card} p-5 transition-all hover:shadow-md no-underline`}
+                    >
+                        <div class="flex items-start justify-between mb-3">
+                            <div class={`w-10 h-10 ${colors.icon} rounded-lg flex items-center justify-center text-xl`}>
+                                {card.icon}
+                            </div>
+                            <span class={`badge ${colors.badge} text-xs`}>
+                                {card.badge}
+                            </span>
+                        </div>
+                        <h3 class="font-semibold text-slate-900 mb-1 group-hover:text-blue-700 transition-colors text-sm">
+                            {card.title}
+                        </h3>
+                        <p class="text-xs text-slate-500 leading-relaxed">
+                            {card.description}
+                        </p>
+                        <div class="mt-3 flex items-center gap-1 text-xs font-medium text-blue-700">
+                            Bölümü Aç
+                            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" class="group-hover:translate-x-0.5 transition-transform">
+                                <path d="M5 12h14M12 5l7 7-7 7"/>
+                            </svg>
+                        </div>
+                    </a>
+                );
+            })}
+        </div>
+    </div>
+
+    <!-- Quick Stats Row -->
+    <div class="mt-10 grid grid-cols-2 sm:grid-cols-4 gap-4">
+        <div class="card text-center">
+            <div class="text-3xl mb-1">🦴</div>
+            <div class="font-semibold text-slate-800">Kalça Protezi</div>
+            <div class="text-xs text-slate-500 mt-0.5">Total kalça artroplastisi</div>
+        </div>
+        <div class="card text-center">
+            <div class="text-3xl mb-1">🦵</div>
+            <div class="font-semibold text-slate-800">Diz Protezi</div>
+            <div class="text-xs text-slate-500 mt-0.5">Total diz artroplastisi</div>
+        </div>
+        <div class="card text-center">
+            <div class="text-3xl mb-1">💊</div>
+            <div class="font-semibold text-slate-800">Ağrı Yönetimi</div>
+            <div class="text-xs text-slate-500 mt-0.5">İlaç ve belirti takibi</div>
+        </div>
+        <div class="card text-center">
+            <div class="text-3xl mb-1">🏥</div>
+            <div class="font-semibold text-slate-800">Ameliyat Sonrası</div>
+            <div class="text-xs text-slate-500 mt-0.5">Yara ve mobilite rehberi</div>
+        </div>
+    </div>
+
+    <!-- Emergency Banner -->
+    <div class="mt-8 bg-red-50 border-2 border-red-200 rounded-xl p-5">
+        <div class="flex items-start gap-4">
+            <div class="w-10 h-10 bg-red-100 rounded-lg flex items-center justify-center flex-shrink-0">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="#dc2626">
+                    <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-2h2v2zm0-4h-2V7h2v6z"/>
+                </svg>
+            </div>
+            <div class="flex-1">
+                <h3 class="font-semibold text-red-800 mb-1">Uyarı İşaretlerini Bilin</h3>
+                <p class="text-sm text-red-700 mb-3">
+                    Eklem replasmanı sonrasında bazı belirtiler <strong>acil tıbbi müdahale</strong> gerektirir: yüksek ateş, şiddetli şişlik, pıhtı belirtileri, ani şiddetli ağrı veya yara akıntısı.
+                </p>
+                <a href="/warning-signs" class="btn btn-danger btn-sm">
+                    Uyarı İşaretlerini Görüntüle →
+                </a>
+            </div>
+        </div>
+    </div>
 </Layout>

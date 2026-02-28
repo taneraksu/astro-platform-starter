@@ -1,0 +1,135 @@
+---
+import Layout from '../layouts/Layout.astro';
+import ExerciseTracker from '../components/ExerciseTracker';
+---
+
+<Layout
+    title="Egzersiz Programı"
+    description="Kalça ve diz protezi iyileşmesi için günlük rehabilitasyon egzersizleri"
+>
+    <div class="page-header">
+        <div class="flex items-center gap-2 text-sm text-slate-500 mb-3">
+            <a href="/" class="hover:text-blue-700 no-underline">Ana Sayfa</a>
+            <span>/</span>
+            <span class="text-slate-700">Egzersizler</span>
+        </div>
+        <h1 class="page-title">Egzersiz ve Rehabilitasyon Programı</h1>
+        <p class="page-subtitle text-lg">
+            Günlük fizyoterapi egzersizlerinizi takip edin. Önerilen egzersizleri görmek için ameliyat tipinizi ve iyileşme fazınızı seçin.
+        </p>
+    </div>
+
+    <!-- Key Principles -->
+    <div class="grid grid-cols-1 sm:grid-cols-4 gap-4 mb-8">
+        <div class="card text-center">
+            <div class="text-2xl mb-1">📅</div>
+            <div class="font-semibold text-sm text-slate-800">Günlük</div>
+            <div class="text-xs text-slate-500 mt-0.5">Günde en az bir kez, ideal olarak 2–3 kez egzersiz yapın</div>
+        </div>
+        <div class="card text-center">
+            <div class="text-2xl mb-1">🔄</div>
+            <div class="font-semibold text-sm text-slate-800">Tutarlı</div>
+            <div class="text-xs text-slate-500 mt-0.5">Tutarlılık yoğunluktan daha önemlidir</div>
+        </div>
+        <div class="card text-center">
+            <div class="text-2xl mb-1">🧊</div>
+            <div class="font-semibold text-sm text-slate-800">Sonrasında Buz</div>
+            <div class="text-xs text-slate-500 mt-0.5">Şişliği azaltmak için egzersiz sonrası 15–20 dk buz uygulayın</div>
+        </div>
+        <div class="card text-center">
+            <div class="text-2xl mb-1">📞</div>
+            <div class="font-semibold text-sm text-slate-800">Fizyoterapistinize Danışın</div>
+            <div class="text-xs text-slate-500 mt-0.5">Her zaman fizyoterapistinizin özel programını takip edin</div>
+        </div>
+    </div>
+
+    <!-- Interactive Exercise Tracker (React) -->
+    <ExerciseTracker client:load />
+
+    <!-- Exercise Frequency Guide -->
+    <div class="mt-8 card">
+        <h2 class="font-semibold text-slate-900 mb-4">Egzersiz Sıklığı Rehberi</h2>
+        <div class="overflow-x-auto">
+            <table class="w-full text-sm">
+                <thead>
+                    <tr class="border-b border-slate-200">
+                        <th class="text-left py-3 pr-4 text-slate-600 font-semibold">Faz</th>
+                        <th class="text-left py-3 pr-4 text-slate-600 font-semibold">Sıklık</th>
+                        <th class="text-left py-3 text-slate-600 font-semibold">Odak</th>
+                    </tr>
+                </thead>
+                <tbody class="divide-y divide-slate-100">
+                    <tr>
+                        <td class="py-3 pr-4"><span class="badge badge-blue">Erken (0–6. hafta)</span></td>
+                        <td class="py-3 pr-4 text-slate-700">Günde 2–3 kez</td>
+                        <td class="py-3 text-slate-600">Kan dolaşımı, kas aktivasyonu, hareket açıklığı</td>
+                    </tr>
+                    <tr>
+                        <td class="py-3 pr-4"><span class="badge badge-green">Orta (6–12. hafta)</span></td>
+                        <td class="py-3 pr-4 text-slate-700">Günde 1–2 kez</td>
+                        <td class="py-3 text-slate-600">Güçlendirme, yürüyüş programı, bisiklet</td>
+                    </tr>
+                    <tr>
+                        <td class="py-3 pr-4"><span class="badge" style="background:#f0fdf4;color:#166534;">Geç (3. ay+)</span></td>
+                        <td class="py-3 pr-4 text-slate-700">Günlük veya gün aşırı</td>
+                        <td class="py-3 text-slate-600">Fonksiyonel antrenman, aktiviteye dönüş</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <!-- Important Notes -->
+    <div class="mt-6 grid grid-cols-1 sm:grid-cols-2 gap-4">
+        <div class="card border-l-4 border-l-amber-400">
+            <h3 class="font-semibold text-slate-900 mb-2">Egzersizi Ne Zaman Durduralım</h3>
+            <ul class="text-sm text-slate-600 space-y-1.5">
+                <li class="flex items-start gap-2">
+                    <span class="text-red-500 mt-0.5">⚠</span>
+                    Keskin veya şiddetli ağrı (hafif rahatsızlık değil)
+                </li>
+                <li class="flex items-start gap-2">
+                    <span class="text-red-500 mt-0.5">⚠</span>
+                    Şişlik veya sıcaklıkta ani artış
+                </li>
+                <li class="flex items-start gap-2">
+                    <span class="text-red-500 mt-0.5">⚠</span>
+                    Yara sorunları veya akıntı belirtileri
+                </li>
+                <li class="flex items-start gap-2">
+                    <span class="text-red-500 mt-0.5">⚠</span>
+                    Ateş veya genel halsizlik hissi
+                </li>
+                <li class="flex items-start gap-2">
+                    <span class="text-red-500 mt-0.5">⚠</span>
+                    Herhangi bir tıklama, gıcırdama veya instabilite
+                </li>
+            </ul>
+        </div>
+        <div class="card border-l-4 border-l-green-400">
+            <h3 class="font-semibold text-slate-900 mb-2">Uzun Vadede Kaçınılacak Aktiviteler</h3>
+            <ul class="text-sm text-slate-600 space-y-1.5">
+                <li class="flex items-start gap-2">
+                    <span class="text-slate-400">•</span>
+                    Koşma veya maraton (implant aşınmasını artırır)
+                </li>
+                <li class="flex items-start gap-2">
+                    <span class="text-slate-400">•</span>
+                    Temaslı sporlar (çıkık/kırık riski)
+                </li>
+                <li class="flex items-start gap-2">
+                    <span class="text-slate-400">•</span>
+                    Yüksek darbe aktiviteleri (zıplama)
+                </li>
+                <li class="flex items-start gap-2">
+                    <span class="text-slate-400">•</span>
+                    Sert zeminde diz çökme (diz protezi)
+                </li>
+                <li class="flex items-start gap-2">
+                    <span class="text-slate-400">•</span>
+                    90°'yi aşan kalça fleksiyonu (erken dönem kalça)
+                </li>
+            </ul>
+        </div>
+    </div>
+</Layout>

@@ -1,0 +1,251 @@
+---
+import Layout from '../layouts/Layout.astro';
+---
+
+<Layout
+    title="Uyarı İşaretleri ve Acil Bilgiler"
+    description="Kalça veya diz protezi sonrasında acil tıbbi yardım gerektiren belirtileri öğrenin"
+>
+    <div class="page-header">
+        <div class="flex items-center gap-2 text-sm text-slate-500 mb-3">
+            <a href="/" class="hover:text-blue-700 no-underline">Ana Sayfa</a>
+            <span>/</span>
+            <span class="text-slate-700">Uyarı İşaretleri</span>
+        </div>
+        <h1 class="page-title">Uyarı İşaretleri ve Ne Zaman Yardım Almalı</h1>
+        <p class="page-subtitle text-lg">
+            Eklem replasmanı ameliyatı sonrasında acil tıbbi müdahale gerektiren belirtileri öğrenin.
+        </p>
+    </div>
+
+    <!-- Emergency Banner -->
+    <div class="bg-red-600 text-white rounded-2xl p-6 mb-8">
+        <div class="flex items-center gap-4">
+            <div class="text-4xl">🚨</div>
+            <div>
+                <h2 class="text-xl font-bold mb-1">Şüpheleniyorsanız — Her zaman yardım alın</h2>
+                <p class="text-red-100 mb-4">
+                    Eklem replasmanı sonrasında, ciddi bir komplikasyonla uğraşmak yerine değerlendirme yaptırıp "her şey yolunda" duymak her zaman daha iyidir. Tereddüt etmeyin.
+                </p>
+                <div class="flex flex-wrap gap-3">
+                    <a href="tel:112" class="btn bg-white text-red-700 hover:bg-red-50 font-bold">
+                        📞 112 (Acil)
+                    </a>
+                    <a href="tel:182" class="btn bg-red-700 text-white hover:bg-red-800 border border-red-500 font-bold">
+                        📞 SABİM: 182
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- IMMEDIATELY CALL 112 -->
+    <div class="mb-6">
+        <h2 class="text-lg font-bold text-red-700 mb-3 flex items-center gap-2">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="#dc2626"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-2h2v2zm0-4h-2V7h2v6z"/></svg>
+            112'yi Arayın veya Hemen Acile Gidin
+        </h2>
+        <div class="space-y-3">
+            <div id="pe" class="alert alert-danger rounded-xl">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="#dc2626" class="flex-shrink-0"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-2h2v2zm0-4h-2V7h2v6z"/></svg>
+                <div>
+                    <h3 class="font-bold text-red-900">Pulmoner Emboli (Akciğerde Kan Pıhtısı)</h3>
+                    <p class="text-sm text-red-800 mt-1 mb-2">Akciğere ulaşan bir kan pıhtısı hayatı tehdit eder. Aşağıdakileri yaşıyorsanız hemen 112'yi arayın:</p>
+                    <ul class="text-sm text-red-800 space-y-1 list-disc list-inside">
+                        <li>Ani nefes darlığı (efordan bağımsız)</li>
+                        <li>Göğüs ağrısı, özellikle nefes alırken</li>
+                        <li>Kan öksürmek</li>
+                        <li>Hızlı kalp atışı veya çarpıntı</li>
+                        <li>Baş dönmesi veya bayılma hissi</li>
+                        <li>Dudaklarda veya parmak uçlarında morarma</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div id="dislocation" class="alert alert-danger rounded-xl">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="#dc2626" class="flex-shrink-0"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-2h2v2zm0-4h-2V7h2v6z"/></svg>
+                <div>
+                    <h3 class="font-bold text-red-900">Kalça Dislokasyonu (Çıkık)</h3>
+                    <p class="text-sm text-red-800 mt-1 mb-2">Yapay top soketten çıkabilir. Kendiniz yerine koymaya çalışmayın. Aşağıdakileri yaşıyorsanız 112'yi arayın:</p>
+                    <ul class="text-sm text-red-800 space-y-1 list-disc list-inside">
+                        <li>Genellikle bükülme veya dönme hareketinin ardından ani şiddetli kalça ağrısı</li>
+                        <li>Bacağa ağırlık verememe</li>
+                        <li>Bacağın diğer tarafa göre kısa veya dönük görünmesi</li>
+                        <li>Hareket edememenin ardından "çıt" veya "pop" sesi</li>
+                    </ul>
+                    <div class="mt-2 p-2 bg-red-100 rounded-lg">
+                        <p class="text-xs text-red-900 font-semibold">Önleme: Kalçayı 90°'den fazla bükmeyin, bacakları çaprazlamayın, dönme hareketi yapmayın.</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="alert alert-danger rounded-xl">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="#dc2626" class="flex-shrink-0"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-2h2v2zm0-4h-2V7h2v6z"/></svg>
+                <div>
+                    <h3 class="font-bold text-red-900">Kontrol Edilemeyen Yara Kanaması</h3>
+                    <ul class="text-sm text-red-800 space-y-1 mt-1 list-disc list-inside">
+                        <li>15 dakika sıkı baskıyla durdurulamayan kanama</li>
+                        <li>Hızla büyüyen büyük hematom (deri altı kan birikmesi)</li>
+                        <li>Önemli kan kaybı belirtileri: solgunluk, bayılma hissi, hızlı nabız</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- SAME DAY - Contact Surgeon -->
+    <div class="mb-6">
+        <h2 class="text-lg font-bold text-amber-700 mb-3 flex items-center gap-2">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="#d97706"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-2h2v2zm0-4h-2V7h2v6z"/></svg>
+            Bugün Cerrahınızı Arayın veya Acile Gidin
+        </h2>
+        <div class="space-y-3">
+            <div id="infection" class="bg-amber-50 border-2 border-amber-200 rounded-xl p-4">
+                <h3 class="font-bold text-amber-900 mb-2">⚠ Eklem Enfeksiyonu Belirtileri</h3>
+                <p class="text-sm text-amber-800 mb-3">Periprostetik eklem enfeksiyonu (PEE) ciddi bir komplikasyondur. Erken tespit, başarılı tedavi için kritiktir.</p>
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                    <div>
+                        <p class="text-xs font-semibold text-amber-900 mb-1">Erken belirtiler:</p>
+                        <ul class="text-sm text-amber-800 space-y-1 list-disc list-inside">
+                            <li>38,5°C üzerinde ateş</li>
+                            <li>Yara etrafında artan kızarıklık</li>
+                            <li>Eklem üzerinde artan sıcaklık</li>
+                            <li>Artan şişlik (ilk iyileşmenin ardından)</li>
+                            <li>Bulutlu, sarı, yeşil veya kötü kokulu akıntı</li>
+                            <li>Yara kenarlarının kapanmaması veya açılması</li>
+                        </ul>
+                    </div>
+                    <div>
+                        <p class="text-xs font-semibold text-amber-900 mb-1">Geç belirtiler:</p>
+                        <ul class="text-sm text-amber-800 space-y-1 list-disc list-inside">
+                            <li>İlk iyileşmenin ardından artan ağrı</li>
+                            <li>İstirahat ve gece ağrısı</li>
+                            <li>Sertlik ve kazanılan hareketin kaybı</li>
+                            <li>Genel halsizlik, titreme, şiddetli yorgunluk</li>
+                            <li>Yüksek ısrarcı ateş</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <div id="dvt" class="bg-amber-50 border-2 border-amber-200 rounded-xl p-4">
+                <h3 class="font-bold text-amber-900 mb-2">⚠ Derin Ven Trombozu (DVT — Bacakta Pıhtı)</h3>
+                <p class="text-sm text-amber-800 mb-2">DVT, derin bir damarında pıhtı oluşumudur. Pıhtı kopup akciğerlere giderse hayati tehlike oluşturur.</p>
+                <ul class="text-sm text-amber-800 space-y-1 list-disc list-inside mb-3">
+                    <li>Baldır ağrısı, hassasiyet (geçmeyen kramp gibi)</li>
+                    <li>Baldır veya tüm bacakta şişlik (iki tarafı karşılaştırın)</li>
+                    <li>Baldır veya uyluğun iç kısmında sıcaklık veya kızarıklık</li>
+                    <li>Diz arkasında ağrı</li>
+                    <li>Bacak diğer bacaktan farklı veya ağır hissettiriyor</li>
+                </ul>
+                <div class="p-3 bg-amber-100 rounded-lg">
+                    <p class="text-xs text-amber-900"><strong>Önemli:</strong> DVT antikoagülasyon tedavisine rağmen oluşabilir. Yeni baldır semptomları gelişirse aynı gün değerlendirme yaptırın.</p>
+                </div>
+            </div>
+
+            <div class="bg-amber-50 border-2 border-amber-200 rounded-xl p-4">
+                <h3 class="font-bold text-amber-900 mb-2">⚠ İmplant Etrafında Olası Kırık</h3>
+                <ul class="text-sm text-amber-800 space-y-1 list-disc list-inside">
+                    <li>Düşme veya darbeden sonra ani şiddetli ağrı</li>
+                    <li>Düşmenin ardından bacağa ağırlık verememe</li>
+                    <li>Uzuvda görünür deformite</li>
+                    <li>Daha önce yapılabilen hareketleri ani olarak yapamamak</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <!-- Normal vs Abnormal -->
+    <div class="card mb-6">
+        <h2 class="font-semibold text-slate-900 mb-4">Normal ve Endişe Verici Belirtiler</h2>
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
+            <div>
+                <h3 class="font-semibold text-green-700 mb-3 flex items-center gap-2">
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="#16a34a"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg>
+                    Ameliyat sonrası normal
+                </h3>
+                <ul class="space-y-1.5 text-sm text-slate-600">
+                    {["Kesi ve eklemde ağrı (kademeli olarak azalmalı)","Kesi etrafında morluk (1–2 hafta kötüleşebilir)","Eklem ve uzuvda şişlik (3–6 aya kadar sürebilir)","Yorgunluk ve bitkinlik","İlk 2 haftada duygusal çökkünlük","İlk pansumanlarda hafif yara ıslaklığı","Kesi bölgesinde uyuşukluk (çoğunlukla kalıcı)","Hareketle hafif tıklama veya his","İlk 2–3 gün hafif ateş (38°C'ye kadar)","Kabızlık (opioid ilaçlar nedeniyle)"].map(item => (
+                        <li class="flex items-start gap-2">
+                            <svg width="14" height="14" viewBox="0 0 24 24" fill="#16a34a" class="flex-shrink-0 mt-0.5"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg>
+                            {item}
+                        </li>
+                    ))}
+                </ul>
+            </div>
+            <div>
+                <h3 class="font-semibold text-red-700 mb-3 flex items-center gap-2">
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="#dc2626"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-2h2v2zm0-4h-2V7h2v6z"/></svg>
+                    Endişe verici — yardım alın
+                </h3>
+                <ul class="space-y-1.5 text-sm text-slate-600">
+                    {["Ameliyattan 72 saat sonra 38,5°C üzerinde ateş","İlk iyileşmenin ardından giderek kötüleşen ağrı","Yayılan yara kızarıklığı, sıcaklığı veya şişliği","Bulutlu, yeşil veya kötü kokulu akıntı","Yeni baldır ağrısı veya belirgin bacak şişliği","İstirahatte veya minimal eforla nefes darlığı","Kalçada ani şiddetli ağrı (olası dislokasyon)","Bacak belirgin şekilde kısa veya deforme görünüyor","Herhangi bir zamanda yüksek ateş (39°C üzeri)","İdrar yapamama","Zihin bulanıklığı veya ani zihinsel bozulma"].map(item => (
+                        <li class="flex items-start gap-2">
+                            <svg width="14" height="14" viewBox="0 0 24 24" fill="#dc2626" class="flex-shrink-0 mt-0.5"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-2h2v2zm0-4h-2V7h2v6z"/></svg>
+                            {item}
+                        </li>
+                    ))}
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <!-- Falls Risk -->
+    <div class="card mb-6 border-l-4 border-l-amber-400">
+        <h2 class="font-semibold text-slate-900 mb-3">🤕 Düşme Durumunda Ne Yapmalı</h2>
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 text-sm">
+            <div>
+                <p class="font-medium mb-2">Düştükten hemen sonra:</p>
+                <ol class="space-y-1.5 list-decimal list-inside text-slate-600">
+                    <li>Sakin olun, hemen kalkmaya çalışmayın</li>
+                    <li>Güvenli kalkamıyorsanız yardım çağırın</li>
+                    <li>Mümkünse yavaşça yana dönün, ardından itin kalkın</li>
+                    <li>Şiddetli ağrı veya yük verememe → Hemen acile gidin</li>
+                    <li>Hafif ağrıyla yük veriliyor → Cerrahi ekibinizi arayın</li>
+                    <li>Görünür yaralanma olmasa bile cerrahınıza bildirin</li>
+                </ol>
+            </div>
+            <div>
+                <p class="font-medium mb-2">Düşme önleme ipuçları:</p>
+                <ul class="space-y-1.5 list-disc list-inside text-slate-600">
+                    <li>Her zaman yürüyüş yardımcısı kullanın</li>
+                    <li>Özellikle gece yeterli aydınlatma sağlayın</li>
+                    <li>Evden tüm düşme tehlikelerini kaldırın</li>
+                    <li>Her zaman kaymaz ayakkabı giyin</li>
+                    <li>Acele etmeyin, hareketler için ekstra zaman ayırın</li>
+                    <li>Evcil hayvanların etrafınızda dolaşmasına dikkat edin</li>
+                    <li>Islak veya kaygan yüzeylere dikkat edin</li>
+                    <li>Kişisel alarm cihazı (tıbbi alarm) düşünün</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <!-- Emergency Contacts -->
+    <div class="card">
+        <h2 class="font-semibold text-slate-900 mb-4">📞 Önemli Telefon Numaraları</h2>
+        <p class="text-sm text-slate-600 mb-4">Ameliyattan önce bu numaraları telefonunuza kaydedin:</p>
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 text-sm">
+            {[
+                { label: "Acil (Ambulans, İtfaiye, Polis)", number: "112", urgent: true },
+                { label: "SABİM Sağlık Danışma Hattı (7/24)", number: "182", urgent: false },
+                { label: "ALO Sağlık — Sağlık İhbar Hattı", number: "184", urgent: false },
+                { label: "Cerrahınızın Kliniği", number: "Numarayı buraya yazın →", urgent: false },
+                { label: "Cerrahınızın Nöbet / Acil Hattı", number: "Randevunuzda sorun", urgent: false },
+                { label: "Pratisyen / Aile Hekiminiz", number: "Numarayı buraya yazın →", urgent: false },
+                { label: "Fizyoterapistiniz", number: "Numarayı buraya yazın →", urgent: false },
+                { label: "En Yakın Acil Servisi", number: "Adresini öğrenin", urgent: false },
+            ].map(contact => (
+                <div class={`flex items-start gap-3 p-3 rounded-lg ${contact.urgent ? 'bg-red-50 border border-red-200' : 'bg-slate-50'}`}>
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill={contact.urgent ? "#dc2626" : "#64748b"} class="flex-shrink-0 mt-0.5">
+                        <path d="M6.62 10.79c1.44 2.83 3.76 5.14 6.59 6.59l2.2-2.2c.27-.27.67-.36 1.02-.24 1.12.37 2.33.57 3.57.57.55 0 1 .45 1 1V20c0 .55-.45 1-1 1-9.39 0-17-7.61-17-17 0-.55.45-1 1-1h3.5c.55 0 1 .45 1 1 0 1.25.2 2.45.57 3.57.11.35.03.74-.25 1.02l-2.2 2.2z"/>
+                    </svg>
+                    <div>
+                        <p class={`font-medium ${contact.urgent ? 'text-red-800' : 'text-slate-700'}`}>{contact.label}</p>
+                        <p class={`text-xs mt-0.5 ${contact.urgent ? 'text-red-600 font-bold' : 'text-slate-500'}`}>{contact.number}</p>
+                    </div>
+                </div>
+            ))}
+        </div>
+    </div>
+</Layout>

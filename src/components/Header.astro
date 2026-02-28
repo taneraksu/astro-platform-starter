@@ -1,30 +1,94 @@
 ---
-import Logo from '../components/Logo.astro';
+const currentPath = Astro.url.pathname;
 
 const navItems = [
-    { linkText: 'Home', href: '/' },
-    { linkText: 'Revalidation', href: '/revalidation' },
-    { linkText: 'Image CDN', href: '/image-cdn' },
-    { linkText: 'Edge Function', href: '/edge' },
-    { linkText: 'Blobs', href: '/blobs' }
+    { linkText: 'Ana Sayfa', href: '/' },
+    { linkText: 'Ameliyat Öncesi', href: '/pre-surgery' },
+    { linkText: 'İyileşme', href: '/recovery' },
+    { linkText: 'Egzersizler', href: '/exercises' },
+    { linkText: 'Ağrı Takibi', href: '/pain-tracker' },
+    { linkText: 'Randevular', href: '/randevular' },
+    { linkText: 'İlaçlar', href: '/ilaclar' },
+    { linkText: 'Kaynaklar', href: '/resources' },
+    { linkText: '⚠ Uyarılar', href: '/warning-signs' },
 ];
 ---
 
-<nav class="flex flex-wrap items-center gap-4 pt-6 pb-16 sm:pt-12 sm:pb-24">
-    <a href="/">
-        <Logo />
-    </a>
-    {
-        !!navItems?.length && (
-            <ul class="flex flex-wrap gap-x-4 gap-y-1">
+<header class="bg-white border-b border-slate-200 sticky top-0 z-50 shadow-sm">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="flex items-center justify-between h-16">
+            <!-- Logo / Brand -->
+            <a href="/" class="flex items-center gap-2 no-underline group flex-shrink-0" aria-label="Op Dr Taner Aksu Protez Takip Ana Sayfa">
+                <div class="w-8 h-8 bg-blue-700 rounded-lg flex items-center justify-center flex-shrink-0">
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M12 2a10 10 0 1 0 0 20A10 10 0 0 0 12 2zm1 15h-2v-6h2v6zm0-8h-2V7h2v2z" fill="white"/>
+                    </svg>
+                </div>
+                <div class="hidden sm:block">
+                    <span class="font-bold text-blue-800 text-base leading-none">Op Dr Taner Aksu</span>
+                    <span class="block text-xs text-slate-500 leading-none">Protez Takip</span>
+                </div>
+                <span class="sm:hidden font-bold text-blue-800 text-base">Dr Taner Aksu</span>
+            </a>
+
+            <!-- Desktop Navigation -->
+            <nav class="hidden xl:flex items-center gap-0.5 overflow-x-auto" aria-label="Ana navigasyon">
                 {navItems.map((item) => (
-                    <li>
-                        <a href={item.href} class="inline-block px-1.5 py-1 sm:px-3 sm:py-2">
-                            {item.linkText}
-                        </a>
-                    </li>
+                    <a
+                        href={item.href}
+                        class={`flex-shrink-0 px-2.5 py-2 rounded-lg text-xs font-medium transition-colors no-underline ${item.href === '/warning-signs' ? 'text-red-600 hover:bg-red-50' : 'text-slate-600 hover:text-blue-700 hover:bg-blue-50'} ${currentPath === item.href || (item.href !== '/' && currentPath.startsWith(item.href)) ? (item.href === '/warning-signs' ? 'bg-red-50 text-red-700' : 'text-blue-700 bg-blue-50') : ''}`}
+                    >
+                        {item.linkText}
+                    </a>
                 ))}
-            </ul>
-        )
-    }
-</nav>
+            </nav>
+
+            <!-- Mobile menu button -->
+            <button
+                id="mobile-menu-btn"
+                class="xl:hidden p-2 rounded-lg text-slate-600 hover:text-blue-700 hover:bg-blue-50 transition-colors"
+                aria-label="Menüyü aç/kapat"
+                aria-expanded="false"
+            >
+                <svg id="menu-icon" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <line x1="3" y1="6" x2="21" y2="6"/>
+                    <line x1="3" y1="12" x2="21" y2="12"/>
+                    <line x1="3" y1="18" x2="21" y2="18"/>
+                </svg>
+                <svg id="close-icon" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="hidden">
+                    <line x1="18" y1="6" x2="6" y2="18"/>
+                    <line x1="6" y1="6" x2="18" y2="18"/>
+                </svg>
+            </button>
+        </div>
+
+        <!-- Mobile Navigation -->
+        <nav id="mobile-menu" class="xl:hidden hidden pb-4" aria-label="Mobil navigasyon">
+            <div class="grid grid-cols-2 gap-1">
+                {navItems.map((item) => (
+                    <a
+                        href={item.href}
+                        class={`px-3 py-2 rounded-lg text-sm font-medium no-underline transition-colors ${item.href === '/warning-signs' ? 'text-red-600 hover:bg-red-50' : 'text-slate-600 hover:text-blue-700 hover:bg-blue-50'} ${currentPath === item.href || (item.href !== '/' && currentPath.startsWith(item.href)) ? (item.href === '/warning-signs' ? 'bg-red-50 text-red-700' : 'text-blue-700 bg-blue-50') : ''}`}
+                    >
+                        {item.linkText}
+                    </a>
+                ))}
+            </div>
+        </nav>
+    </div>
+</header>
+
+<script>
+    const btn = document.getElementById('mobile-menu-btn');
+    const menu = document.getElementById('mobile-menu');
+    const menuIcon = document.getElementById('menu-icon');
+    const closeIcon = document.getElementById('close-icon');
+
+    btn?.addEventListener('click', () => {
+        const isOpen = !menu?.classList.contains('hidden');
+        menu?.classList.toggle('hidden', isOpen);
+        menuIcon?.classList.toggle('hidden', !isOpen);
+        closeIcon?.classList.toggle('hidden', isOpen);
+        btn.setAttribute('aria-expanded', String(!isOpen));
+    });
+</script>

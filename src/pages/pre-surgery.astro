@@ -1,0 +1,113 @@
+---
+import Layout from '../layouts/Layout.astro';
+import PreSurgeryChecklist from '../components/PreSurgeryChecklist';
+---
+
+<Layout
+    title="Ameliyat Öncesi Hazırlık"
+    description="Kalça ve diz protezi ameliyatı öncesi kapsamlı kontrol listesi"
+>
+    <div class="page-header">
+        <div class="flex items-center gap-2 text-sm text-slate-500 mb-3">
+            <a href="/" class="hover:text-blue-700 no-underline">Ana Sayfa</a>
+            <span>/</span>
+            <span class="text-slate-700">Ameliyat Öncesi</span>
+        </div>
+        <h1 class="page-title">Ameliyat Öncesi Hazırlık</h1>
+        <p class="page-subtitle text-lg">
+            Kalça veya diz protezi ameliyatınıza tam hazır olmak için bu kontrol listesini takip edin.
+        </p>
+    </div>
+
+    <!-- Key Info Banner -->
+    <div class="grid grid-cols-1 sm:grid-cols-3 gap-4 mb-8">
+        <div class="alert alert-info">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor" class="flex-shrink-0">
+                <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-6h2v6zm0-8h-2V7h2v2z"/>
+            </svg>
+            <div>
+                <p class="font-semibold text-sm">Erken Başlayın</p>
+                <p class="text-sm mt-0.5">Hazırlığa ameliyat tarihinden 4–6 hafta önce başlayın</p>
+            </div>
+        </div>
+        <div class="alert alert-warning">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor" class="flex-shrink-0">
+                <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-2h2v2zm0-4h-2V7h2v6z"/>
+            </svg>
+            <div>
+                <p class="font-semibold text-sm">Talimatları İzleyin</p>
+                <p class="text-sm mt-0.5">Cerrahınızın özel talimatları buradaki genel bilgilere göre önceliklidir</p>
+            </div>
+        </div>
+        <div class="alert alert-success">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor" class="flex-shrink-0">
+                <path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/>
+            </svg>
+            <div>
+                <p class="font-semibold text-sm">Otomatik Kayıt</p>
+                <p class="text-sm mt-0.5">İlerlemeniz bu cihazda otomatik olarak kaydedilir</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Interactive Checklist (React) -->
+    <PreSurgeryChecklist client:load />
+
+    <!-- Additional Tips -->
+    <div class="mt-8 card">
+        <h2 class="font-semibold text-slate-900 mb-4">Ameliyat Öncesi Egzersiz (Pre-Hab)</h2>
+        <p class="text-sm text-slate-600 mb-4">
+            Araştırmalar, ameliyat öncesi egzersizin (pre-habilitasyon) iyileşme sonuçlarını önemli ölçüde iyileştirdiğini göstermektedir. Ameliyata giden haftalarda ekleminizin çevresindeki kasları güçlendirmeyi hedefleyin.
+        </p>
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+            <div class="bg-blue-50 rounded-lg p-4">
+                <h3 class="text-sm font-semibold text-blue-900 mb-2">Kalça İçin Pre-Hab</h3>
+                <ul class="text-sm text-blue-800 space-y-1 list-disc list-inside">
+                    <li>Gluteal güçlendirme egzersizleri</li>
+                    <li>Kalça abdüktör güçlendirme</li>
+                    <li>Sabit bisiklet (düşük direnç)</li>
+                    <li>Yüzme veya su egzersizleri</li>
+                    <li>Nazik esneme egzersizleri</li>
+                </ul>
+            </div>
+            <div class="bg-teal-50 rounded-lg p-4">
+                <h3 class="text-sm font-semibold text-teal-900 mb-2">Diz İçin Pre-Hab</h3>
+                <ul class="text-sm text-teal-800 space-y-1 list-disc list-inside">
+                    <li>Quadriseps güçlendirme</li>
+                    <li>Düz bacak kaldırma</li>
+                    <li>Sabit bisiklet</li>
+                    <li>Ayak bileği pompalama ve topuk kaydırma</li>
+                    <li>Mümkünse yüzme</li>
+                </ul>
+            </div>
+        </div>
+        <div class="mt-4">
+            <a href="/exercises" class="btn btn-primary btn-sm">Egzersiz Programını Görüntüle →</a>
+        </div>
+    </div>
+
+    <!-- Questions to Ask Your Surgeon -->
+    <div class="mt-6 card">
+        <h2 class="font-semibold text-slate-900 mb-4">Cerrahınıza Sormanız Gereken Sorular</h2>
+        <ul class="space-y-2 text-sm text-slate-700">
+            {[
+                "Hangi tür implant kullanılacak ve neden?",
+                "Hangi cerrahi yaklaşım kullanılacak (kalça için ön, arka, yan)?",
+                "Planlanan anestezi nedir? Seçeneklerim neler?",
+                "Hastanede ne kadar kalacağım?",
+                "Ameliyat sonrası ne zaman araba kullanabilirim?",
+                "Ne zaman işe dönebilirim? (İş türüne bağlı değişir)",
+                "İmplantımla hangi aktivitelerden kaçınmalıyım?",
+                "Pıhtı önleme (antikoagülasyon) tedavisi ne olacak?",
+                "Ameliyatım için özel kısıtlamalar neler?",
+                "Ameliyat sonrası ağrı nasıl yönetilecek?",
+                "Bilmem gereken başlıca riskler neler?",
+            ].map(q => (
+                <li class="flex items-start gap-2 p-2 rounded-lg hover:bg-slate-50">
+                    <span class="text-blue-500 mt-0.5 font-bold">?</span>
+                    <span>{q}</span>
+                </li>
+            ))}
+        </ul>
+    </div>
+</Layout>

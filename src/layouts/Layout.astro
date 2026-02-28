@@ -1,5 +1,5 @@
 ---
-import '../../src/styles/globals.css';
+import '../styles/globals.css';
 import '@fontsource-variable/inter/wght.css';
 import interWoff2 from '@fontsource-variable/inter/files/inter-latin-wght-normal.woff2?url';
 import Header from '../components/Header.astro';
@@ -7,28 +7,30 @@ import Footer from '../components/Footer.astro';
 
 interface Props {
     title: string;
+    description?: string;
 }
 
-const { title } = Astro.props;
+const { title, description = 'Ortopedik artroplasti ameliyatı öncesi ve sonrası kapsamlı hasta rehberi' } = Astro.props;
 ---
 
 <!doctype html>
-<html lang="en">
+<html lang="tr">
     <head>
         <meta charset="UTF-8" />
-        <title>{title}</title>
-        <meta name="viewport" content="width=device-width" />
+        <title>{title} | Op Dr Taner Aksu Protez Takip</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <meta name="description" content={description} />
         <meta name="generator" content={Astro.generator} />
-        <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+        <link rel="icon" type="image/svg+xml" href="/favicon-medical.svg" />
         <link rel="preload" as="font" type="font/woff2" href={interWoff2} crossorigin />
     </head>
-    <body class="antialiased text-white bg-complementary">
-        <div class="flex flex-col min-h-screen px-6 bg-noise sm:px-12">
-            <div class="flex flex-col w-full max-w-5xl mx-auto grow">
-                <Header />
-                <main class="grow"><slot /></main>
-                <Footer />
-            </div>
+    <body class="antialiased bg-slate-50 text-slate-800">
+        <div class="min-h-screen flex flex-col">
+            <Header />
+            <main class="flex-1 w-full max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+                <slot />
+            </main>
+            <Footer />
         </div>
     </body>
 </html>
