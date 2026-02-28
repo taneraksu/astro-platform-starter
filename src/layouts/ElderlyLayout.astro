@@ -1,0 +1,43 @@
+---
+import '../styles/globals.css';
+import '@fontsource-variable/inter/wght.css';
+import interWoff2 from '@fontsource-variable/inter/files/inter-latin-wght-normal.woff2?url';
+import ElderlyHeader from '../components/ElderlyHeader.astro';
+import ElderlyFooter from '../components/ElderlyFooter.astro';
+
+interface Props {
+    title: string;
+    description?: string;
+    activeNav?: string;
+}
+
+const {
+    title,
+    description = 'Op Dr Taner Aksu Yaş Ritmi - Kas İskelet Sistemi Sağlığı Takip Uygulaması',
+    activeNav = ''
+} = Astro.props;
+---
+
+<!doctype html>
+<html lang="tr">
+    <head>
+        <meta charset="UTF-8" />
+        <title>{title} | Op Dr Taner Aksu Yaş Ritmi</title>
+        <meta name="description" content={description} />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <meta name="generator" content={Astro.generator} />
+        <link rel="icon" type="image/svg+xml" href="/favicon-elder.svg" />
+        <link rel="preload" as="font" type="font/woff2" href={interWoff2} crossorigin />
+        <style>
+            html { scroll-behavior: smooth; }
+            body { font-size: 18px; }
+        </style>
+    </head>
+    <body class="antialiased bg-slate-50 text-slate-800 min-h-screen">
+        <ElderlyHeader activeNav={activeNav} />
+        <main class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-8 lg:py-12">
+            <slot />
+        </main>
+        <ElderlyFooter />
+    </body>
+</html>

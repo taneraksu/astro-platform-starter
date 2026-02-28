@@ -1,0 +1,55 @@
+---
+interface Props {
+    activeNav?: string;
+}
+const { activeNav = '' } = Astro.props;
+
+const navItems = [
+    { href: '/', label: 'Ana Sayfa', icon: '🏠', key: 'home' },
+    { href: '/degerlendirme', label: 'Değerlendirme', icon: '📊', key: 'degerlendirme' },
+    { href: '/egzersiz', label: 'Egzersiz', icon: '💪', key: 'egzersiz' },
+    { href: '/beslenme', label: 'Beslenme', icon: '🥗', key: 'beslenme' },
+    { href: '/ilerleme', label: 'İlerleme', icon: '📈', key: 'ilerleme' },
+    { href: '/bilgi', label: 'Bilgi Merkezi', icon: '📚', key: 'bilgi' },
+];
+---
+
+<header class="bg-gradient-to-r from-blue-900 via-blue-800 to-blue-700 shadow-xl sticky top-0 z-50">
+    <!-- App Title Bar -->
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="flex items-center justify-between py-3 border-b border-blue-600/40">
+            <a href="/" class="no-underline group">
+                <div class="flex items-center gap-3">
+                    <div class="w-12 h-12 bg-white/20 rounded-xl flex items-center justify-center text-2xl group-hover:bg-white/30 transition-all">
+                        🦴
+                    </div>
+                    <div>
+                        <div class="text-white font-bold text-xl leading-tight">Op Dr Taner Aksu</div>
+                        <div class="text-blue-200 text-sm font-medium leading-tight">Yaş Ritmi</div>
+                    </div>
+                </div>
+            </a>
+            <div class="hidden sm:flex items-center gap-2 text-blue-200 text-sm">
+                <span class="text-base">🩺</span>
+                <span>Ortopedi & Travmatoloji</span>
+            </div>
+        </div>
+
+        <!-- Navigation -->
+        <nav class="py-2">
+            <ul class="flex flex-wrap gap-1 justify-center sm:justify-start">
+                {navItems.map((item) => (
+                    <li>
+                        <a
+                            href={item.href}
+                            class={`elder-nav-link text-sm px-3 py-2 ${activeNav === item.key ? 'bg-white/25 border border-white/30' : ''}`}
+                        >
+                            <span class="text-lg leading-none">{item.icon}</span>
+                            <span class="hidden sm:block">{item.label}</span>
+                        </a>
+                    </li>
+                ))}
+            </ul>
+        </nav>
+    </div>
+</header>

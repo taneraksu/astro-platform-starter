@@ -1,0 +1,303 @@
+---
+import ElderlyLayout from '../../layouts/ElderlyLayout.astro';
+---
+
+<ElderlyLayout title="Beslenme Rehberi" activeNav="beslenme">
+    <!-- Header -->
+    <div class="bg-gradient-to-r from-orange-700 to-amber-600 text-white rounded-3xl p-8 mb-8">
+        <div class="flex items-center gap-4 mb-4">
+            <div class="w-16 h-16 bg-white/20 rounded-2xl flex items-center justify-center text-4xl">🥗</div>
+            <div>
+                <h1 class="text-3xl sm:text-4xl font-bold text-white mb-1">Beslenme Rehberi</h1>
+                <p class="text-orange-100 text-lg">Kas ve kemik sağlığı için bilimsel beslenme önerileri</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Protein Section -->
+    <section class="mb-8">
+        <h2 class="text-2xl font-bold text-orange-800 mb-5 flex items-center gap-2">
+            <span class="text-3xl">🥩</span> Protein: Kas Sağlığının Temeli
+        </h2>
+        <div class="bg-white rounded-2xl border-2 border-orange-200 p-6 mb-5">
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-5">
+                <div class="bg-orange-50 rounded-xl p-5">
+                    <h3 class="text-xl font-bold text-orange-900 mb-2">Normal Yaşlı</h3>
+                    <div class="text-4xl font-bold text-orange-600 mb-1">1.0–1.2</div>
+                    <div class="text-orange-700 text-lg font-medium">g/kg/gün</div>
+                    <p class="text-orange-700 text-base mt-2">70 kg için günlük 70–84 g protein</p>
+                </div>
+                <div class="bg-red-50 rounded-xl p-5">
+                    <h3 class="text-xl font-bold text-red-900 mb-2">Sarkopeni Riski</h3>
+                    <div class="text-4xl font-bold text-red-600 mb-1">1.2–1.5</div>
+                    <div class="text-red-700 text-lg font-medium">g/kg/gün</div>
+                    <p class="text-red-700 text-base mt-2">70 kg için günlük 84–105 g protein</p>
+                </div>
+                <div class="bg-purple-50 rounded-xl p-5">
+                    <h3 class="text-xl font-bold text-purple-900 mb-2">Aktif Egzersiz</h3>
+                    <div class="text-4xl font-bold text-purple-600 mb-1">1.5–2.0</div>
+                    <div class="text-purple-700 text-lg font-medium">g/kg/gün</div>
+                    <p class="text-purple-700 text-base mt-2">70 kg için günlük 105–140 g protein</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Protein-Rich Foods -->
+        <div class="bg-white rounded-2xl border-2 border-slate-200 p-6">
+            <h3 class="text-xl font-bold text-slate-800 mb-4">En İyi Protein Kaynakları</h3>
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+                {[
+                    { food: 'Yumurta', amount: '2 adet', protein: '12g', icon: '🥚', note: 'En kaliteli protein kaynağı (PDCAAS=1.0)' },
+                    { food: 'Tavuk Göğsü', amount: '100g', protein: '31g', icon: '🍗', note: 'Lösince zengin, kas sentezini uyarır' },
+                    { food: 'Somon Balığı', amount: '100g', protein: '25g', icon: '🐟', note: 'Omega-3 + protein kombinasyonu' },
+                    { food: 'Ton Balığı', amount: '100g', protein: '28g', icon: '🐠', note: 'Uygun fiyatlı yüksek protein' },
+                    { food: 'Lor/Çökelek', amount: '100g', protein: '12g', icon: '🧀', note: 'Yavaş sindirilen kazein proteini' },
+                    { food: 'Nohut', amount: '100g pişmiş', protein: '9g', icon: '🫘', note: 'Bitkisel protein + demir' },
+                    { food: 'Yoğurt', amount: '150g', protein: '9g', icon: '🥛', note: 'Probiyotik + protein' },
+                    { food: 'Mercimek', amount: '100g pişmiş', protein: '9g', icon: '🍲', note: 'Lif + protein kombinasyonu' },
+                    { food: 'Süt (yarım yağlı)', amount: '240ml', protein: '8g', icon: '🥛', note: 'Kalsiyum + protein' },
+                ].map(item => (
+                    <div class="bg-slate-50 rounded-xl p-4 border border-slate-200">
+                        <div class="flex items-center gap-3 mb-2">
+                            <span class="text-3xl">{item.icon}</span>
+                            <div>
+                                <div class="font-bold text-lg text-slate-800">{item.food}</div>
+                                <div class="text-slate-500 text-sm">{item.amount}</div>
+                            </div>
+                            <div class="ml-auto bg-orange-100 text-orange-800 font-bold px-3 py-1 rounded-lg text-lg">{item.protein}</div>
+                        </div>
+                        <p class="text-slate-600 text-sm">{item.note}</p>
+                    </div>
+                ))}
+            </div>
+        </div>
+
+        <!-- Leucine Note -->
+        <div class="mt-5 bg-blue-50 border-2 border-blue-200 rounded-2xl p-5">
+            <h3 class="text-xl font-bold text-blue-900 mb-2">💡 Lösine: Kas Sentezinin Anahtarı</h3>
+            <p class="text-blue-800 text-base leading-relaxed">
+                Lösine, mTOR yolağını aktive ederek kas protein sentezini uyaran esansiyel bir amino asittir.
+                Öğün başına <strong>2.5–3g lösine</strong> alımı kas kütlesini korumak için kritiktir.
+                <strong>Yumurta, peynir, hindi ve soya fasulyesi</strong> en zengin kaynaklardır.
+            </p>
+        </div>
+    </section>
+
+    <!-- Calcium Section -->
+    <section class="mb-8">
+        <h2 class="text-2xl font-bold text-purple-800 mb-5 flex items-center gap-2">
+            <span class="text-3xl">🦴</span> Kalsiyum: Kemik Sağlığı
+        </h2>
+        <div class="bg-white rounded-2xl border-2 border-purple-200 p-6 mb-5">
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-5 mb-5">
+                <div class="bg-purple-50 rounded-xl p-5">
+                    <h3 class="text-xl font-bold text-purple-900 mb-2">Günlük Gereksinim</h3>
+                    <div class="text-4xl font-bold text-purple-600 mb-1">1200 mg</div>
+                    <div class="text-purple-700 text-lg">50 yaş üzeri kadın ve erkek</div>
+                </div>
+                <div class="bg-blue-50 rounded-xl p-5">
+                    <h3 class="text-xl font-bold text-blue-900 mb-2">D Vitamini Gereksinimi</h3>
+                    <div class="text-4xl font-bold text-blue-600 mb-1">800–2000 IU</div>
+                    <div class="text-blue-700 text-lg">Kalsiyum emilimi için şarttır</div>
+                </div>
+            </div>
+
+            <h3 class="text-xl font-bold text-slate-800 mb-4">Kalsiyum Kaynakları</h3>
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                {[
+                    { food: 'Süt (1 bardak)', calcium: '300mg', icon: '🥛' },
+                    { food: 'Yoğurt (1 kase)', calcium: '275mg', icon: '🥣' },
+                    { food: 'Peynir (30g)', calcium: '200mg', icon: '🧀' },
+                    { food: 'Sardalya (100g)', calcium: '350mg', icon: '🐟' },
+                    { food: 'Brokoli (100g)', calcium: '47mg', icon: '🥦' },
+                    { food: 'Badem (30g)', calcium: '75mg', icon: '🌰' },
+                    { food: 'Kalsiyumla zenginleştirilmiş bitki sütü', calcium: '300mg', icon: '🌿' },
+                    { food: 'Susam (1 yemek kaşığı)', calcium: '88mg', icon: '🫙' },
+                ].map(item => (
+                    <div class="flex items-center gap-3 bg-purple-50 rounded-xl p-3">
+                        <span class="text-2xl">{item.icon}</span>
+                        <span class="text-lg text-slate-800 flex-1">{item.food}</span>
+                        <span class="font-bold text-purple-700 text-lg">{item.calcium}</span>
+                    </div>
+                ))}
+            </div>
+        </div>
+
+        <!-- D Vitamin -->
+        <div class="bg-yellow-50 border-2 border-yellow-200 rounded-2xl p-6">
+            <h3 class="text-xl font-bold text-yellow-900 mb-3">☀️ D Vitamini: Güneş Işığı ve Takviye</h3>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-4 text-base text-yellow-800">
+                <div>
+                    <p class="mb-2"><strong>Güneş ışığı:</strong> Kollar ve bacaklar açık şekilde günde 15-20 dakika güneş ışığı (öğle öncesi/sonrası).</p>
+                    <p><strong>D vitamini yetersizliği</strong> yaşlılarda çok yaygındır ve kas zayıflığına, kemik kaybına yol açar.</p>
+                </div>
+                <div>
+                    <p class="mb-2"><strong>D vitamini kaynakları:</strong> Somon balığı, uskumru, yumurta sarısı, D vitamini ile zenginleştirilmiş süt.</p>
+                    <p><strong>Takviye önerisi:</strong> Düzeye göre D3 vitamini + K2 kombinasyonu (hekim gözetiminde).</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Omega-3 Section -->
+    <section class="mb-8">
+        <h2 class="text-2xl font-bold text-teal-800 mb-5 flex items-center gap-2">
+            <span class="text-3xl">🐟</span> Omega-3: Anti-Enflamatuar Güç
+        </h2>
+        <div class="bg-white rounded-2xl border-2 border-teal-200 p-6">
+            <p class="text-teal-800 text-base leading-relaxed mb-4">
+                Omega-3 yağ asitleri (EPA ve DHA), inflamasyon kaynaklı kas kaybını (sarkopeni) yavaşlatır ve kemik döngüsünü iyileştirir.
+                Haftada 2-3 porsiyon yağlı balık veya 2-3g/gün balık yağı takviyesi önerilir.
+            </p>
+            <div class="flex flex-wrap gap-3">
+                {['🐟 Somon', '🐠 Uskumru', '🐡 Ringa', '🫙 Sardalya (konserve)', '🌱 Keten tohumu', '🥜 Ceviz', '🌿 Chia tohumu'].map(item => (
+                    <span class="bg-teal-50 text-teal-800 border border-teal-300 px-4 py-2 rounded-xl text-base font-medium">{item}</span>
+                ))}
+            </div>
+        </div>
+    </section>
+
+    <!-- Sample Meal Plan -->
+    <section class="mb-8">
+        <h2 class="text-2xl font-bold text-slate-800 mb-5 flex items-center gap-2">
+            <span class="text-3xl">🍽️</span> Örnek Günlük Beslenme Planı
+        </h2>
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+            {[
+                {
+                    meal: '🌅 Kahvaltı', time: '07:30 – 08:00',
+                    items: [
+                        '2 yumurta (haşlanmış veya menemen)',
+                        '1 dilim tam tahıllı ekmek',
+                        '30g beyaz peynir veya lor',
+                        '1 bardak (200ml) süt veya yoğurt',
+                        'Domates, salatalık, zeytin',
+                    ],
+                    protein: '~30g protein, ~300mg kalsiyum',
+                    color: 'bg-yellow-50 border-yellow-200',
+                },
+                {
+                    meal: '☀️ Öğle Yemeği', time: '12:30 – 13:00',
+                    items: [
+                        '150g pişmiş tavuk, balık veya kırmızı et',
+                        '1 kase zeytinyağlı sebze yemeği',
+                        '1 kase yoğurt (150g)',
+                        '1-2 dilim tam tahıllı ekmek',
+                        'Mevsim salatası',
+                    ],
+                    protein: '~40g protein, ~300mg kalsiyum',
+                    color: 'bg-orange-50 border-orange-200',
+                },
+                {
+                    meal: '🌙 Akşam Yemeği', time: '18:30 – 19:00',
+                    items: [
+                        '100g nohut veya mercimek yemeği',
+                        '1 kase cacık/ayran',
+                        '1 porsiyon pilav veya makarna',
+                        '1 kase zeytinyağlı sebze',
+                        'Mevsim salatası',
+                    ],
+                    protein: '~25g protein, ~250mg kalsiyum',
+                    color: 'bg-blue-50 border-blue-200',
+                },
+                {
+                    meal: '🍎 Ara Öğün (Sabah)', time: '10:00',
+                    items: [
+                        '1 avuç badem (20g)',
+                        '1 meyve',
+                        '1 bardak ayran',
+                    ],
+                    protein: '~10g protein',
+                    color: 'bg-green-50 border-green-200',
+                },
+                {
+                    meal: '🥛 Ara Öğün (Öğleden Sonra)', time: '15:30',
+                    items: [
+                        '1 bardak süt veya yoğurt',
+                        '2 ceviz',
+                        '1 meyve',
+                    ],
+                    protein: '~10g protein, ~300mg kalsiyum',
+                    color: 'bg-purple-50 border-purple-200',
+                },
+                {
+                    meal: '🌛 Gece Atıştırması (isteğe bağlı)', time: '20:30',
+                    items: [
+                        '1 bardak yoğurt',
+                        'Tarçın + 1 çay kaşığı bal (isteğe bağlı)',
+                    ],
+                    protein: '~7g protein (yavaş sindirilen kazein)',
+                    color: 'bg-indigo-50 border-indigo-200',
+                },
+            ].map(meal => (
+                <div class={`rounded-2xl border-2 p-5 ${meal.color}`}>
+                    <div class="flex items-center justify-between mb-3">
+                        <h3 class="text-xl font-bold text-slate-800">{meal.meal}</h3>
+                        <span class="text-sm text-slate-500 font-medium">{meal.time}</span>
+                    </div>
+                    <ul class="space-y-1 mb-3">
+                        {meal.items.map((item, i) => (
+                            <li class="text-base text-slate-700">• {item}</li>
+                        ))}
+                    </ul>
+                    <div class="bg-white/70 rounded-lg px-3 py-2 text-sm font-semibold text-slate-600">
+                        {meal.protein}
+                    </div>
+                </div>
+            ))}
+        </div>
+    </section>
+
+    <!-- Hydration -->
+    <section class="mb-8">
+        <div class="bg-blue-50 border-2 border-blue-200 rounded-2xl p-6">
+            <h2 class="text-2xl font-bold text-blue-900 mb-3 flex items-center gap-2">
+                <span class="text-3xl">💧</span> Sıvı Alımı: Sıkça Unutulan Detay
+            </h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-4 text-base text-blue-800">
+                <div>
+                    <p class="mb-2"><strong>Günlük hedef:</strong> 1.5–2 litre su (diğer içecekler dahil).</p>
+                    <p><strong>Dikkat:</strong> Yaşlılarda susama hissi azalır — su içmeyi hatırlatıcılar kullanın.</p>
+                </div>
+                <div>
+                    <p class="mb-2"><strong>Dehidratasyon belirtileri:</strong> Halsizlik, baş dönmesi, konsantrasyon güçlüğü, düşme riski artar!</p>
+                    <p><strong>İpucu:</strong> Her uyandığınızda, yemekten önce ve sonra birer bardak su içme alışkanlığı edinin.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Supplements -->
+    <section>
+        <h2 class="text-2xl font-bold text-slate-800 mb-5 flex items-center gap-2">
+            <span class="text-3xl">💊</span> Takviyeler (Hekim Onayıyla)
+        </h2>
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+            {[
+                { name: 'D3 Vitamini', dose: '800–2000 IU/gün', use: 'Kalsiyum emilimi, kemik yoğunluğu, kas gücü', evidence: 'Yüksek kanıt', color: 'bg-yellow-50 border-yellow-300' },
+                { name: 'Kalsiyum Sitrat', dose: '500–600 mg x 2/gün', use: 'Osteoporoz önleme/tedavisi', evidence: 'Yüksek kanıt', color: 'bg-purple-50 border-purple-300' },
+                { name: 'Omega-3 (balık yağı)', dose: '2–3 g/gün EPA+DHA', use: 'Sarkopeni, inflamasyon azaltma', evidence: 'Orta kanıt', color: 'bg-teal-50 border-teal-300' },
+                { name: 'Kreatin Monohidrat', dose: '3–5 g/gün', use: 'Direnç egzersizi ile kas gücü', evidence: 'Orta kanıt', color: 'bg-blue-50 border-blue-300' },
+                { name: 'Magnezyum', dose: '300–400 mg/gün', use: 'Kas kasılması, kemik sağlığı, uyku', evidence: 'Orta kanıt', color: 'bg-green-50 border-green-300' },
+                { name: 'B12 Vitamini', dose: '1000 mcg/gün', use: 'Sinir sistemi, kas fonksiyonu, enerji', evidence: 'Yüksek kanıt (emilim sorunu varsa)', color: 'bg-pink-50 border-pink-300' },
+            ].map(supp => (
+                <div class={`rounded-2xl border-2 p-5 ${supp.color}`}>
+                    <div class="flex items-start justify-between gap-2 mb-2">
+                        <h3 class="text-xl font-bold text-slate-800">{supp.name}</h3>
+                        <span class={`text-xs font-bold px-2 py-1 rounded-full flex-shrink-0 ${supp.evidence === 'Yüksek kanıt' ? 'bg-green-200 text-green-800' : 'bg-yellow-200 text-yellow-800'}`}>
+                            {supp.evidence}
+                        </span>
+                    </div>
+                    <div class="text-base text-slate-600 mb-1"><strong>Doz:</strong> {supp.dose}</div>
+                    <div class="text-base text-slate-700">{supp.use}</div>
+                </div>
+            ))}
+        </div>
+        <div class="mt-5 bg-red-50 border-2 border-red-200 rounded-2xl p-5">
+            <p class="text-red-800 text-base font-medium">
+                ⚕️ <strong>Önemli:</strong> Herhangi bir takviye başlamadan önce Op Dr Taner Aksu veya ilgili uzman hekiminize danışınız.
+                İlaç etkileşimleri söz konusu olabilir.
+            </p>
+        </div>
+    </section>
+</ElderlyLayout>

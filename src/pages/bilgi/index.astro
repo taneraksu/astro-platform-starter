@@ -1,0 +1,393 @@
+---
+import ElderlyLayout from '../../layouts/ElderlyLayout.astro';
+---
+
+<ElderlyLayout title="Bilgi Merkezi" activeNav="bilgi">
+    <!-- Header -->
+    <div class="bg-gradient-to-r from-teal-800 to-teal-600 text-white rounded-3xl p-8 mb-8">
+        <div class="flex items-center gap-4 mb-4">
+            <div class="w-16 h-16 bg-white/20 rounded-2xl flex items-center justify-center text-4xl">📚</div>
+            <div>
+                <h1 class="text-3xl sm:text-4xl font-bold text-white mb-1">Bilgi Merkezi</h1>
+                <p class="text-teal-100 text-lg">Sarkopeni, osteoporoz ve yaşlı sağlığı hakkında kapsamlı bilgiler</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Quick Nav -->
+    <div class="flex flex-wrap gap-3 mb-8">
+        {[
+            { href: '#sarkopeni', label: '💪 Sarkopeni', color: 'bg-blue-100 text-blue-800 border-blue-300' },
+            { href: '#osteoporoz', label: '🦴 Osteoporoz', color: 'bg-purple-100 text-purple-800 border-purple-300' },
+            { href: '#dusme', label: '⚠️ Düşme Önleme', color: 'bg-red-100 text-red-800 border-red-300' },
+            { href: '#yas', label: '🌟 Başarılı Yaşlanma', color: 'bg-green-100 text-green-800 border-green-300' },
+            { href: '#motivasyon', label: '🧠 Motivasyon Bilimi', color: 'bg-amber-100 text-amber-800 border-amber-300' },
+        ].map(nav => (
+            <a href={nav.href} class={`px-4 py-2 rounded-xl border-2 font-semibold text-base no-underline hover:opacity-80 transition-all ${nav.color}`}>
+                {nav.label}
+            </a>
+        ))}
+    </div>
+
+    <!-- Sarcopenia Section -->
+    <section id="sarkopeni" class="mb-12 scroll-mt-8">
+        <div class="bg-blue-800 text-white rounded-t-2xl p-5">
+            <h2 class="text-3xl font-bold">💪 Sarkopeni Nedir?</h2>
+            <p class="text-blue-200 text-base mt-1">Yaşa bağlı kas kaybı hastalığı</p>
+        </div>
+        <div class="bg-white rounded-b-2xl border-2 border-blue-200 p-6 space-y-5">
+            <div>
+                <h3 class="text-xl font-bold text-blue-900 mb-2">Tanım</h3>
+                <p class="text-slate-700 text-base leading-relaxed">
+                    Sarkopeni, <strong>30 yaşından itibaren başlayan</strong> ve özellikle 60 yaş sonrası hızlanan iskelet kası kütlesi, kas gücü
+                    ve fiziksel performans kaybı ile karakterize bir kas iskelet sistemi hastalığıdır.
+                    Avrupa Sarkopeni Çalışma Grubu (EWGSOP2) tarafından 2018'de resmi bir hastalık olarak kabul edilmiştir.
+                </p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+                <div class="bg-blue-50 rounded-xl p-4">
+                    <h4 class="font-bold text-blue-900 text-lg mb-2">Ne Kadar Yaygın?</h4>
+                    <ul class="text-blue-800 text-base space-y-1">
+                        <li>• 60-70 yaş: <strong>%10-15</strong></li>
+                        <li>• 80+ yaş: <strong>%30-50</strong></li>
+                        <li>• Türkiye'de 70+ yaş: <strong>~%20-25</strong></li>
+                    </ul>
+                </div>
+                <div class="bg-orange-50 rounded-xl p-4">
+                    <h4 class="font-bold text-orange-900 text-lg mb-2">Neden Olur?</h4>
+                    <ul class="text-orange-800 text-base space-y-1">
+                        <li>• Yetersiz protein alımı</li>
+                        <li>• Fiziksel inaktivite</li>
+                        <li>• Hormonal değişimler</li>
+                        <li>• Kronik inflamasyon</li>
+                        <li>• D vitamini eksikliği</li>
+                    </ul>
+                </div>
+                <div class="bg-red-50 rounded-xl p-4">
+                    <h4 class="font-bold text-red-900 text-lg mb-2">Sonuçları</h4>
+                    <ul class="text-red-800 text-base space-y-1">
+                        <li>• Düşme ve kırık riski ↑</li>
+                        <li>• Yatağa bağımlılık</li>
+                        <li>• Hastaneye yatış ↑</li>
+                        <li>• Ölüm riski ↑</li>
+                        <li>• Yaşam kalitesi ↓</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div>
+                <h3 class="text-xl font-bold text-blue-900 mb-2">Teşhis Kriterleri (EWGSOP2)</h3>
+                <div class="grid grid-cols-1 sm:grid-cols-3 gap-3">
+                    {[
+                        { icon: '💪', title: 'Düşük Kas Gücü', detail: 'El kavrama kuvveti: E < 27 kg, K < 16 kg', step: '1. Aşama — Muhtemel sarkopeni' },
+                        { icon: '🏃', title: 'Düşük Kas Kütlesi', detail: 'DXA/BIA ile ölçüm', step: '2. Aşama — Sarkopeni teyidi' },
+                        { icon: '🚶', title: 'Düşük Fiziksel Performans', detail: 'TUG ≥ 20s, SPPB ≤ 8', step: '3. Aşama — Ciddi sarkopeni' },
+                    ].map(item => (
+                        <div class="bg-slate-50 rounded-xl p-4 border border-slate-200">
+                            <div class="text-3xl mb-2">{item.icon}</div>
+                            <div class="font-bold text-lg text-slate-800 mb-1">{item.title}</div>
+                            <div class="text-base text-slate-600 mb-1">{item.detail}</div>
+                            <div class="text-sm text-blue-700 font-medium">{item.step}</div>
+                        </div>
+                    ))}
+                </div>
+            </div>
+
+            <div class="bg-green-50 border-2 border-green-200 rounded-xl p-5">
+                <h3 class="text-xl font-bold text-green-900 mb-3">✅ Tedavi Edilebilir mi?</h3>
+                <p class="text-green-800 text-base leading-relaxed mb-3">
+                    <strong>Evet!</strong> Sarkopeni büyük ölçüde önlenebilir ve tedavi edilebilir. Kanıta dayalı müdahaleler:
+                </p>
+                <div class="grid grid-cols-1 sm:grid-cols-3 gap-3">
+                    {[
+                        { icon: '💪', text: 'Direnç egzersizi (haftada ≥2 gün)', effect: 'Kas kütlesini ve gücünü artırır' },
+                        { icon: '🥩', text: 'Yeterli protein (1.2-1.5 g/kg/gün)', effect: 'Kas sentezini destekler' },
+                        { icon: '☀️', text: 'D vitamini (800-2000 IU/gün)', effect: 'Kas fonksiyonunu iyileştirir' },
+                    ].map(item => (
+                        <div class="bg-white rounded-xl p-4 border border-green-300">
+                            <span class="text-2xl">{item.icon}</span>
+                            <div class="font-semibold text-slate-800 text-base mt-1">{item.text}</div>
+                            <div class="text-sm text-green-700 mt-1">{item.effect}</div>
+                        </div>
+                    ))}
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Osteoporosis Section -->
+    <section id="osteoporoz" class="mb-12 scroll-mt-8">
+        <div class="bg-purple-800 text-white rounded-t-2xl p-5">
+            <h2 class="text-3xl font-bold">🦴 Osteoporoz Nedir?</h2>
+            <p class="text-purple-200 text-base mt-1">Kemik yoğunluğu kaybı ve kırık riski</p>
+        </div>
+        <div class="bg-white rounded-b-2xl border-2 border-purple-200 p-6 space-y-5">
+            <p class="text-slate-700 text-base leading-relaxed">
+                Osteoporoz, <strong>kemik yoğunluğunun azalması</strong> ve kemik mikro-yapısının bozulmasıyla karakterize bir iskelet hastalığıdır.
+                Bu durum kırık riskini belirgin biçimde artırır. Özellikle <strong>kalça, omurga ve el bileği kırıkları</strong> yaşlılarda ciddi sakatlık ve ölüm nedeni olabilir.
+            </p>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-5">
+                <div>
+                    <h3 class="text-xl font-bold text-purple-900 mb-3">Risk Faktörleri</h3>
+                    <div class="space-y-2">
+                        {[
+                            { risk: 'İleri yaş (65+ kadın, 70+ erkek)', level: 'Yüksek' },
+                            { risk: 'Kadın cinsiyet ve menopoz', level: 'Yüksek' },
+                            { risk: 'Ailede kalça kırığı öyküsü', level: 'Yüksek' },
+                            { risk: 'Düşük VKİ (< 19 kg/m²)', level: 'Orta' },
+                            { risk: 'Sigara kullanımı', level: 'Orta' },
+                            { risk: 'Kortikosteroid kullanımı', level: 'Yüksek' },
+                            { risk: 'D vitamini ve kalsiyum eksikliği', level: 'Orta' },
+                            { risk: 'Sedanter yaşam tarzı', level: 'Orta' },
+                        ].map(item => (
+                            <div class="flex items-center gap-3">
+                                <span class={`text-xs font-bold px-2 py-1 rounded flex-shrink-0 ${item.level === 'Yüksek' ? 'bg-red-100 text-red-800' : 'bg-yellow-100 text-yellow-800'}`}>
+                                    {item.level}
+                                </span>
+                                <span class="text-base text-slate-700">{item.risk}</span>
+                            </div>
+                        ))}
+                    </div>
+                </div>
+                <div>
+                    <h3 class="text-xl font-bold text-purple-900 mb-3">Teşhis: T-Skoru (DEXA)</h3>
+                    <div class="space-y-3">
+                        <div class="bg-green-50 border border-green-300 rounded-xl p-3">
+                            <div class="font-bold text-green-800">T-skoru ≥ -1.0</div>
+                            <div class="text-green-700 text-base">Normal kemik yoğunluğu</div>
+                        </div>
+                        <div class="bg-yellow-50 border border-yellow-300 rounded-xl p-3">
+                            <div class="font-bold text-yellow-800">T-skoru -1.0 ile -2.5 arası</div>
+                            <div class="text-yellow-700 text-base">Osteopeni (kemik kaybı başlamış)</div>
+                        </div>
+                        <div class="bg-red-50 border border-red-300 rounded-xl p-3">
+                            <div class="font-bold text-red-800">T-skoru ≤ -2.5</div>
+                            <div class="text-red-700 text-base">Osteoporoz — tedavi gerektirir</div>
+                        </div>
+                    </div>
+                    <p class="text-slate-600 text-sm mt-3">* DEXA (çift enerjili X-ışını absorbsiyometri) ile ölçülür</p>
+                </div>
+            </div>
+
+            <div class="bg-purple-50 border-2 border-purple-200 rounded-xl p-5">
+                <h3 class="text-xl font-bold text-purple-900 mb-3">💊 Tedavi Seçenekleri</h3>
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 text-base text-purple-800">
+                    <div>
+                        <p class="font-bold mb-1">İlaç Dışı Tedavi:</p>
+                        <ul class="space-y-1">
+                            <li>• Kalsiyum (1200 mg/gün) + D3 vitamini</li>
+                            <li>• Ağırlık taşıyan egzersiz</li>
+                            <li>• Sigara ve alkol bırakma</li>
+                            <li>• Düşme önleme programları</li>
+                        </ul>
+                    </div>
+                    <div>
+                        <p class="font-bold mb-1">İlaç Tedavisi (hekim kararıyla):</p>
+                        <ul class="space-y-1">
+                            <li>• Bifosfonatlar (alendronat, zoledronik asit)</li>
+                            <li>• Denosumab</li>
+                            <li>• Teriparatid (ağır osteoporoz)</li>
+                            <li>• Romosozumab</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Fall Prevention Section -->
+    <section id="dusme" class="mb-12 scroll-mt-8">
+        <div class="bg-red-700 text-white rounded-t-2xl p-5">
+            <h2 class="text-3xl font-bold">⚠️ Düşme Önleme</h2>
+            <p class="text-red-200 text-base mt-1">Yaşlılarda düşmeler önlenebilir!</p>
+        </div>
+        <div class="bg-white rounded-b-2xl border-2 border-red-200 p-6 space-y-5">
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-5">
+                <div>
+                    <h3 class="text-xl font-bold text-red-900 mb-3">Neden Önemli?</h3>
+                    <ul class="space-y-2 text-base text-slate-700">
+                        <li>• 65 yaş üzeri her 3 kişiden 1'i yılda en az bir kez düşer</li>
+                        <li>• Düşmelerin <strong>%20-30'u ciddi yaralanma</strong> ile sonuçlanır</li>
+                        <li>• Kalça kırığının <strong>%20-30'u 1 yıl içinde ölümle</strong> sonuçlanır</li>
+                        <li>• Düşmelerin büyük çoğunluğu <strong>önlenebilir!</strong></li>
+                    </ul>
+                </div>
+                <div>
+                    <h3 class="text-xl font-bold text-red-900 mb-3">Risk Faktörleri</h3>
+                    <div class="grid grid-cols-2 gap-2">
+                        {['Kas zayıflığı', 'Denge sorunu', 'Görme bozukluğu', 'Çoklu ilaç kullanımı', 'Ev tehlikeleri', 'Uygunsuz ayakkabı', 'Düşme korkusu', 'Hipotansiyon'].map(r => (
+                            <div class="bg-red-50 border border-red-200 rounded-lg p-2 text-red-800 text-sm font-medium">⚠️ {r}</div>
+                        ))}
+                    </div>
+                </div>
+            </div>
+
+            <div>
+                <h3 class="text-xl font-bold text-slate-800 mb-3">🏠 Ev Güvenliği Kontrol Listesi</h3>
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                    {[
+                        { area: 'Banyo', items: ['Duş kabininde tutunma barı', 'Kaymazlık paspası', 'Duş oturağı', 'Yeterli aydınlatma'] },
+                        { area: 'Merdiven', items: ['Her iki tarafta korkuluk', 'Yeterli aydınlatma', 'Kaymaz bant', 'Darmadağın eşya bırakmamak'] },
+                        { area: 'Yatak Odası', items: ['Gece lambası', 'Yataktan kolay kalkma için tutacak', 'Yer halılarını kaldırmak', 'Telefonu yakın tutmak'] },
+                        { area: 'Oturma Odası', items: ['Kablo ve halıları düzenlemek', 'Yeterli aydınlatma', 'Stabil mobilya', 'Yürüme alanı açık tutmak'] },
+                    ].map(area => (
+                        <div class="bg-slate-50 rounded-xl p-4 border border-slate-200">
+                            <h4 class="font-bold text-lg text-slate-800 mb-2">{area.area}</h4>
+                            <ul class="space-y-1">
+                                {area.items.map(item => (
+                                    <li class="flex items-center gap-2 text-base text-slate-700">
+                                        <span class="text-green-600 font-bold">✓</span> {item}
+                                    </li>
+                                ))}
+                            </ul>
+                        </div>
+                    ))}
+                </div>
+            </div>
+
+            <div class="bg-blue-50 border-2 border-blue-200 rounded-xl p-5">
+                <h3 class="text-xl font-bold text-blue-900 mb-3">👟 Doğru Ayakkabı Seçimi</h3>
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 text-base text-blue-800">
+                    <div>
+                        <p class="font-bold mb-1">Olması Gereken:</p>
+                        <ul class="space-y-1">
+                            <li>✅ Kaymaz taban</li>
+                            <li>✅ Topuk desteği</li>
+                            <li>✅ Ayağa tam oturan boyut</li>
+                            <li>✅ Velcro veya kolay bağlama</li>
+                        </ul>
+                    </div>
+                    <div>
+                        <p class="font-bold mb-1">Kaçınılması Gereken:</p>
+                        <ul class="space-y-1">
+                            <li>❌ Terlik ve pabucun içinde yürümek</li>
+                            <li>❌ Yüksek topuk</li>
+                            <li>❌ Bol veya kaymaz olmayan taban</li>
+                            <li>❌ Lastik bant/ip olmayan sandalet</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Successful Aging -->
+    <section id="yas" class="mb-12 scroll-mt-8">
+        <div class="bg-emerald-700 text-white rounded-t-2xl p-5">
+            <h2 class="text-3xl font-bold">🌟 Başarılı Yaşlanma</h2>
+            <p class="text-emerald-200 text-base mt-1">Her yaşta aktif ve sağlıklı olmak mümkün!</p>
+        </div>
+        <div class="bg-white rounded-b-2xl border-2 border-emerald-200 p-6 space-y-5">
+            <p class="text-slate-700 text-base leading-relaxed">
+                Başarılı yaşlanma; kronik hastalık olmaksızın yüksek fiziksel ve bilişsel fonksiyon ve aktif yaşam ile yaşlanmayı ifade eder
+                (Rowe & Kahn, 1997). Modern araştırmalar yaşlanmanın büyük ölçüde modifiye edilebilir olduğunu ortaya koymaktadır.
+            </p>
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+                {[
+                    { icon: '🏃', title: 'Fiziksel Aktivite', text: 'Düzenli egzersiz; kas-kemik sağlığını, kardiyovasküler kapasiteyi ve bilişsel fonksiyonu korur.' },
+                    { icon: '🥗', title: 'Akdeniz Diyeti', text: 'Akdeniz tipi beslenme sarkopeni ve osteoporoz riskini belirgin azaltır, ömrü uzatır.' },
+                    { icon: '🧠', title: 'Zihinsel Aktiflik', text: 'Okuma, bulmaca, yeni beceri öğrenmek beyin rezervini artırır ve demans riskini azaltır.' },
+                    { icon: '🤝', title: 'Sosyal Bağlar', text: 'Güçlü sosyal destek ağı; yaşam süresini, mental sağlığı ve egzersiz uyumunu olumlu etkiler.' },
+                    { icon: '😴', title: 'Kaliteli Uyku', text: '7-8 saat uyku; kas yenilenmesi, kemik döngüsü ve immün sistem için kritiktir.' },
+                    { icon: '🩺', title: 'Düzenli Takip', text: 'Yıllık sağlık kontrolleri, erken müdahale ile hastalık yükünü önemli ölçüde azaltır.' },
+                ].map(item => (
+                    <div class="bg-emerald-50 rounded-xl p-5 border border-emerald-200">
+                        <div class="text-4xl mb-2">{item.icon}</div>
+                        <h3 class="font-bold text-xl text-emerald-900 mb-2">{item.title}</h3>
+                        <p class="text-emerald-800 text-base">{item.text}</p>
+                    </div>
+                ))}
+            </div>
+        </div>
+    </section>
+
+    <!-- Motivation Science -->
+    <section id="motivasyon" class="mb-8 scroll-mt-8">
+        <div class="bg-amber-600 text-white rounded-t-2xl p-5">
+            <h2 class="text-3xl font-bold">🧠 Motivasyon Bilimi</h2>
+            <p class="text-amber-100 text-base mt-1">Neden egzersiz yapmak zor ve bunu nasıl kolaylaştırabiliriz?</p>
+        </div>
+        <div class="bg-white rounded-b-2xl border-2 border-amber-200 p-6 space-y-5">
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-5">
+                <div>
+                    <h3 class="text-xl font-bold text-amber-900 mb-3">🎯 SMART Hedef Belirleme</h3>
+                    <div class="space-y-2">
+                        {[
+                            { letter: 'S', full: 'Spesifik', ex: '"Sabah 8\'de 20 dakika yürüyüş"' },
+                            { letter: 'M', full: 'Ölçülebilir', ex: '"Haftada 3 kez direnç egzersizi"' },
+                            { letter: 'A', full: 'Ulaşılabilir', ex: '"Bugün 5 tekrar, gelecek hafta 8 tekrar"' },
+                            { letter: 'R', full: 'Anlamlı', ex: '"Torunumla oynayabilmek için"' },
+                            { letter: 'T', full: 'Zamanlı', ex: '"Bu ay içinde TUG testini geliştireceğim"' },
+                        ].map(item => (
+                            <div class="flex items-center gap-3 bg-amber-50 rounded-xl px-4 py-3">
+                                <span class="bg-amber-600 text-white font-bold w-8 h-8 rounded-full flex items-center justify-center text-lg flex-shrink-0">{item.letter}</span>
+                                <div>
+                                    <span class="font-bold text-slate-800 text-base">{item.full}: </span>
+                                    <span class="text-slate-600 text-base italic">{item.ex}</span>
+                                </div>
+                            </div>
+                        ))}
+                    </div>
+                </div>
+                <div>
+                    <h3 class="text-xl font-bold text-amber-900 mb-3">🔄 Alışkanlık Oluşturma</h3>
+                    <div class="space-y-3 text-base">
+                        <div class="bg-slate-50 rounded-xl p-4">
+                            <h4 class="font-bold text-slate-800 mb-1">İstif Yöntemi (Habit Stacking)</h4>
+                            <p class="text-slate-700">"Kahvaltıdan sonra her gün 10 dakika denge egzersizi yapacağım" — Mevcut alışkanlığa yeni alışkanlığı ekleyin.</p>
+                        </div>
+                        <div class="bg-slate-50 rounded-xl p-4">
+                            <h4 class="font-bold text-slate-800 mb-1">Öz-Yeterlik (Bandura, 1986)</h4>
+                            <p class="text-slate-700">Küçük başarılar özgüveni artırır. "Başlangıç" düzeyi egzersizlerle başlayın, zorluğu kademeli artırın.</p>
+                        </div>
+                        <div class="bg-slate-50 rounded-xl p-4">
+                            <h4 class="font-bold text-slate-800 mb-1">Sosyal Destek</h4>
+                            <p class="text-slate-700">Aile desteği egzersiz uyumunu %40-60 artırır. Eşinizi, çocuklarınızı veya arkadaşlarınızı sürece dahil edin.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="bg-gradient-to-r from-amber-50 to-orange-50 border-2 border-amber-200 rounded-xl p-6">
+                <h3 class="text-xl font-bold text-amber-900 mb-3">💬 Bilimden Motivasyon Sözleri</h3>
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                    {[
+                        { quote: '"Yaş bir sayıdır, enerji bir seçimdir."', source: 'Gerontoloji araştırmaları' },
+                        { quote: '"Oturmak yeni sigaradır — hareket edin!"', source: 'WHO Fiziksel Aktivite Rehberi' },
+                        { quote: '"Her düşüş bir bitiş değil, bir başlangıçtır."', source: 'Rehabilitasyon tıbbı' },
+                        { quote: '"85 yaşında da kas kazanabilirsiniz."', source: 'NEJM Sarkopeni Araştırmaları' },
+                    ].map(item => (
+                        <div class="bg-white rounded-xl p-4 border border-amber-200">
+                            <p class="text-lg text-slate-800 font-medium mb-2 italic">"{item.quote}"</p>
+                            <p class="text-amber-700 text-sm font-medium">— {item.source}</p>
+                        </div>
+                    ))}
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- References -->
+    <section class="bg-slate-100 rounded-2xl p-6">
+        <h2 class="text-xl font-bold text-slate-700 mb-4">📖 Kaynaklar ve Kılavuzlar</h2>
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 text-sm text-slate-600">
+            {[
+                'EWGSOP2 (2018) — Avrupa Sarkopeni Çalışma Grubu',
+                'NOF (2013) — Ulusal Osteoporoz Vakfı Kılavuzu',
+                'WHO (2020) — Fiziksel Aktivite Rehberi',
+                'Cochrane (2012) — Düşme Önleme Meta-Analizi',
+                'Cruz-Jentoft AJ et al. (2019) — Age Ageing',
+                'Bandura A (1986) — Sosyal Öğrenme Teorisi',
+                'Rowe & Kahn (1997) — Başarılı Yaşlanma',
+                'FRAX® — Sheffield Üniversitesi Kırık Risk Aracı',
+            ].map(ref => (
+                <div class="flex items-start gap-2">
+                    <span class="text-slate-400 font-bold flex-shrink-0">•</span>
+                    <span>{ref}</span>
+                </div>
+            ))}
+        </div>
+    </section>
+</ElderlyLayout>
