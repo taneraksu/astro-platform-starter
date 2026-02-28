@@ -1,0 +1,457 @@
+---
+import Layout from '../layouts/Layout.astro';
+
+const zimmerProducts = {
+    hip: [
+        {
+            name: 'Taperloc Complete Hip System',
+            type: 'Çimentosuz Kalça Sapı',
+            highlight: true,
+            description: 'Anatomik konik tasarımı ile enine ve boyuna stabilite sağlar. Geniş fleksiyon aralığına uyarlanabilen modüler baş seçenekleri mevcuttur.',
+            features: ['Titanyum alaşım gövde', 'Plazmaporöz kaplama', 'Modüler baş: metal, seramik', 'Offset ve sap uzunluğu varyantları'],
+            indication: 'Primer ve revizyon kalça replasmanı',
+        },
+        {
+            name: 'G7 Acetabular System',
+            type: 'Asetabular Kap',
+            highlight: true,
+            description: 'Titanyum poroz kaplı hemisferikal kap. Geniş hareket açıklığı sağlayan yüksek ofset liner seçenekleri ile dislokasyon riskini azaltır.',
+            features: ['Titanyum gövde, HA veya poroz kaplama', 'E1 yüksek çapraz bağlı polietilen liner', 'Seramik ve metal liner seçenekleri', '36–56 mm kap boyutları'],
+            indication: 'Primer total kalça artroplastisi',
+        },
+        {
+            name: 'Avenir Complete Hip System',
+            type: 'Çimentosuz Kalça Sapı',
+            highlight: false,
+            description: 'Cilalı boyun bölgesi ile düşük stres konsantrasyonlu, anatomik kama tasarım. Düz ve anatomi uyumlu versiyon seçenekleri.',
+            features: ['Proksimal poroz kaplama', 'CoCrMo alaşım', 'Kısa ve standart sap versiyonları', 'Yüksek primary stabilitenin kanıtı'],
+            indication: 'Primer kalça replasmanı, dar femoral kanal',
+        },
+        {
+            name: 'Fitmore Hip Stem',
+            type: 'Kısa Çimentosuz Sap',
+            highlight: false,
+            description: 'Femoral boyun ve proksimal femuru koruyan kısa sap tasarımı. Kemik koruyucu yaklaşım, özellikle genç aktif hastalar için.',
+            features: ['Proksimal yük aktarımı', 'Titanyum alaşım', 'Biyolojik fiksasyon', 'MIS (minimal invaziv) cerrahiye uygun'],
+            indication: 'Genç ve aktif hastalar, kemik kitlesi korunması',
+        },
+    ],
+    knee: [
+        {
+            name: 'Persona Personalized Knee System',
+            type: 'Total Diz Artroplastisi',
+            highlight: true,
+            description: 'Zimmer Biomet\'in en gelişmiş diz sistemi. Hastanın anatomisinı 3D modelleme ile analiz ederek kişiselleştirilmiş implant yerleştirme planı sunar. ROSA Robotic ile entegre çalışır.',
+            features: ['CrCo femoral komponent', 'Persona PE & trabecular metal tibia', 'Posterior stabilize veya cruciate retaining', 'Medial congruent liner seçeneği', 'Kişiselleştirilmiş cerrahi planlama'],
+            indication: 'Primer total diz artroplastisi',
+        },
+        {
+            name: 'Oxford Partial Knee System',
+            type: 'Medial Unikompartmantal Diz',
+            highlight: true,
+            description: 'Dünya genelinde en çok tercih edilen medial unikompartmantal diz sistemi. 30 yılı aşkın klinik kanıt. Yalnızca medial kompartman etkilenmiş hastalarda eklem dokusunun büyük bölümünü korur.',
+            features: ['Hareketli meniskal bearing (mobilite)', 'CoCrMo femoral ve tibial komponent', 'Ultra-yüksek moleküler ağırlıklı PE', 'Minimal invaziv cerrahi (MIS) tekniği', 'Revizyon kolaylaştırıcı tasarım'],
+            indication: 'Anterior cruciate ligament sağlam, izole medial OA',
+        },
+        {
+            name: 'Vanguard 360 Knee System',
+            type: 'Primer Total Diz',
+            highlight: false,
+            description: 'Tam rotasyon kısıtlaması olmaksızın posterior stabilize dizayn. Geniş endikasyon yelpazesi için çok yönlü sistem.',
+            features: ['Anterior flange dizaynı', 'E1 antioxidant polietilen', 'Articular Surface bearings', 'Geniş boyut skalası'],
+            indication: 'Primer ve kompleks revizyon diz artroplastisi',
+        },
+    ],
+    tech: {
+        name: 'ROSA Knee Robotic System',
+        description: 'Zimmer Biomet\'in yapay zeka destekli robotik diz cerrahisi platformu. Gerçek zamanlı hasta verileri ve 3D planlama ile cerrahın hassasiyetini artırır.',
+        benefits: ['Bağ dengesi optimizasyonu', 'Özelleştirilmiş kesim planlaması', 'İmplant hizalamada ±1° hassasiyet', 'Daha az yumuşak doku hasarı', 'Klinik olarak kanıtlanmış sonuçlar'],
+    },
+};
+
+const smithProducts = {
+    hip: [
+        {
+            name: 'Anthology Hip System',
+            type: 'Çimentosuz Kalça Sapı',
+            highlight: true,
+            description: 'Anatomik kıvrım açısı ve proksimal yük aktarım bölgesiyle kemik koruyucu tasarım. Primer ve revizyon için geniş boyut skalası.',
+            features: ['Titanium alaşım', 'Hydroxyapatite kaplama', 'Standart, offset ve yüksek offset versiyonlar', 'OXINIUM baş seçeneği'],
+            indication: 'Primer total kalça artroplastisi',
+        },
+        {
+            name: 'R3 Acetabular System',
+            type: 'Asetabular Kap',
+            highlight: true,
+            description: 'Poroz titanyum kaplı çimentosuz kap. Yüksek uyumlu polietilen liner seçenekleri ile birlikte geniş hareket açıklığı sağlar.',
+            features: ['Titanium poroz (Tritanium benzeri) kaplama', 'UHMWPE, OXINIUM uyumlu liner', 'X3 cross-linked PE', 'Esnek vida açıları'],
+            indication: 'Primer ve revizyon total kalça artroplastisi',
+        },
+        {
+            name: 'Birmingham Hip Resurfacing (BHR)',
+            type: 'Kalça Yüzey Değiştirme',
+            highlight: false,
+            description: 'Metal-metal yüzey yenileme. Femoral başı çıkarmadan yalnızca eklem yüzeylerini yeniler. Genç ve aktif hastalar için kemik koruyucu alternatif.',
+            features: ['CoCrMo metal-metal tasarım', 'Büyük çaplı baş stabilitesi', 'Anatomik femoral komponent', 'Uzun vadeli revizyon kolaylığı'],
+            indication: 'Genç (<65y), aktif erkek hastalar, iyi kemik kalitesi',
+        },
+    ],
+    knee: [
+        {
+            name: 'JOURNEY II BCS Knee System',
+            type: 'Total Diz Artroplastisi',
+            highlight: true,
+            description: 'Bi-cruciate stabilize (BCS) tasarım — doğal diz kinematiklerini taklit eden, ön ve arka çapraz bağ fonksiyonunu simüle eden yenilikçi sistem. Doğal yürüyüş hissi için tasarlandı.',
+            features: ['Bi-cruciate stabilize tasarım', 'OXINIUM opsiyonu (daha az polietilen aşınması)', 'Medial pivot kinematik', 'Femoral komponent asimetrik tasarımı', 'Doğal patella tracking'],
+            indication: 'Primer total diz artroplastisi, aktif hastalar',
+        },
+        {
+            name: 'LEGION Primary Knee System',
+            type: 'Total Diz Artroplastisi',
+            highlight: true,
+            description: 'Geniş cerrahi fleksibilite sunan kapsamlı primer diz sistemi. CR, PS ve CCK seçenekleriyle geniş endikasyon yelpazesine hitap eder.',
+            features: ['CoCrMo femoral komponent', 'OXINIUM opsiyonu', 'Asymmetric tibia bazası', 'Modüler extension stem', 'VERILAST teknolojisi'],
+            indication: 'Primer total diz artroplastisi',
+        },
+        {
+            name: 'OXINIUM Oxidized Zirconium',
+            type: 'Yüzey Materyali — S&N Özel Teknolojisi',
+            highlight: true,
+            description: 'Smith & Nephew\'nin tescilli yüzey teknolojisi. Zirkonyum alaşımı yüzeyi oksitlenmiş zirkonyum seramiğe dönüştürülür. Kobalt-krom kaplamanın 4900 kez daha sert yüzeyi, polietilen liner aşınmasını %50\'ye kadar azaltır.',
+            features: ['4900× daha sert yüzey (CoCrMo vs OXINIUM)', 'Metal iyonu salınımında belirgin azalma', 'Polietilen aşınması %45–50 daha az', 'Metal alerjisi olan hastalarda tercih', 'Seramik kırılma riskini ortadan kaldırır'],
+            indication: 'Genç aktif hastalar, metal alerjisi, uzun ömür beklentisi',
+        },
+    ],
+    tech: {
+        name: 'CORI Surgical System',
+        description: 'Smith & Nephew\'nin el tutmalı robotik / bilgisayar destekli cerrahi platformu. CT gerektirmez — ameliyat öncesi planlama görüntüleme yapar ve gerçek zamanlı geri bildirim sağlar.',
+        benefits: ['CT taraması gerekmez', 'Kompakt, el tutmalı cihaz', 'Gerçek zamanlı 3D görüntüleme', 'Uygulanabilir kesim rehberliği', 'Hem kalça hem diz için kullanım'],
+    },
+};
+
+---
+
+<Layout
+    title="İmplant Markaları"
+    description="Zimmer Biomet ve Smith & Nephew kalça ve diz protezi sistemleri hakkında bilgi edinin"
+>
+    <div class="page-header">
+        <div class="flex items-center gap-2 text-sm text-slate-500 mb-3">
+            <a href="/" class="hover:text-blue-700 no-underline">Ana Sayfa</a>
+            <span>/</span>
+            <span class="text-slate-700">İmplant Markaları</span>
+        </div>
+        <h1 class="page-title">İmplant Markaları ve Sistemleri</h1>
+        <p class="page-subtitle text-lg">
+            Kliniğimizde kullandığımız Zimmer Biomet ve Smith &amp; Nephew implant sistemleri hakkında bilgi edinin.
+        </p>
+    </div>
+
+    <!-- Disclaimer -->
+    <div class="alert alert-info mb-8">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor" class="flex-shrink-0">
+            <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-6h2v6zm0-8h-2V7h2v2z"/>
+        </svg>
+        <p class="text-sm">
+            Hangi implantın size uygun olduğuna <strong>yalnızca cerrahınız karar verebilir</strong>. Bu bilgiler, ameliyat öncesinde konuya aşinalık kazanmanıza yardımcı olmak amacıyla sunulmuştur.
+        </p>
+    </div>
+
+    <!-- ==================== ZIMMER BIOMET ==================== -->
+    <div class="mb-12">
+        <!-- Brand Header -->
+        <div class="bg-gradient-to-r from-slate-800 to-slate-700 rounded-2xl p-6 mb-6">
+            <div class="flex flex-col sm:flex-row sm:items-center gap-4">
+                <div class="flex-1">
+                    <div class="flex items-center gap-3 mb-2">
+                        <div class="w-10 h-10 bg-white rounded-lg flex items-center justify-center font-bold text-slate-800 text-sm flex-shrink-0">ZB</div>
+                        <h2 class="text-2xl font-bold text-white">Zimmer Biomet</h2>
+                    </div>
+                    <p class="text-slate-300 text-sm leading-relaxed">
+                        1927 yılında ABD'nin Indiana eyaletinde kurulan Zimmer ile Biomet'in 2015 yılındaki birleşmesiyle oluşan dünya lider ortopedik implant şirketi. 100'den fazla ülkede faaliyet göstermekte; yıllık 8 milyardan fazla prostetik implant ve ilgili ekipmana erişim sağlamaktadır.
+                    </p>
+                </div>
+                <div class="flex flex-col gap-2 text-xs text-slate-400 min-w-36">
+                    <div class="bg-white/10 rounded-lg p-3">
+                        <div class="text-white font-semibold text-sm">1927</div>
+                        <div>Kuruluş yılı</div>
+                    </div>
+                    <div class="bg-white/10 rounded-lg p-3">
+                        <div class="text-white font-semibold text-sm">Dünya #1</div>
+                        <div>Ortopedi pazarı payı</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Zimmer Hip Systems -->
+        <h3 class="text-lg font-bold text-slate-800 mb-4 flex items-center gap-2">
+            🦴 <span>Kalça Protezi Sistemleri</span>
+        </h3>
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-8">
+            {zimmerProducts.hip.map(product => (
+                <div class={`card border-2 ${product.highlight ? 'border-slate-300' : 'border-slate-100'}`}>
+                    <div class="flex items-start justify-between mb-2">
+                        <div>
+                            <div class="flex items-center gap-2 flex-wrap">
+                                <h4 class="font-semibold text-slate-900">{product.name}</h4>
+                                {product.highlight && <span class="badge bg-slate-800 text-white text-xs">Öne Çıkan</span>}
+                            </div>
+                            <span class="badge badge-blue text-xs mt-1">{product.type}</span>
+                        </div>
+                    </div>
+                    <p class="text-sm text-slate-600 leading-relaxed mb-3">{product.description}</p>
+                    <div class="mb-3">
+                        <p class="text-xs font-semibold text-slate-500 uppercase tracking-wider mb-1.5">Özellikler</p>
+                        <ul class="space-y-1">
+                            {product.features.map(f => (
+                                <li class="flex items-start gap-2 text-xs text-slate-600">
+                                    <svg width="12" height="12" viewBox="0 0 24 24" fill="#2563eb" class="flex-shrink-0 mt-0.5"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg>
+                                    {f}
+                                </li>
+                            ))}
+                        </ul>
+                    </div>
+                    <div class="bg-slate-50 rounded-lg px-3 py-2">
+                        <p class="text-xs text-slate-500"><span class="font-semibold">Endikasyon:</span> {product.indication}</p>
+                    </div>
+                </div>
+            ))}
+        </div>
+
+        <!-- Zimmer Knee Systems -->
+        <h3 class="text-lg font-bold text-slate-800 mb-4 flex items-center gap-2">
+            🦵 <span>Diz Protezi Sistemleri</span>
+        </h3>
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-6">
+            {zimmerProducts.knee.map(product => (
+                <div class={`card border-2 ${product.highlight ? 'border-slate-300' : 'border-slate-100'}`}>
+                    <div class="flex items-start justify-between mb-2">
+                        <div>
+                            <div class="flex items-center gap-2 flex-wrap">
+                                <h4 class="font-semibold text-slate-900">{product.name}</h4>
+                                {product.highlight && <span class="badge bg-slate-800 text-white text-xs">Öne Çıkan</span>}
+                            </div>
+                            <span class="badge badge-blue text-xs mt-1">{product.type}</span>
+                        </div>
+                    </div>
+                    <p class="text-sm text-slate-600 leading-relaxed mb-3">{product.description}</p>
+                    <div class="mb-3">
+                        <p class="text-xs font-semibold text-slate-500 uppercase tracking-wider mb-1.5">Özellikler</p>
+                        <ul class="space-y-1">
+                            {product.features.map(f => (
+                                <li class="flex items-start gap-2 text-xs text-slate-600">
+                                    <svg width="12" height="12" viewBox="0 0 24 24" fill="#2563eb" class="flex-shrink-0 mt-0.5"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg>
+                                    {f}
+                                </li>
+                            ))}
+                        </ul>
+                    </div>
+                    <div class="bg-slate-50 rounded-lg px-3 py-2">
+                        <p class="text-xs text-slate-500"><span class="font-semibold">Endikasyon:</span> {product.indication}</p>
+                    </div>
+                </div>
+            ))}
+        </div>
+
+        <!-- ROSA Robotic -->
+        <div class="bg-gradient-to-r from-blue-900 to-blue-800 rounded-xl p-5 text-white">
+            <div class="flex items-start gap-4">
+                <div class="w-10 h-10 bg-blue-700 rounded-lg flex items-center justify-center text-lg flex-shrink-0">🤖</div>
+                <div>
+                    <h4 class="font-semibold text-lg mb-1">{zimmerProducts.tech.name}</h4>
+                    <p class="text-blue-100 text-sm mb-3">{zimmerProducts.tech.description}</p>
+                    <div class="flex flex-wrap gap-2">
+                        {zimmerProducts.tech.benefits.map(b => (
+                            <span class="bg-blue-700/60 text-blue-100 text-xs px-2.5 py-1 rounded-full">{b}</span>
+                        ))}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Divider -->
+    <div class="flex items-center gap-4 my-10">
+        <div class="flex-1 h-px bg-slate-200"></div>
+        <span class="text-slate-400 text-sm font-medium">İkinci Marka</span>
+        <div class="flex-1 h-px bg-slate-200"></div>
+    </div>
+
+    <!-- ==================== SMITH & NEPHEW ==================== -->
+    <div class="mb-10">
+        <!-- Brand Header -->
+        <div class="bg-gradient-to-r from-teal-800 to-teal-700 rounded-2xl p-6 mb-6">
+            <div class="flex flex-col sm:flex-row sm:items-center gap-4">
+                <div class="flex-1">
+                    <div class="flex items-center gap-3 mb-2">
+                        <div class="w-10 h-10 bg-white rounded-lg flex items-center justify-center font-bold text-teal-800 text-sm flex-shrink-0">S&amp;N</div>
+                        <h2 class="text-2xl font-bold text-white">Smith &amp; Nephew</h2>
+                    </div>
+                    <p class="text-teal-100 text-sm leading-relaxed">
+                        1856 yılında İngiltere'nin Hull şehrinde kurulan İngiliz çok uluslu tıbbi cihaz şirketi. Ortopedik implantlar, yara bakımı ve endoskopi alanlarında dünya lideri. OXINIUM oksitlenmiş zirkonyum teknolojisi gibi öncü yeniliklerle tanınır.
+                    </p>
+                </div>
+                <div class="flex flex-col gap-2 text-xs text-teal-300 min-w-36">
+                    <div class="bg-white/10 rounded-lg p-3">
+                        <div class="text-white font-semibold text-sm">1856</div>
+                        <div>Kuruluş yılı</div>
+                    </div>
+                    <div class="bg-white/10 rounded-lg p-3">
+                        <div class="text-white font-semibold text-sm">OXINIUM™</div>
+                        <div>Tescilli teknoloji</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Smith & Nephew Hip Systems -->
+        <h3 class="text-lg font-bold text-slate-800 mb-4 flex items-center gap-2">
+            🦴 <span>Kalça Protezi Sistemleri</span>
+        </h3>
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-8">
+            {smithProducts.hip.map(product => (
+                <div class={`card border-2 ${product.highlight ? 'border-teal-200' : 'border-slate-100'}`}>
+                    <div class="flex items-start justify-between mb-2">
+                        <div>
+                            <div class="flex items-center gap-2 flex-wrap">
+                                <h4 class="font-semibold text-slate-900">{product.name}</h4>
+                                {product.highlight && <span class="badge bg-teal-700 text-white text-xs">Öne Çıkan</span>}
+                            </div>
+                            <span class="badge badge-green text-xs mt-1">{product.type}</span>
+                        </div>
+                    </div>
+                    <p class="text-sm text-slate-600 leading-relaxed mb-3">{product.description}</p>
+                    <div class="mb-3">
+                        <p class="text-xs font-semibold text-slate-500 uppercase tracking-wider mb-1.5">Özellikler</p>
+                        <ul class="space-y-1">
+                            {product.features.map(f => (
+                                <li class="flex items-start gap-2 text-xs text-slate-600">
+                                    <svg width="12" height="12" viewBox="0 0 24 24" fill="#0d9488" class="flex-shrink-0 mt-0.5"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg>
+                                    {f}
+                                </li>
+                            ))}
+                        </ul>
+                    </div>
+                    <div class="bg-teal-50 rounded-lg px-3 py-2">
+                        <p class="text-xs text-teal-700"><span class="font-semibold">Endikasyon:</span> {product.indication}</p>
+                    </div>
+                </div>
+            ))}
+        </div>
+
+        <!-- Smith & Nephew Knee Systems -->
+        <h3 class="text-lg font-bold text-slate-800 mb-4 flex items-center gap-2">
+            🦵 <span>Diz Protezi Sistemleri</span>
+        </h3>
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-6">
+            {smithProducts.knee.map(product => (
+                <div class={`card border-2 ${product.highlight ? 'border-teal-200' : 'border-slate-100'} ${product.name === 'OXINIUM Oxidized Zirconium' ? 'md:col-span-2 bg-gradient-to-r from-teal-50 to-slate-50' : ''}`}>
+                    <div class="flex items-start justify-between mb-2">
+                        <div>
+                            <div class="flex items-center gap-2 flex-wrap">
+                                <h4 class="font-semibold text-slate-900">{product.name}</h4>
+                                {product.highlight && <span class={`badge text-xs ${product.name === 'OXINIUM Oxidized Zirconium' ? 'bg-teal-600 text-white' : 'bg-teal-700 text-white'}`}>
+                                    {product.name === 'OXINIUM Oxidized Zirconium' ? '🏅 Özel Teknoloji' : 'Öne Çıkan'}
+                                </span>}
+                            </div>
+                            <span class="badge badge-green text-xs mt-1">{product.type}</span>
+                        </div>
+                    </div>
+                    <p class="text-sm text-slate-600 leading-relaxed mb-3">{product.description}</p>
+                    <div class={`${product.name === 'OXINIUM Oxidized Zirconium' ? 'grid grid-cols-1 sm:grid-cols-2 gap-4' : ''} mb-3`}>
+                        <div>
+                            <p class="text-xs font-semibold text-slate-500 uppercase tracking-wider mb-1.5">Özellikler</p>
+                            <ul class="space-y-1">
+                                {product.features.map(f => (
+                                    <li class="flex items-start gap-2 text-xs text-slate-600">
+                                        <svg width="12" height="12" viewBox="0 0 24 24" fill="#0d9488" class="flex-shrink-0 mt-0.5"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg>
+                                        {f}
+                                    </li>
+                                ))}
+                            </ul>
+                        </div>
+                        {product.name === 'OXINIUM Oxidized Zirconium' && (
+                            <div class="bg-teal-100 rounded-xl p-4 flex flex-col justify-center">
+                                <p class="text-teal-800 font-semibold text-sm mb-2">Neden OXINIUM?</p>
+                                <p class="text-teal-700 text-xs leading-relaxed">
+                                    Kobalt-krom'a kıyasla 4.900 kat daha sert yüzey. Polietilen aşınmasında %45–50 azalma. Metal alerjisi veya metal iyonu hassasiyeti olan hastalarda güvenli alternatif. Seramik kırılma riski yok.
+                                </p>
+                            </div>
+                        )}
+                    </div>
+                    <div class="bg-teal-50 rounded-lg px-3 py-2">
+                        <p class="text-xs text-teal-700"><span class="font-semibold">Endikasyon:</span> {product.indication}</p>
+                    </div>
+                </div>
+            ))}
+        </div>
+
+        <!-- CORI Robotic -->
+        <div class="bg-gradient-to-r from-teal-900 to-teal-800 rounded-xl p-5 text-white">
+            <div class="flex items-start gap-4">
+                <div class="w-10 h-10 bg-teal-700 rounded-lg flex items-center justify-center text-lg flex-shrink-0">🤖</div>
+                <div>
+                    <h4 class="font-semibold text-lg mb-1">{smithProducts.tech.name}</h4>
+                    <p class="text-teal-100 text-sm mb-3">{smithProducts.tech.description}</p>
+                    <div class="flex flex-wrap gap-2">
+                        {smithProducts.tech.benefits.map(b => (
+                            <span class="bg-teal-700/60 text-teal-100 text-xs px-2.5 py-1 rounded-full">{b}</span>
+                        ))}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Comparison Table -->
+    <div class="card mb-8">
+        <h2 class="font-semibold text-slate-900 mb-4 text-lg">Karşılaştırma: Zimmer Biomet vs Smith &amp; Nephew</h2>
+        <div class="overflow-x-auto">
+            <table class="w-full text-sm">
+                <thead>
+                    <tr class="border-b-2 border-slate-200">
+                        <th class="text-left py-3 pr-4 text-slate-500 font-semibold w-1/3">Özellik</th>
+                        <th class="text-left py-3 pr-4 text-slate-700 font-semibold">
+                            <span class="badge bg-slate-800 text-white">ZB</span> Zimmer Biomet
+                        </th>
+                        <th class="text-left py-3 text-slate-700 font-semibold">
+                            <span class="badge bg-teal-700 text-white">S&N</span> Smith &amp; Nephew
+                        </th>
+                    </tr>
+                </thead>
+                <tbody class="divide-y divide-slate-100 text-sm">
+                    {[
+                        ['Kuruluş', '1927 — Warsaw, Indiana, ABD', '1856 — Hull, İngiltere'],
+                        ['Öne çıkan diz', 'Persona (kişiselleştirilmiş)', 'JOURNEY II BCS (doğal kinematik)'],
+                        ['Kısmi diz', 'Oxford Partial Knee (dünya lideri)', 'Mevcut sistemler'],
+                        ['Özel materyal', 'Vivacit-E (Vit-E PE)', 'OXINIUM (oksitlenmiş zirkonyum)'],
+                        ['Metal alerjisi', 'Seramik başlar mevcut', 'OXINIUM — en iyi seçenek'],
+                        ['Robotik sistem', 'ROSA Knee (tam robotik)', 'CORI (el tutmalı, CT gerektirmez)'],
+                        ['Klinik kanıt', '30+ yıl Oxford verisi', '30+ yıl BHR resurfacing verisi'],
+                    ].map(([feature, zb, sn]) => (
+                        <tr>
+                            <td class="py-3 pr-4 font-medium text-slate-700">{feature}</td>
+                            <td class="py-3 pr-4 text-slate-600">{zb}</td>
+                            <td class="py-3 text-slate-600">{sn}</td>
+                        </tr>
+                    ))}
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <!-- CTA -->
+    <div class="card bg-blue-50 border-2 border-blue-100">
+        <div class="flex items-start gap-4">
+            <div class="text-3xl">🩺</div>
+            <div>
+                <h3 class="font-semibold text-slate-900 mb-1">Hangi implant benim için doğru?</h3>
+                <p class="text-sm text-slate-600 mb-3">
+                    İmplant seçimi; hastanın yaşı, aktivite düzeyi, kemik kalitesi, vücut kitle indeksi ve cerrahın deneyimine bağlı olarak belirlenir. Bu sayfadaki bilgiler yalnızca genel bilgilendirme amaçlıdır.
+                </p>
+                <a href="/randevular" class="btn btn-primary btn-sm">Randevu Al →</a>
+            </div>
+        </div>
+    </div>
+</Layout>
