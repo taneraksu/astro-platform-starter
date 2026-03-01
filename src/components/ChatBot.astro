@@ -112,7 +112,8 @@
 <script>
 (function () {
     // ── Constants ─────────────────────────────────────────────────────────────
-    const ENDPOINT    = '/.netlify/functions/chat';
+    // Try the standalone Netlify Function first; fall back to the Astro SSR route.
+    const ENDPOINTS   = ['/.netlify/functions/chat', '/api/chat'];
     const STORAGE_KEY = 'yas_ritmi_chat';
 
     // ── State ─────────────────────────────────────────────────────────────────
@@ -275,13 +276,19 @@
         showTyping();
 
         try {
-            const res = await fetch(ENDPOINT, {
-                method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({ messages: messages.map(m => ({ role: m.role, content: m.content })) }),
-            });
-
-            const data = await res.json();
+            // Try each endpoint in order; use first one that responds
+            let res, data;
+            for (const endpoint of ENDPOINTS) {
+                try {
+                    res = await fetch(endpoint, {
+                        method: 'POST',
+                        headers: { 'Content-Type': 'application/json' },
+                        body: JSON.stringify({ messages: messages.map(m => ({ role: m.role, content: m.content })) }),
+                    });
+                    if (res.ok || res.status === 503) break; // 503 = API key missing, still a valid response
+                } catch { /* network error on this endpoint, try next */ }
+            }
+            data = await res.json();
             removeTyping();
 
             if (data.error === 'API_KEY_MISSING') {
