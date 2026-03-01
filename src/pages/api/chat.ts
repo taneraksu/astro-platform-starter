@@ -1,5 +1,8 @@
 import type { APIRoute } from 'astro';
 
+// Explicitly mark as server-side rendered (not prerendered at build time)
+export const prerender = false;
+
 const SYSTEM_PROMPT = `Sen "Op Dr Taner Aksu Yaş Ritmi" uygulamasının sağlık asistanısın. Orta ve ileri yaş hastalara yönelik bir ortopedi ve travmatoloji pratiğinin dijital asistanısın.
 
 UZMANLIK ALANIN:
@@ -29,11 +32,17 @@ DOKTOR İLETİŞİM BİLGİLERİ (gerektiğinde paylaş):
 Yanıtlarında emoji kullanabilirsin — bu mesajları daha okunabilir yapar. Her zaman umut verici ve motive edici ol.`;
 
 export const POST: APIRoute = async ({ request }) => {
-    const apiKey = import.meta.env.ANTHROPIC_API_KEY;
+    // Use process.env for runtime environment variables in Netlify Functions.
+    // import.meta.env is resolved at BUILD TIME in static/hybrid mode and will
+    // be undefined for keys added to Netlify after the build.
+    const apiKey = process.env.ANTHROPIC_API_KEY ?? import.meta.env.ANTHROPIC_API_KEY;
 
     if (!apiKey) {
         return new Response(
-            JSON.stringify({ error: 'API_KEY_MISSING', message: 'Chatbot henüz yapılandırılmamış. Lütfen yöneticinize başvurun.' }),
+            JSON.stringify({
+                error: 'API_KEY_MISSING',
+                message: 'ANTHROPIC_API_KEY ortam değişkeni bulunamadı. Netlify → Site Settings → Environment Variables bölümünden ekleyip yeniden deploy edin.',
+            }),
             { status: 503, headers: { 'Content-Type': 'application/json' } }
         );
     }
@@ -42,7 +51,10 @@ export const POST: APIRoute = async ({ request }) => {
     try {
         body = await request.json();
     } catch {
-        return new Response(JSON.stringify({ error: 'INVALID_JSON' }), { status: 400, headers: { 'Content-Type': 'application/json' } });
+        return new Response(
+            JSON.stringify({ error: 'INVALID_JSON', message: 'Geçersiz istek formatı.' }),
+            { status: 400, headers: { 'Content-Type': 'application/json' } }
+        );
     }
 
     const { messages = [] } = body;
@@ -66,15 +78,21 @@ export const POST: APIRoute = async ({ request }) => {
         if (!response.ok) {
             const errText = await response.text();
             console.error('Anthropic API error:', response.status, errText);
+            // Surface the actual Anthropic error code to help debugging
+            let userMessage = 'Asistana ulaşılamadı. Lütfen daha sonra tekrar deneyin.';
+            if (response.status === 401) userMessage = 'API anahtarı geçersiz. Netlify panelinden ANTHROPIC_API_KEY değerini kontrol edin.';
+            if (response.status === 429) userMessage = 'Çok fazla istek gönderildi. Lütfen bir süre bekleyip tekrar deneyin.';
             return new Response(
-                JSON.stringify({ error: 'API_ERROR', message: 'Asistana ulaşılamadı. Lütfen daha sonra tekrar deneyin.' }),
+                JSON.stringify({ error: 'API_ERROR', message: userMessage }),
                 { status: 502, headers: { 'Content-Type': 'application/json' } }
             );
         }
 
         const data = await response.json();
         const text = data?.content?.[0]?.text ?? '';
-        return new Response(JSON.stringify({ content: text }), { headers: { 'Content-Type': 'application/json' } });
+        return new Response(JSON.stringify({ content: text }), {
+            headers: { 'Content-Type': 'application/json' },
+        });
 
     } catch (err) {
         console.error('Chat API exception:', err);
