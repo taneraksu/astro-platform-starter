@@ -1,0 +1,44 @@
+---
+// OrthoSolve Diabetik Ayak Takip Sistemi - Main Entry Page
+// This Astro page mounts the full React SPA
+import App from '../components/orthosolve/App';
+import '../styles/globals.css';
+---
+
+<html lang="tr">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="OrthoSolve Diabetik Ayak Takip Sistemi - Op. Dr. Taner Aksu" />
+    <title>OrthoSolve — Diabetik Ayak Takip Sistemi</title>
+    <!-- Prevent zoom on mobile input focus (for elderly users) -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0" />
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🦶</text></svg>" />
+    <style>
+      /* Base font size for accessibility */
+      html {
+        font-size: 16px;
+      }
+      body {
+        margin: 0;
+        padding: 0;
+        font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', sans-serif;
+        -webkit-font-smoothing: antialiased;
+      }
+      /* Smooth transitions */
+      * {
+        box-sizing: border-box;
+      }
+      /* Better focus visibility for accessibility */
+      button:focus-visible,
+      a:focus-visible,
+      input:focus-visible {
+        outline: 3px solid #1a3c6e;
+        outline-offset: 2px;
+      }
+    </style>
+  </head>
+  <body>
+    <App client:only="react" />
+  </body>
+</html>
