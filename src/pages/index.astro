@@ -1,5 +1,6 @@
 ---
 import ElderlyLayout from '../layouts/ElderlyLayout.astro';
+import HomeGreeting from '../components/home/HomeGreeting.tsx';
 
 const motivasyonSozleri = [
     "Her adım, daha güçlü bir yarına açılan kapıdır. 🌅",
@@ -84,6 +85,9 @@ const hizliOlcekler = [
 ---
 
 <ElderlyLayout title="Ana Sayfa" activeNav="home">
+    <!-- Personalized Greeting (client-side, reads localStorage) -->
+    <HomeGreeting client:only="react" />
+
     <!-- Hero Section -->
     <section class="bg-gradient-to-br from-blue-900 via-blue-800 to-blue-700 rounded-3xl p-8 lg:p-12 mb-10 text-white relative overflow-hidden">
         <div class="absolute inset-0 opacity-5">
@@ -192,8 +196,45 @@ const hizliOlcekler = [
         </div>
     </section>
 
+    <!-- Quick Contact on Home Page -->
+    <section class="mt-8 bg-gradient-to-r from-green-800 to-emerald-700 text-white rounded-3xl p-7">
+        <h2 class="text-2xl font-bold mb-5 text-center">📞 Op Dr Taner Aksu ile İletişim</h2>
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+            <a href="tel:+905424260599"
+               class="flex items-center justify-center gap-4 bg-white text-green-900 font-bold rounded-2xl p-5 no-underline hover:bg-green-50 transition-all group">
+                <span class="text-5xl group-hover:scale-110 transition-transform">📞</span>
+                <div>
+                    <div class="text-3xl font-black tracking-wide">0542 426 05 99</div>
+                    <div class="text-green-700 text-base font-semibold">Hemen Ara</div>
+                </div>
+            </a>
+            <div class="grid grid-cols-2 gap-3">
+                <a href="mailto:taneraksu@gmail.com"
+                   class="flex flex-col items-center justify-center gap-2 bg-white/20 hover:bg-white/30 border border-white/30 rounded-2xl p-4 no-underline text-center transition-all">
+                    <span class="text-4xl">✉️</span>
+                    <span class="text-white font-semibold text-sm">E-posta</span>
+                </a>
+                <a href="https://maps.google.com/?q=40.986004,28.871471" target="_blank" rel="noopener noreferrer"
+                   class="flex flex-col items-center justify-center gap-2 bg-white/20 hover:bg-white/30 border border-white/30 rounded-2xl p-4 no-underline text-center transition-all">
+                    <span class="text-4xl">🗺️</span>
+                    <span class="text-white font-semibold text-sm">Konum</span>
+                </a>
+                <a href="/chatbot"
+                   class="flex flex-col items-center justify-center gap-2 bg-white/20 hover:bg-white/30 border border-white/30 rounded-2xl p-4 no-underline text-center transition-all">
+                    <span class="text-4xl">🤖</span>
+                    <span class="text-white font-semibold text-sm">Asistan</span>
+                </a>
+                <a href="/iletisim"
+                   class="flex flex-col items-center justify-center gap-2 bg-white/20 hover:bg-white/30 border border-white/30 rounded-2xl p-4 no-underline text-center transition-all">
+                    <span class="text-4xl">📍</span>
+                    <span class="text-white font-semibold text-sm">Adres</span>
+                </a>
+            </div>
+        </div>
+    </section>
+
     <!-- Important Note -->
-    <section class="mt-8 bg-red-50 border-2 border-red-200 rounded-2xl p-6">
+    <section class="mt-6 bg-red-50 border-2 border-red-200 rounded-2xl p-6">
         <div class="flex items-start gap-4">
             <span class="text-3xl">⚕️</span>
             <div>
