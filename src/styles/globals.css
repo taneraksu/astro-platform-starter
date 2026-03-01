@@ -17,6 +17,11 @@
     --color-med-green: #1e6b46;
     --color-med-amber: #c4600e;
     --color-med-bg: #eef3f9;
+    /* OrthoSolve Theme */
+    --color-ortho-blue: #1a3c6e;
+    --color-ortho-teal: #0d9488;
+    --color-ortho-alert: #dc2626;
+    --color-ortho-bg: #f0f4f8;
 }
 
 @layer base {
