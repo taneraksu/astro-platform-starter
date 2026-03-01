@@ -1,0 +1,62 @@
+---
+import ElderlyLayout from '../../layouts/ElderlyLayout.astro';
+import ChatBot from '../../components/chat/ChatBot.tsx';
+---
+
+<ElderlyLayout title="Sağlık Asistanı" activeNav="chatbot">
+    <!-- Header -->
+    <div class="bg-gradient-to-r from-indigo-900 to-blue-800 text-white rounded-3xl p-8 mb-8">
+        <div class="flex items-center gap-4 mb-4">
+            <div class="w-16 h-16 bg-white/20 rounded-2xl flex items-center justify-center text-4xl">🤖</div>
+            <div>
+                <h1 class="text-3xl sm:text-4xl font-bold text-white mb-1">Sağlık Asistanı</h1>
+                <p class="text-indigo-100 text-lg">Sarkopeni, osteoporoz ve yaşlı sağlığı hakkında sorularınızı sorun</p>
+            </div>
+        </div>
+        <div class="flex flex-wrap gap-3">
+            {['Sarkopeni', 'Osteoporoz', 'Egzersiz', 'Beslenme', 'Düşme Önleme', 'Tetkik Yorumu'].map(tag => (
+                <span class="bg-white/15 border border-white/25 text-white px-3 py-1 rounded-xl text-sm font-medium">{tag}</span>
+            ))}
+        </div>
+    </div>
+
+    <!-- Chat Interface -->
+    <div class="bg-white rounded-3xl shadow-xl overflow-hidden border-2 border-slate-200 mb-8">
+        <ChatBot client:load />
+    </div>
+
+    <!-- Capabilities -->
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 mb-6">
+        {[
+            { icon: '💪', title: 'Egzersiz Önerileri', desc: 'Yaşınıza ve durumunuza uygun egzersiz programları' },
+            { icon: '🥗', title: 'Beslenme Rehberliği', desc: 'Protein, kalsiyum, D vitamini ihtiyaçları' },
+            { icon: '📊', title: 'Skor Yorumu', desc: 'SARC-F, TUG, FES-I sonuçlarınızı açıklar' },
+            { icon: '🦴', title: 'Osteoporoz Bilgisi', desc: 'Kemik yoğunluğu, DEXA, tedavi seçenekleri' },
+            { icon: '⚖️', title: 'Düşme Önleme', desc: 'Risk faktörleri ve güvenli yaşam ipuçları' },
+            { icon: '📞', title: 'Randevu Yönlendirme', desc: 'Doktor ile iletişim bilgilerini paylaşır' },
+        ].map(cap => (
+            <div class="bg-slate-50 border border-slate-200 rounded-xl p-4 flex items-start gap-3">
+                <span class="text-3xl flex-shrink-0">{cap.icon}</span>
+                <div>
+                    <div class="font-bold text-slate-800 text-base">{cap.title}</div>
+                    <div class="text-slate-500 text-sm">{cap.desc}</div>
+                </div>
+            </div>
+        ))}
+    </div>
+
+    <!-- Direct Contact -->
+    <div class="bg-green-50 border-2 border-green-200 rounded-2xl p-6">
+        <h3 class="text-xl font-bold text-green-900 mb-3">📞 Doğrudan İletişim Tercih Ediyorsanız</h3>
+        <div class="flex flex-wrap gap-4 items-center">
+            <a href="tel:+905424260599"
+               class="flex items-center gap-3 bg-green-600 text-white font-bold px-6 py-4 rounded-xl text-xl no-underline hover:bg-green-700 transition-all">
+                📞 0542 426 05 99
+            </a>
+            <a href="mailto:taneraksu@gmail.com"
+               class="flex items-center gap-3 bg-blue-700 text-white font-bold px-6 py-4 rounded-xl text-base no-underline hover:bg-blue-800 transition-all">
+                ✉️ taneraksu@gmail.com
+            </a>
+        </div>
+    </div>
+</ElderlyLayout>

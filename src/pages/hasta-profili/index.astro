@@ -1,0 +1,30 @@
+---
+import ElderlyLayout from '../../layouts/ElderlyLayout.astro';
+import PatientProfile from '../../components/patient/PatientProfile.tsx';
+---
+
+<ElderlyLayout title="Hasta Profili" activeNav="hasta-profili">
+    <div class="bg-gradient-to-r from-blue-900 to-indigo-800 text-white rounded-3xl p-8 mb-8">
+        <div class="flex items-center gap-4">
+            <div class="w-16 h-16 bg-white/20 rounded-2xl flex items-center justify-center text-4xl">👤</div>
+            <div>
+                <h1 class="text-3xl sm:text-4xl font-bold text-white mb-1">Hasta Profili</h1>
+                <p class="text-blue-100 text-lg">Kişisel bilgilerinizi, ölçümlerinizi ve tetkik sonuçlarınızı girin</p>
+            </div>
+        </div>
+    </div>
+
+    <div class="bg-white rounded-3xl shadow-lg p-6 lg:p-8">
+        <PatientProfile client:load />
+    </div>
+
+    <div class="mt-6 bg-blue-50 border-2 border-blue-200 rounded-2xl p-5">
+        <div class="flex items-start gap-3">
+            <span class="text-2xl">🔒</span>
+            <p class="text-blue-800 text-base leading-relaxed">
+                <strong>Gizlilik:</strong> Tüm bilgileriniz yalnızca bu cihazda, tarayıcınızın yerel deposunda saklanır.
+                Hiçbir sunucuya gönderilmez. Başka cihazlarda görünmez.
+            </p>
+        </div>
+    </div>
+</ElderlyLayout>

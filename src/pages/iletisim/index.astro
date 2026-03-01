@@ -1,0 +1,137 @@
+---
+import ElderlyLayout from '../../layouts/ElderlyLayout.astro';
+---
+
+<ElderlyLayout title="İletişim" activeNav="iletisim">
+    <div class="bg-gradient-to-r from-green-800 to-emerald-700 text-white rounded-3xl p-8 mb-8">
+        <div class="flex items-center gap-4">
+            <div class="w-16 h-16 bg-white/20 rounded-2xl flex items-center justify-center text-4xl">📞</div>
+            <div>
+                <h1 class="text-3xl sm:text-4xl font-bold text-white mb-1">İletişim</h1>
+                <p class="text-green-100 text-lg">Op Dr Taner Aksu ile iletişime geçin</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- BIG PHONE - most prominent -->
+    <section class="mb-8">
+        <a href="tel:+905424260599"
+           class="block bg-gradient-to-r from-green-600 to-green-500 hover:from-green-500 hover:to-green-400 text-white rounded-3xl p-10 text-center no-underline transition-all group shadow-2xl">
+            <div class="text-8xl mb-5 group-hover:scale-110 transition-transform">📞</div>
+            <div class="text-5xl sm:text-6xl font-black tracking-widest mb-3">0542 426 05 99</div>
+            <div class="text-green-100 text-2xl font-semibold">Aramak için buraya dokunun / tıklayın</div>
+        </a>
+    </section>
+
+    <!-- Other Contact Methods -->
+    <section class="grid grid-cols-1 sm:grid-cols-2 gap-6 mb-8">
+        <!-- Email -->
+        <a href="mailto:taneraksu@gmail.com"
+           class="flex flex-col items-center gap-4 bg-blue-700 hover:bg-blue-600 text-white rounded-2xl p-8 no-underline transition-all text-center group">
+            <span class="text-6xl group-hover:scale-110 transition-transform">✉️</span>
+            <div>
+                <div class="text-2xl font-bold mb-1">E-posta</div>
+                <div class="text-xl text-blue-200">taneraksu@gmail.com</div>
+                <div class="text-blue-300 text-base mt-2">Tıklayarak e-posta gönderin</div>
+            </div>
+        </a>
+
+        <!-- WhatsApp-style (using tel) -->
+        <a href="tel:+905424260599"
+           class="flex flex-col items-center gap-4 bg-emerald-700 hover:bg-emerald-600 text-white rounded-2xl p-8 no-underline transition-all text-center group">
+            <span class="text-6xl group-hover:scale-110 transition-transform">🩺</span>
+            <div>
+                <div class="text-2xl font-bold mb-1">Op Dr Taner Aksu</div>
+                <div class="text-xl text-emerald-200">Ortopedi & Travmatoloji</div>
+                <div class="text-emerald-300 text-base mt-2">Uzman hekiminiz</div>
+            </div>
+        </a>
+    </section>
+
+    <!-- Address -->
+    <section class="mb-8">
+        <div class="bg-white rounded-2xl border-2 border-orange-200 p-6">
+            <h2 class="text-2xl font-bold text-orange-900 mb-5">📍 Adres Bilgileri</h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <div>
+                    <div class="bg-orange-50 rounded-2xl p-5 mb-4">
+                        <div class="text-xl font-bold text-slate-800 mb-3 flex items-start gap-3">
+                            <span class="text-3xl">🏢</span>
+                            <span>Muayenehane Adresi</span>
+                        </div>
+                        <address class="not-italic text-lg text-slate-700 leading-relaxed font-medium">
+                            Zuhuratbaba Mahallesi<br/>
+                            Vankulu Sokak<br/>
+                            Uğurlu Konakları<br/>
+                            B Blok, No: 6<br/>
+                            <strong>Bakırköy / İstanbul</strong>
+                        </address>
+                    </div>
+                    <div class="flex flex-col gap-3">
+                        <a href="https://maps.google.com/?q=40.986004,28.871471" target="_blank" rel="noopener noreferrer"
+                           class="flex items-center gap-3 bg-red-600 hover:bg-red-500 text-white font-bold px-6 py-4 rounded-xl text-lg no-underline transition-all">
+                            🗺️ Google Maps'te Aç
+                        </a>
+                        <a href="https://maps.google.com/?q=40.986004,28.871471" target="_blank" rel="noopener noreferrer"
+                           class="flex items-center gap-3 bg-blue-700 hover:bg-blue-600 text-white font-bold px-6 py-4 rounded-xl text-lg no-underline transition-all">
+                            🧭 Yol Tarifi Al
+                        </a>
+                    </div>
+                </div>
+                <!-- Embedded map placeholder with link -->
+                <a href="https://maps.google.com/?q=40.986004,28.871471" target="_blank" rel="noopener noreferrer"
+                   class="block bg-slate-100 rounded-2xl overflow-hidden min-h-64 flex items-center justify-center no-underline group hover:bg-slate-200 transition-all border-2 border-slate-200">
+                    <div class="text-center p-6">
+                        <div class="text-7xl mb-4 group-hover:scale-110 transition-transform">🗺️</div>
+                        <div class="text-xl font-bold text-slate-700">Haritayı Açmak için Tıklayın</div>
+                        <div class="text-slate-500 text-base mt-2">40.986004, 28.871471</div>
+                        <div class="text-slate-400 text-sm mt-1">Bakırköy, İstanbul</div>
+                    </div>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Doctor Info -->
+    <section class="mb-8">
+        <div class="bg-gradient-to-br from-blue-900 to-blue-800 text-white rounded-2xl p-8 text-center">
+            <div class="text-6xl mb-4">🦴</div>
+            <h2 class="text-3xl font-bold mb-2">Op Dr Taner Aksu</h2>
+            <p class="text-blue-200 text-xl mb-1">Ortopedi ve Travmatoloji Uzmanı</p>
+            <p class="text-blue-300 text-lg mb-6">Kas İskelet Sistemi Sağlığı | Sarkopeni | Osteoporoz</p>
+            <div class="flex flex-col sm:flex-row gap-4 justify-center">
+                <a href="tel:+905424260599"
+                   class="flex items-center justify-center gap-3 bg-white text-blue-900 font-bold px-8 py-4 rounded-xl text-xl no-underline hover:bg-blue-50 transition-all">
+                    📞 0542 426 05 99
+                </a>
+                <a href="mailto:taneraksu@gmail.com"
+                   class="flex items-center justify-center gap-3 bg-white/20 text-white font-bold px-8 py-4 rounded-xl text-lg no-underline hover:bg-white/30 transition-all border border-white/30">
+                    ✉️ E-posta Gönder
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Working hours (placeholder - you can update) -->
+    <section>
+        <div class="bg-slate-50 border-2 border-slate-200 rounded-2xl p-6">
+            <h2 class="text-2xl font-bold text-slate-800 mb-4">⏰ Çalışma Saatleri</h2>
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                {[
+                    { day: 'Pazartesi – Cuma', hours: '09:00 – 18:00' },
+                    { day: 'Cumartesi', hours: '09:00 – 14:00' },
+                    { day: 'Pazar', hours: 'Kapalı' },
+                    { day: 'Acil Durum', hours: '0542 426 05 99' },
+                ].map(item => (
+                    <div class="flex items-center justify-between bg-white rounded-xl px-5 py-3 border border-slate-200">
+                        <span class="text-lg font-semibold text-slate-700">{item.day}</span>
+                        <span class={`text-lg font-bold ${item.day === 'Pazar' ? 'text-red-600' : item.day === 'Acil Durum' ? 'text-green-700' : 'text-blue-800'}`}>
+                            {item.hours}
+                        </span>
+                    </div>
+                ))}
+            </div>
+            <p class="text-slate-500 text-sm mt-3 text-center">* Çalışma saatleri değişkenlik gösterebilir. Randevu için arayınız.</p>
+        </div>
+    </section>
+</ElderlyLayout>

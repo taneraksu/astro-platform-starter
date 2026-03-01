@@ -1,0 +1,328 @@
+---
+// ChatBot.astro
+// Floating chat widget — included in ElderlyLayout so it appears on every page.
+// Calls /.netlify/functions/chat (standalone Netlify Function).
+---
+
+<!-- Floating chat widget: bottom-right corner -->
+<div id="yas-chat-widget" class="fixed bottom-6 right-6 z-50 flex flex-col items-end gap-3">
+
+    <!-- Chat panel (hidden by default) -->
+    <div
+        id="chat-panel"
+        class="hidden w-80 sm:w-96 bg-white rounded-2xl shadow-2xl border border-slate-200 flex-col overflow-hidden"
+        style="height: 520px;"
+        role="dialog"
+        aria-label="Yaş Ritmi Sağlık Asistanı"
+    >
+        <!-- Header -->
+        <div class="bg-blue-800 text-white px-4 py-3 flex items-center justify-between flex-shrink-0">
+            <div class="flex items-center gap-2">
+                <span class="text-2xl" aria-hidden="true">🤖</span>
+                <div>
+                    <div class="font-bold text-base leading-tight">Yaş Ritmi Asistanı</div>
+                    <div class="text-blue-200 text-xs">Op Dr Taner Aksu Kliniği</div>
+                </div>
+            </div>
+            <div class="flex items-center gap-3">
+                <button
+                    id="chat-clear"
+                    class="text-blue-200 hover:text-white text-xs underline bg-transparent border-0 cursor-pointer hidden"
+                    title="Sohbeti temizle"
+                >
+                    Temizle
+                </button>
+                <button
+                    id="chat-close"
+                    class="text-blue-200 hover:text-white text-2xl leading-none bg-transparent border-0 cursor-pointer w-8 h-8 flex items-center justify-center"
+                    title="Kapat"
+                    aria-label="Sohbeti kapat"
+                >
+                    ✕
+                </button>
+            </div>
+        </div>
+
+        <!-- Messages area -->
+        <div id="chat-messages" class="flex-1 overflow-y-auto p-3 space-y-3 bg-slate-50">
+            <!-- Welcome screen -->
+            <div id="chat-welcome" class="text-center py-4">
+                <div class="text-5xl mb-2" aria-hidden="true">🤖</div>
+                <p class="text-slate-700 text-sm font-semibold mb-1">Merhaba! Size nasıl yardımcı olabilirim?</p>
+                <p class="text-slate-500 text-xs mb-4 leading-relaxed">
+                    Sarkopeni, osteoporoz, egzersiz ve sağlıklı yaşlanma konularındaki sorularınızı yanıtlıyorum.
+                </p>
+                <div class="flex flex-wrap gap-1.5 justify-center">
+                    <button class="quick-q bg-white border border-blue-200 text-blue-800 px-3 py-1.5 rounded-xl text-xs font-medium hover:bg-blue-50 cursor-pointer transition-colors">Sarkopeni nedir?</button>
+                    <button class="quick-q bg-white border border-blue-200 text-blue-800 px-3 py-1.5 rounded-xl text-xs font-medium hover:bg-blue-50 cursor-pointer transition-colors">Düşme riski önleme</button>
+                    <button class="quick-q bg-white border border-blue-200 text-blue-800 px-3 py-1.5 rounded-xl text-xs font-medium hover:bg-blue-50 cursor-pointer transition-colors">Hangi egzersizler?</button>
+                    <button class="quick-q bg-white border border-blue-200 text-blue-800 px-3 py-1.5 rounded-xl text-xs font-medium hover:bg-blue-50 cursor-pointer transition-colors">Günlük protein ihtiyacı</button>
+                    <button class="quick-q bg-white border border-blue-200 text-blue-800 px-3 py-1.5 rounded-xl text-xs font-medium hover:bg-blue-50 cursor-pointer transition-colors">Doktorla iletişim</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Error banner -->
+        <div
+            id="chat-error"
+            class="hidden px-3 py-2 bg-red-50 border-t border-red-200 text-red-700 text-xs flex-shrink-0"
+            role="alert"
+        ></div>
+
+        <!-- Input area -->
+        <div class="border-t-2 border-slate-200 p-3 bg-white flex-shrink-0">
+            <div class="flex gap-2 items-end">
+                <textarea
+                    id="chat-input"
+                    rows="2"
+                    placeholder="Sorunuzu yazın... (Enter = gönder)"
+                    aria-label="Mesaj yaz"
+                    class="flex-1 border-2 border-gray-300 rounded-xl px-3 py-2 text-sm text-slate-800 focus:outline-none focus:border-blue-600 resize-none leading-snug"
+                ></textarea>
+                <button
+                    id="chat-send"
+                    aria-label="Gönder"
+                    class="bg-blue-800 text-white font-bold px-4 py-3 rounded-xl text-base hover:bg-blue-900 transition-all cursor-pointer flex-shrink-0 disabled:opacity-50 disabled:cursor-not-allowed min-h-[3.5rem]"
+                >
+                    ➤
+                </button>
+            </div>
+            <p class="text-slate-400 text-xs mt-1.5 text-center">
+                ⚕️ Bilgilendirme amaçlıdır — tıbbi karar için doktorunuza danışın
+            </p>
+        </div>
+    </div>
+
+    <!-- Toggle button (chat bubble) -->
+    <button
+        id="chat-toggle"
+        aria-label="Sağlık asistanını aç"
+        class="w-16 h-16 bg-blue-800 hover:bg-blue-900 text-white rounded-full shadow-xl flex items-center justify-center text-3xl transition-all hover:scale-110 cursor-pointer border-0 relative"
+    >
+        <span id="chat-icon-open" aria-hidden="true">💬</span>
+        <span id="chat-icon-close" class="hidden" aria-hidden="true" style="font-size:1.5rem;">✕</span>
+        <span
+            id="chat-unread"
+            class="hidden absolute -top-1 -right-1 w-5 h-5 bg-red-500 rounded-full text-xs flex items-center justify-center font-bold"
+            aria-label="Yeni mesaj"
+        >!</span>
+    </button>
+</div>
+
+<script>
+(function () {
+    // ── Constants ─────────────────────────────────────────────────────────────
+    // Try the standalone Netlify Function first; fall back to the Astro SSR route.
+    const ENDPOINTS   = ['/.netlify/functions/chat', '/api/chat'];
+    const STORAGE_KEY = 'yas_ritmi_chat';
+
+    // ── State ─────────────────────────────────────────────────────────────────
+    /** @type {{ role: 'user'|'assistant', content: string }[]} */
+    let messages = [];
+    let loading  = false;
+    let isOpen   = false;
+
+    // ── DOM refs ──────────────────────────────────────────────────────────────
+    const panel      = /** @type {HTMLElement} */ (document.getElementById('chat-panel'));
+    const toggleBtn  = document.getElementById('chat-toggle');
+    const closeBtn   = document.getElementById('chat-close');
+    const clearBtn   = document.getElementById('chat-clear');
+    const iconOpen   = document.getElementById('chat-icon-open');
+    const iconClose  = document.getElementById('chat-icon-close');
+    const messagesEl = document.getElementById('chat-messages');
+    const welcome    = document.getElementById('chat-welcome');
+    const inputEl    = /** @type {HTMLTextAreaElement} */ (document.getElementById('chat-input'));
+    const sendBtn    = /** @type {HTMLButtonElement}  */ (document.getElementById('chat-send'));
+    const errorEl    = document.getElementById('chat-error');
+    const unreadDot  = document.getElementById('chat-unread');
+
+    // ── Load history ──────────────────────────────────────────────────────────
+    try {
+        const saved = localStorage.getItem(STORAGE_KEY);
+        if (saved) {
+            messages = JSON.parse(saved);
+            if (messages.length > 0) {
+                welcome.classList.add('hidden');
+                clearBtn.classList.remove('hidden');
+                messages.forEach(m => appendBubble(m.role, m.content));
+            }
+        }
+    } catch { /* ignore */ }
+
+    // ── Quick-question buttons ────────────────────────────────────────────────
+    document.querySelectorAll('.quick-q').forEach(btn => {
+        btn.addEventListener('click', () => send(btn.textContent.trim()));
+    });
+
+    // ── Panel open / close ────────────────────────────────────────────────────
+    function openPanel() {
+        isOpen = true;
+        panel.classList.remove('hidden');
+        panel.classList.add('flex');
+        iconOpen.classList.add('hidden');
+        iconClose.classList.remove('hidden');
+        unreadDot.classList.add('hidden');
+        toggleBtn.setAttribute('aria-label', 'Sağlık asistanını kapat');
+        scrollBottom();
+        inputEl.focus();
+    }
+
+    function closePanel() {
+        isOpen = false;
+        panel.classList.add('hidden');
+        panel.classList.remove('flex');
+        iconOpen.classList.remove('hidden');
+        iconClose.classList.add('hidden');
+        toggleBtn.setAttribute('aria-label', 'Sağlık asistanını aç');
+    }
+
+    toggleBtn.addEventListener('click', () => isOpen ? closePanel() : openPanel());
+    closeBtn.addEventListener('click', closePanel);
+
+    // ── Clear chat ────────────────────────────────────────────────────────────
+    clearBtn.addEventListener('click', () => {
+        if (!confirm('Sohbet geçmişini silmek istiyor musunuz?')) return;
+        messages = [];
+        localStorage.removeItem(STORAGE_KEY);
+        // Remove all bubbles; restore welcome screen
+        Array.from(messagesEl.children).forEach(child => {
+            if (child.id !== 'chat-welcome') child.remove();
+        });
+        welcome.classList.remove('hidden');
+        clearBtn.classList.add('hidden');
+    });
+
+    // ── Render helpers ────────────────────────────────────────────────────────
+    function appendBubble(role, content) {
+        const isUser = role === 'user';
+        const row = document.createElement('div');
+        row.className = `flex ${isUser ? 'justify-end' : 'justify-start'} items-end gap-1.5`;
+
+        if (!isUser) {
+            const av = document.createElement('span');
+            av.textContent = '🤖';
+            av.className = 'text-lg flex-shrink-0';
+            av.setAttribute('aria-hidden', 'true');
+            row.appendChild(av);
+        }
+
+        const bubble = document.createElement('div');
+        bubble.className = `max-w-[85%] rounded-2xl px-4 py-3 text-sm leading-relaxed ${
+            isUser
+                ? 'bg-blue-800 text-white rounded-br-sm'
+                : 'bg-white border border-slate-200 text-slate-800 rounded-bl-sm shadow-sm'
+        }`;
+        bubble.innerHTML = content
+            .replace(/&/g, '&amp;')
+            .replace(/</g, '&lt;')
+            .replace(/>/g, '&gt;')
+            .replace(/\*\*(.+?)\*\*/g, '<strong>$1</strong>')
+            .replace(/\*(.+?)\*/g, '<em>$1</em>')
+            .replace(/\n/g, '<br>');
+        row.appendChild(bubble);
+
+        if (isUser) {
+            const av = document.createElement('span');
+            av.textContent = '👤';
+            av.className = 'text-lg flex-shrink-0';
+            av.setAttribute('aria-hidden', 'true');
+            row.appendChild(av);
+        }
+
+        messagesEl.appendChild(row);
+    }
+
+    function showTyping() {
+        const el = document.createElement('div');
+        el.id = 'chat-typing';
+        el.className = 'flex items-center gap-1.5';
+        el.innerHTML =
+            '<span class="text-lg" aria-hidden="true">🤖</span>' +
+            '<div class="bg-white border border-slate-200 rounded-2xl px-4 py-3 shadow-sm flex gap-1 items-center">' +
+                '<span class="w-2 h-2 bg-blue-600 rounded-full animate-bounce" style="animation-delay:0s"></span>' +
+                '<span class="w-2 h-2 bg-blue-600 rounded-full animate-bounce" style="animation-delay:.15s"></span>' +
+                '<span class="w-2 h-2 bg-blue-600 rounded-full animate-bounce" style="animation-delay:.3s"></span>' +
+            '</div>';
+        messagesEl.appendChild(el);
+        scrollBottom();
+    }
+
+    function removeTyping() {
+        document.getElementById('chat-typing')?.remove();
+    }
+
+    function scrollBottom() {
+        setTimeout(() => { messagesEl.scrollTop = messagesEl.scrollHeight; }, 30);
+    }
+
+    function showError(msg) {
+        errorEl.textContent = '⚠️ ' + msg;
+        errorEl.classList.remove('hidden');
+        setTimeout(() => errorEl.classList.add('hidden'), 6000);
+    }
+
+    // ── Send ──────────────────────────────────────────────────────────────────
+    async function send(text) {
+        if (!text?.trim() || loading) return;
+        loading = true;
+        sendBtn.disabled = true;
+        inputEl.value = '';
+
+        const userMsg = { role: 'user', content: text.trim() };
+        messages.push(userMsg);
+        welcome.classList.add('hidden');
+        clearBtn.classList.remove('hidden');
+        appendBubble('user', userMsg.content);
+        showTyping();
+
+        try {
+            // Try each endpoint in order; use first one that responds
+            let res, data;
+            for (const endpoint of ENDPOINTS) {
+                try {
+                    res = await fetch(endpoint, {
+                        method: 'POST',
+                        headers: { 'Content-Type': 'application/json' },
+                        body: JSON.stringify({ messages: messages.map(m => ({ role: m.role, content: m.content })) }),
+                    });
+                    if (res.ok || res.status === 503) break; // 503 = API key missing, still a valid response
+                } catch { /* network error on this endpoint, try next */ }
+            }
+            data = await res.json();
+            removeTyping();
+
+            if (data.error === 'API_KEY_MISSING') {
+                showError('Chatbot henüz yapılandırılmamış. Doktorunuzla iletişime geçin: 0542 426 05 99');
+                messages.pop();
+            } else if (data.error || !data.content) {
+                showError(data.message || 'Bir hata oluştu. Lütfen tekrar deneyin.');
+                messages.pop();
+            } else {
+                const assistantMsg = { role: 'assistant', content: data.content };
+                messages.push(assistantMsg);
+                appendBubble('assistant', assistantMsg.content);
+                scrollBottom();
+                try { localStorage.setItem(STORAGE_KEY, JSON.stringify(messages.slice(-40))); } catch { /* storage full */ }
+                if (!isOpen) unreadDot.classList.remove('hidden');
+            }
+        } catch {
+            removeTyping();
+            showError('Bağlantı hatası. İnternet bağlantınızı kontrol edin.');
+            messages.pop();
+        } finally {
+            loading = false;
+            sendBtn.disabled = false;
+            inputEl.focus();
+        }
+    }
+
+    // ── Input events ──────────────────────────────────────────────────────────
+    sendBtn.addEventListener('click', () => send(inputEl.value));
+    inputEl.addEventListener('keydown', e => {
+        if (e.key === 'Enter' && !e.shiftKey) {
+            e.preventDefault();
+            send(inputEl.value);
+        }
+    });
+})();
+</script>
