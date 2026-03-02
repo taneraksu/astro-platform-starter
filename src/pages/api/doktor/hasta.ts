@@ -4,7 +4,10 @@ import {
     getGlucoseEntries,
     getWoundEntries,
     getProcedures,
-    getMessages
+    getMessages,
+    getVascularEntries,
+    getOsteomyelitisEntries,
+    getHBOSessions
 } from '../../../utils/storage';
 
 // GET /api/doktor/hasta?id=xxx — full patient detail
@@ -17,11 +20,14 @@ export const GET: APIRoute = async ({ request }) => {
         const patient = await getPatientById(id);
         if (!patient) return new Response(JSON.stringify({ error: 'Hasta bulunamadı.' }), { status: 404 });
 
-        const [glucoseEntries, woundEntries, procedures, messages] = await Promise.all([
+        const [glucoseEntries, woundEntries, procedures, messages, vascularEntries, osteomyelitisEntries, hboSessions] = await Promise.all([
             getGlucoseEntries(id),
             getWoundEntries(id),
             getProcedures(id),
-            getMessages(id)
+            getMessages(id),
+            getVascularEntries(id),
+            getOsteomyelitisEntries(id),
+            getHBOSessions(id)
         ]);
 
         return new Response(JSON.stringify({
@@ -29,9 +35,12 @@ export const GET: APIRoute = async ({ request }) => {
             glucoseEntries,
             woundEntries,
             procedures,
-            messages
+            messages,
+            vascularEntries,
+            osteomyelitisEntries,
+            hboSessions
         }), { status: 200 });
-    } catch (e) {
+    } catch {
         return new Response(JSON.stringify({ error: 'Sunucu hatası.' }), { status: 500 });
     }
 };

@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react';
 import { WAGNER_GRADES } from '../../utils/scoring';
+import FootMap from './FootMap';
 
 const WAGNER_DESCRIPTIONS = [
     { emoji: '🟢', desc: 'Yara yok, risk faktörleri mevcut' },
@@ -13,8 +14,20 @@ const WAGNER_DESCRIPTIONS = [
 export default function WoundForm() {
     const [patientId, setPatientId] = useState('');
     const [footSide, setFootSide] = useState<'left' | 'right' | 'both'>('right');
+    const [footRegions, setFootRegions] = useState<string[]>([]);
     const [wagnerGrade, setWagnerGrade] = useState(0);
     const [size, setSize] = useState<'small' | 'medium' | 'large'>('small');
+    // Boyutlar
+    const [dimLength, setDimLength] = useState('');
+    const [dimWidth, setDimWidth] = useState('');
+    const [dimDepth, setDimDepth] = useState('');
+    // Yara yatağı
+    const [granulation, setGranulation] = useState('');
+    const [slough, setSlough] = useState('');
+    const [necrosis, setNecrosis] = useState('');
+    const [exudateAmount, setExudateAmount] = useState<'none' | 'low' | 'moderate' | 'high'>('none');
+    const [exudateType, setExudateType] = useState('');
+    // Symptoms
     const [symptoms, setSymptoms] = useState({ redness: false, swelling: false, discharge: false, odor: false });
     const [painScore, setPainScore] = useState(1);
     const [canWalk, setCanWalk] = useState<'normal' | 'limping' | 'cannot'>('normal');
@@ -39,10 +52,36 @@ export default function WoundForm() {
         e.preventDefault();
         setLoading(true); setError('');
         try {
+            const body: any = {
+                patientId, footSide, wagnerGrade, size,
+                footRegions: footRegions.length > 0 ? footRegions : undefined,
+                symptoms, painScore, canWalk,
+                temperature: temperature ? parseFloat(temperature) : undefined,
+                notes, datetime
+            };
+            // Yara boyutları
+            if (dimLength || dimWidth || dimDepth) {
+                body.dimensions = {
+                    length: dimLength ? parseFloat(dimLength) : undefined,
+                    width: dimWidth ? parseFloat(dimWidth) : undefined,
+                    depth: dimDepth ? parseFloat(dimDepth) : undefined,
+                };
+            }
+            // Yara yatağı
+            if (granulation || slough || necrosis || exudateAmount !== 'none' || exudateType) {
+                body.woundBed = {
+                    granulation: granulation ? parseInt(granulation) : undefined,
+                    slough: slough ? parseInt(slough) : undefined,
+                    necrosis: necrosis ? parseInt(necrosis) : undefined,
+                    exudateAmount,
+                    exudateType: exudateType || undefined,
+                };
+            }
+
             const res = await fetch('/api/yara-durumu', {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({ patientId, footSide, wagnerGrade, size, symptoms, painScore, canWalk, temperature: temperature ? parseFloat(temperature) : undefined, notes, datetime })
+                body: JSON.stringify(body)
             });
             if (!res.ok) { const d = await res.json(); setError(d.error); return; }
             setSaved(true);
@@ -53,12 +92,14 @@ export default function WoundForm() {
     const s = {
         page: { minHeight: '100vh', background: '#f0fdf4', fontFamily: 'Inter,system-ui,sans-serif' },
         header: { background: '#0f766e', color: 'white', padding: '1.25rem 1.5rem', display: 'flex', alignItems: 'center', gap: '1rem' },
-        body: { padding: '1.5rem', maxWidth: '26rem', margin: '0 auto' },
+        body: { padding: '1.5rem', maxWidth: '28rem', margin: '0 auto' },
         card: { background: 'white', borderRadius: '1.25rem', padding: '1.5rem', boxShadow: '0 4px 16px rgba(0,0,0,0.08)', marginBottom: '1rem' },
         label: { display: 'block', fontSize: '1.05rem', fontWeight: 700, color: '#374151', marginBottom: '0.625rem' } as React.CSSProperties,
+        sublabel: { display: 'block', fontSize: '0.9rem', fontWeight: 600, color: '#64748b', marginBottom: '0.375rem', marginTop: '0.875rem' } as React.CSSProperties,
         choiceBtn: (active: boolean, color = '#0f766e') => ({ flex: 1, padding: '0.875rem 0.5rem', border: `2px solid ${active ? color : '#e2e8f0'}`, background: active ? color : 'white', color: active ? 'white' : '#64748b', borderRadius: '0.75rem', cursor: 'pointer', fontSize: '1rem', fontWeight: active ? 700 : 400, transition: 'all 0.15s', textAlign: 'center' as const }) as React.CSSProperties,
         submitBtn: { width: '100%', padding: '1.25rem', background: '#0f766e', color: 'white', border: 'none', borderRadius: '1rem', fontSize: '1.35rem', fontWeight: 800, cursor: 'pointer' } as React.CSSProperties,
         inp: { width: '100%', padding: '0.875rem', border: '2px solid #e2e8f0', borderRadius: '0.75rem', fontSize: '1.05rem', outline: 'none', boxSizing: 'border-box' as const },
+        inpSm: { padding: '0.625rem 0.75rem', border: '2px solid #e2e8f0', borderRadius: '0.625rem', fontSize: '1rem', outline: 'none', width: '100%', boxSizing: 'border-box' as const },
     };
 
     if (saved) {
@@ -72,6 +113,11 @@ export default function WoundForm() {
                         <p style={{ fontWeight: 700, color: '#166534', fontSize: '1.05rem', marginBottom: '0.5rem' }}>Wagner Grade {wagnerGrade}</p>
                         <p style={{ color: '#166534', fontSize: '1rem', lineHeight: 1.5 }}>{wInfo?.recommendation}</p>
                     </div>
+                    {footRegions.length > 0 && (
+                        <p style={{ color: '#64748b', fontSize: '0.9rem', marginBottom: '1rem' }}>
+                            📍 İşaretlenen bölge(ler) kaydedildi
+                        </p>
+                    )}
                     <a href="/hasta" style={{ display: 'block', background: '#0f766e', color: 'white', borderRadius: '1rem', padding: '1rem', textDecoration: 'none', fontWeight: 800, fontSize: '1.2rem' }}>
                         Ana Ekrana Dön
                     </a>
@@ -106,6 +152,19 @@ export default function WoundForm() {
                         </div>
                     </div>
 
+                    {/* Foot Map */}
+                    <div style={s.card}>
+                        <label style={s.label}>📍 Yara Yerini İşaretleyin</label>
+                        <p style={{ fontSize: '0.9rem', color: '#64748b', marginBottom: '1rem' }}>
+                            Ayak diyagramında yaranın bulunduğu bölge(lere) dokunun
+                        </p>
+                        <FootMap
+                            footSide={footSide}
+                            selectedRegions={footRegions}
+                            onChange={setFootRegions}
+                        />
+                    </div>
+
                     {/* Wagner Grade */}
                     <div style={s.card}>
                         <label style={s.label}>Wagner Yara Sınıflaması</label>
@@ -121,15 +180,77 @@ export default function WoundForm() {
                                 );
                             })}
                         </div>
-                        {/* Description */}
                         <div style={{ background: '#f8fafc', borderRadius: '0.625rem', padding: '0.875rem', fontSize: '0.95rem', color: '#475569' }}>
                             <strong>Grade {wagnerGrade}:</strong> {WAGNER_DESCRIPTIONS[wagnerGrade]?.emoji} {WAGNER_DESCRIPTIONS[wagnerGrade]?.desc}
                         </div>
                     </div>
 
+                    {/* Boyutlar (opsiyonel) */}
+                    {wagnerGrade >= 1 && (
+                        <div style={s.card}>
+                            <label style={s.label}>📏 Yara Boyutları (opsiyonel)</label>
+                            <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr 1fr', gap: '0.625rem' }}>
+                                <div>
+                                    <label style={{ fontSize: '0.8rem', color: '#64748b', fontWeight: 600 }}>Uzunluk (cm)</label>
+                                    <input style={s.inpSm} type="number" value={dimLength} onChange={e => setDimLength(e.target.value)} placeholder="0.0" step="0.1" min="0" />
+                                </div>
+                                <div>
+                                    <label style={{ fontSize: '0.8rem', color: '#64748b', fontWeight: 600 }}>Genişlik (cm)</label>
+                                    <input style={s.inpSm} type="number" value={dimWidth} onChange={e => setDimWidth(e.target.value)} placeholder="0.0" step="0.1" min="0" />
+                                </div>
+                                <div>
+                                    <label style={{ fontSize: '0.8rem', color: '#64748b', fontWeight: 600 }}>Derinlik (cm)</label>
+                                    <input style={s.inpSm} type="number" value={dimDepth} onChange={e => setDimDepth(e.target.value)} placeholder="0.0" step="0.1" min="0" />
+                                </div>
+                            </div>
+                        </div>
+                    )}
+
+                    {/* Yara yatağı (opsiyonel, grade 1+) */}
+                    {wagnerGrade >= 1 && (
+                        <div style={s.card}>
+                            <label style={s.label}>🔬 Yara Yatağı (opsiyonel)</label>
+                            <p style={{ fontSize: '0.85rem', color: '#94a3b8', marginBottom: '0.875rem' }}>Yüzdeler toplamı 100 olmalı (bilmiyorsanız boş bırakın)</p>
+                            <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr 1fr', gap: '0.625rem', marginBottom: '1rem' }}>
+                                <div>
+                                    <label style={{ fontSize: '0.8rem', color: '#16a34a', fontWeight: 700 }}>Granülasyon %</label>
+                                    <input style={{ ...s.inpSm, borderColor: '#86efac' }} type="number" value={granulation} onChange={e => setGranulation(e.target.value)} placeholder="0" min="0" max="100" />
+                                </div>
+                                <div>
+                                    <label style={{ fontSize: '0.8rem', color: '#ca8a04', fontWeight: 700 }}>Slough/Fibrin %</label>
+                                    <input style={{ ...s.inpSm, borderColor: '#fde68a' }} type="number" value={slough} onChange={e => setSlough(e.target.value)} placeholder="0" min="0" max="100" />
+                                </div>
+                                <div>
+                                    <label style={{ fontSize: '0.8rem', color: '#dc2626', fontWeight: 700 }}>Nekroz %</label>
+                                    <input style={{ ...s.inpSm, borderColor: '#fca5a5' }} type="number" value={necrosis} onChange={e => setNecrosis(e.target.value)} placeholder="0" min="0" max="100" />
+                                </div>
+                            </div>
+                            <label style={{ fontSize: '0.9rem', fontWeight: 600, color: '#374151' }}>Eksüda Miktarı</label>
+                            <div style={{ display: 'flex', gap: '0.5rem', marginTop: '0.375rem', marginBottom: '0.75rem' }}>
+                                {([['none','Yok'],['low','Az'],['moderate','Orta'],['high','Çok']] as const).map(([v, l]) => (
+                                    <button key={v} type="button"
+                                        style={{ flex: 1, padding: '0.5rem 0.25rem', border: `2px solid ${exudateAmount === v ? '#0f766e' : '#e2e8f0'}`, background: exudateAmount === v ? '#0f766e' : 'white', color: exudateAmount === v ? 'white' : '#64748b', borderRadius: '0.625rem', cursor: 'pointer', fontSize: '0.85rem', fontWeight: 600 }}
+                                        onClick={() => setExudateAmount(v)}>
+                                        {l}
+                                    </button>
+                                ))}
+                            </div>
+                            <label style={{ fontSize: '0.9rem', fontWeight: 600, color: '#374151' }}>Eksüda Tipi</label>
+                            <div style={{ display: 'flex', gap: '0.5rem', marginTop: '0.375rem' }}>
+                                {([['serous','Seröz'],['purulent','Pürülan'],['bloody','Kanlı'],['mixed','Karma']] as const).map(([v, l]) => (
+                                    <button key={v} type="button"
+                                        style={{ flex: 1, padding: '0.5rem 0.1rem', border: `2px solid ${exudateType === v ? '#475569' : '#e2e8f0'}`, background: exudateType === v ? '#475569' : 'white', color: exudateType === v ? 'white' : '#64748b', borderRadius: '0.625rem', cursor: 'pointer', fontSize: '0.8rem', fontWeight: 600 }}
+                                        onClick={() => setExudateType(exudateType === v ? '' : v)}>
+                                        {l}
+                                    </button>
+                                ))}
+                            </div>
+                        </div>
+                    )}
+
                     {/* Size */}
                     <div style={s.card}>
-                        <label style={s.label}>Yara Büyüklüğü</label>
+                        <label style={s.label}>Yara Büyüklüğü (Genel)</label>
                         <div style={{ display: 'flex', gap: '0.75rem' }}>
                             {([['small','Küçük','●'], ['medium','Orta','⬤'], ['large','Büyük','⬛']] as const).map(([v, l, e]) => (
                                 <button key={v} type="button" style={s.choiceBtn(size === v)} onClick={() => setSize(v)}>
@@ -161,6 +282,9 @@ export default function WoundForm() {
                     {/* Pain score */}
                     <div style={s.card}>
                         <label style={s.label}>Ağrı Skoru: {painScore}/10 {PAIN_EMOJIS[painScore]}</label>
+                        <p style={{ fontSize: '0.85rem', color: '#94a3b8', marginBottom: '0.5rem' }}>
+                            Nöropatik hastalarda ağrı hissedilmeyebilir — bu önemli bir bulgudur.
+                        </p>
                         <input type="range" min={1} max={10} value={painScore} onChange={e => setPainScore(parseInt(e.target.value))}
                             style={{ width: '100%', accentColor: '#0f766e' }} />
                         <div style={{ display: 'flex', justifyContent: 'space-between', fontSize: '0.85rem', color: '#94a3b8', marginTop: '0.25rem' }}>

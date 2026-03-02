@@ -17,19 +17,34 @@ export const GET: APIRoute = async ({ request }) => {
 export const POST: APIRoute = async ({ request }) => {
     try {
         const body = await request.json();
-        const { patientId, footSide, wagnerGrade, size, symptoms, painScore, canWalk, temperature, notes, datetime } = body;
+        const {
+            patientId, footSide, wagnerGrade, size,
+            footRegions, dimensions, woundBed,
+            utGrade, utStage, iwgdfInfectionGrade,
+            wifiWound, wifiIschemia, wifiFootInfection,
+            symptoms, painScore, canWalk, temperature, notes, datetime
+        } = body;
 
         if (!patientId || footSide === undefined || wagnerGrade === undefined || !size || !canWalk) {
             return new Response(JSON.stringify({ error: 'Eksik alan.' }), { status: 400 });
         }
 
-        const entry = {
+        const entry: any = {
             id: randomUUID(),
             patientId,
             datetime: datetime ?? new Date().toISOString(),
             footSide,
+            footRegions: footRegions ?? undefined,
             wagnerGrade: Number(wagnerGrade),
             size,
+            dimensions: dimensions ?? undefined,
+            woundBed: woundBed ?? undefined,
+            utGrade: utGrade !== undefined ? Number(utGrade) : undefined,
+            utStage: utStage ?? undefined,
+            iwgdfInfectionGrade: iwgdfInfectionGrade !== undefined ? Number(iwgdfInfectionGrade) : undefined,
+            wifiWound: wifiWound !== undefined ? Number(wifiWound) : undefined,
+            wifiIschemia: wifiIschemia !== undefined ? Number(wifiIschemia) : undefined,
+            wifiFootInfection: wifiFootInfection !== undefined ? Number(wifiFootInfection) : undefined,
             symptoms: symptoms ?? {},
             painScore: painScore ? Number(painScore) : 1,
             canWalk,
@@ -40,7 +55,7 @@ export const POST: APIRoute = async ({ request }) => {
 
         await saveWoundEntry(entry);
         return new Response(JSON.stringify(entry), { status: 201 });
-    } catch (e) {
+    } catch {
         return new Response(JSON.stringify({ error: 'Sunucu hatası.' }), { status: 500 });
     }
 };

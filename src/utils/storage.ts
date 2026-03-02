@@ -125,8 +125,33 @@ export interface WoundEntry {
     patientId: string;
     datetime: string;
     footSide: 'left' | 'right' | 'both';
+    // Lokasyon
+    footRegions?: string[];  // Anatomical region IDs (e.g. ['hallux', 'mth1'])
+    // Wagner (patient-friendly)
     wagnerGrade: number;
     size: 'small' | 'medium' | 'large';
+    // Boyutlar
+    dimensions?: {
+        length?: number;    // cm
+        width?: number;     // cm
+        depth?: number;     // cm
+    };
+    // Yara yatağı
+    woundBed?: {
+        granulation?: number;       // % 0-100
+        slough?: number;            // % 0-100
+        necrosis?: number;          // % 0-100
+        exudateAmount?: 'none' | 'low' | 'moderate' | 'high';
+        exudateType?: string;       // serous/purulent/bloody
+    };
+    // Klinik sınıflamalar (doktor tarafından doldurulabilir)
+    utGrade?: 0 | 1 | 2 | 3;        // University of Texas Grade
+    utStage?: 'A' | 'B' | 'C' | 'D'; // University of Texas Stage
+    iwgdfInfectionGrade?: 1 | 2 | 3 | 4; // 1=yok 2=hafif 3=orta 4=ağır
+    wifiWound?: 0 | 1 | 2 | 3;      // WIfI - Wound component
+    wifiIschemia?: 0 | 1 | 2 | 3;   // WIfI - Ischemia component
+    wifiFootInfection?: 0 | 1 | 2 | 3; // WIfI - foot Infection component
+    // Symptoms
     symptoms: {
         redness?: boolean;
         swelling?: boolean;
@@ -149,6 +174,114 @@ export async function saveWoundEntry(entry: WoundEntry): Promise<void> {
     const all = await getList<WoundEntry>(`wounds-${entry.patientId}`);
     all.push(entry);
     await setList(`wounds-${entry.patientId}`, all);
+}
+
+// ---------- Vascular / Doppler Entries ----------
+
+export interface VascularEntry {
+    id: string;
+    patientId: string;
+    doctorId: string;
+    date: string;
+    // Nabız palpe/Doppler
+    dpPulse: 'present' | 'weak' | 'absent';        // Dorsalis pedis
+    ptPulse: 'present' | 'weak' | 'absent';        // Posterior tibial
+    dopplerWave?: 'triphasic' | 'biphasic' | 'monophasic' | 'absent'; // Dalga karakteri
+    // Ölçümler
+    abi?: number;           // Ankle-Brachial Index (0.0 – 1.5)
+    tbi?: number;           // Toe-Brachial Index (0.0 – 1.0)
+    toePressure?: number;   // mmHg
+    tcpo2?: number;         // Transcutaneous O2 pressure (mmHg)
+    // Sonuç
+    padDiagnosis: 'normal' | 'mild' | 'moderate' | 'severe' | 'critical';
+    revascularizationRecommended: boolean;
+    findings: string;
+    notes?: string;
+    createdAt: string;
+}
+
+export async function getVascularEntries(patientId: string): Promise<VascularEntry[]> {
+    const all = await getList<VascularEntry>(`vascular-${patientId}`);
+    return all.sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime());
+}
+
+export async function saveVascularEntry(entry: VascularEntry): Promise<void> {
+    const all = await getList<VascularEntry>(`vascular-${entry.patientId}`);
+    all.push(entry);
+    await setList(`vascular-${entry.patientId}`, all);
+}
+
+// ---------- Osteomyelitis Records ----------
+
+export interface OsteomyelitisEntry {
+    id: string;
+    patientId: string;
+    doctorId: string;
+    date: string;
+    // Klinik testler
+    probeToBone: boolean;                           // Probe-to-bone testi
+    probeToBoneResult?: 'negative' | 'positive';
+    // Görüntüleme
+    xrayResult: 'not_done' | 'normal' | 'suspicious' | 'confirmed';
+    mriResult: 'not_done' | 'normal' | 'suspicious' | 'confirmed';
+    // Biyopsi
+    boneBiopsy: boolean;
+    biopsyOrganism?: string;                        // Üreyen mikroorganizma
+    // Laboratuvar
+    esr?: number;           // ESR mm/saat
+    crp?: number;           // CRP mg/L
+    wbc?: number;           // WBC x10³/µL
+    // Anatomik
+    affectedBone: string;   // Etkilenen kemik (ör: "1. metatarsal", "kalkaneus")
+    eichenholtzStage?: 'acute' | 'consolidation' | 'reconstruction' | 'na'; // Charcot evresi (gerekirse)
+    // Tedavi
+    diagnosis: 'ruled_out' | 'suspected' | 'confirmed';
+    treatment: 'conservative' | 'antibiotics' | 'surgical' | 'combined';
+    antibioticProtocol?: string;
+    surgicalPlan?: string;
+    notes?: string;
+    createdAt: string;
+}
+
+export async function getOsteomyelitisEntries(patientId: string): Promise<OsteomyelitisEntry[]> {
+    const all = await getList<OsteomyelitisEntry>(`osteo-${patientId}`);
+    return all.sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime());
+}
+
+export async function saveOsteomyelitisEntry(entry: OsteomyelitisEntry): Promise<void> {
+    const all = await getList<OsteomyelitisEntry>(`osteo-${entry.patientId}`);
+    all.push(entry);
+    await setList(`osteo-${entry.patientId}`, all);
+}
+
+// ---------- HBO Sessions ----------
+
+export interface HBOSession {
+    id: string;
+    patientId: string;
+    doctorId: string;
+    date: string;
+    sessionNumber: number;          // Bu seanın numarası (1'den başlar)
+    totalPlannedSessions: number;   // Toplam planlanan seans sayısı
+    indication: string;             // Endikasyon
+    pressureAta: number;            // Basınç (ATA), genellikle 2.0-2.5
+    durationMin: number;            // Süre (dakika), genellikle 60-90
+    outcome: 'completed' | 'interrupted' | 'postponed';
+    woundResponse?: 'improving' | 'stable' | 'worsening' | 'not_assessed';
+    sideEffects?: string;           // Barotravma, kulak ağrısı vb.
+    notes?: string;
+    createdAt: string;
+}
+
+export async function getHBOSessions(patientId: string): Promise<HBOSession[]> {
+    const all = await getList<HBOSession>(`hbo-${patientId}`);
+    return all.sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime());
+}
+
+export async function saveHBOSession(session: HBOSession): Promise<void> {
+    const all = await getList<HBOSession>(`hbo-${session.patientId}`);
+    all.push(session);
+    await setList(`hbo-${session.patientId}`, all);
 }
 
 // ---------- Procedures ----------
