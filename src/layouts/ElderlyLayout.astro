@@ -4,6 +4,7 @@ import '@fontsource-variable/inter/wght.css';
 import interWoff2 from '@fontsource-variable/inter/files/inter-latin-wght-normal.woff2?url';
 import ElderlyHeader from '../components/ElderlyHeader.astro';
 import ElderlyFooter from '../components/ElderlyFooter.astro';
+import ChatBot from '../components/ChatBot.astro';
 
 interface Props {
     title: string;
@@ -39,5 +40,6 @@ const {
             <slot />
         </main>
         <ElderlyFooter />
+        <ChatBot />
     </body>
 </html>
