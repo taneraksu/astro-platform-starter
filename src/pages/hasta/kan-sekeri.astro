@@ -1,0 +1,7 @@
+---
+import DiabeticLayout from '../../layouts/DiabeticLayout.astro';
+import BloodSugarForm from '../../components/diabetic/BloodSugarForm';
+---
+<DiabeticLayout title="Kan Şekeri Gir — DiyabetikAyak" patientFacing={true}>
+  <BloodSugarForm client:load />
+</DiabeticLayout>
