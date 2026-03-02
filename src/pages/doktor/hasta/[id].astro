@@ -1,8 +1,0 @@
----
-import DiabeticLayout from '../../../layouts/DiabeticLayout.astro';
-import PatientDetail from '../../../components/diabetic/PatientDetail';
-const { id } = Astro.params;
----
-<DiabeticLayout title="Hasta Detayı — DiyabetikAyak">
-  <PatientDetail patientId={id!} client:load />
-</DiabeticLayout>

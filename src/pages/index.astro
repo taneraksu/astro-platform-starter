@@ -1,29 +1,249 @@
 ---
-import DiabeticLayout from '../layouts/DiabeticLayout.astro';
+import ElderlyLayout from '../layouts/ElderlyLayout.astro';
+import HomeGreeting from '../components/home/HomeGreeting.tsx';
+
+const motivasyonSozleri = [
+    "Her adım, daha güçlü bir yarına açılan kapıdır. 🌅",
+    "Hareket etmek, hayatı uzatmaktır. Bugün bir adım at! 💪",
+    "Kemikleriniz ve kaslarınız sizin desteğiniz — onları güçlü tutun. 🦴",
+    "Yaş bir sayıdır, enerji ise bir seçimdir. ✨",
+    "Düzenli egzersiz, en iyi yaşlanma ilacıdır. 🏃",
+    "Güçlü kaslar = bağımsız yaşam. Her hareket önemlidir! 🌟",
+];
+
+const bugunMotivasyonu = motivasyonSozleri[new Date().getDay() % motivasyonSozleri.length];
+
+const bolumler = [
+    {
+        href: '/degerlendirme',
+        icon: '📊',
+        baslik: 'Sağlık Değerlendirmesi',
+        aciklama: 'SARC-F, TUG Testi, Düşme Riski ve Komorbiditelerinizi değerlendirin',
+        renk: 'bg-blue-800',
+        acikRenk: 'bg-blue-50',
+        yaziRenk: 'text-blue-800',
+        sinir: 'border-blue-200',
+    },
+    {
+        href: '/egzersiz',
+        icon: '💪',
+        baslik: 'Egzersiz Programı',
+        aciklama: 'Sarkopeni ve osteoporoza yönelik bilimsel egzersiz programları',
+        renk: 'bg-emerald-700',
+        acikRenk: 'bg-emerald-50',
+        yaziRenk: 'text-emerald-800',
+        sinir: 'border-emerald-200',
+    },
+    {
+        href: '/beslenme',
+        icon: '🥗',
+        baslik: 'Beslenme Rehberi',
+        aciklama: 'Protein, kalsiyum ve D vitamini ile kas ve kemik sağlığınızı destekleyin',
+        renk: 'bg-orange-600',
+        acikRenk: 'bg-orange-50',
+        yaziRenk: 'text-orange-800',
+        sinir: 'border-orange-200',
+    },
+    {
+        href: '/ilerleme',
+        icon: '📈',
+        baslik: 'İlerleme Takibi',
+        aciklama: 'Değerlendirme geçmişinizi ve egzersiz başarılarınızı takip edin',
+        renk: 'bg-purple-700',
+        acikRenk: 'bg-purple-50',
+        yaziRenk: 'text-purple-800',
+        sinir: 'border-purple-200',
+    },
+    {
+        href: '/bilgi',
+        icon: '📚',
+        baslik: 'Bilgi Merkezi',
+        aciklama: 'Sarkopeni, osteoporoz ve düşme önleme hakkında kapsamlı bilgiler',
+        renk: 'bg-teal-700',
+        acikRenk: 'bg-teal-50',
+        yaziRenk: 'text-teal-800',
+        sinir: 'border-teal-200',
+    },
+    {
+        href: '/degerlendirme#frax',
+        icon: '🔬',
+        baslik: 'FRAX Kırık Riski',
+        aciklama: 'On yıllık osteoporotik kırık riskini değerlendirin',
+        renk: 'bg-rose-700',
+        acikRenk: 'bg-rose-50',
+        yaziRenk: 'text-rose-800',
+        sinir: 'border-rose-200',
+    },
+];
+
+const hizliOlcekler = [
+    { baslik: 'SARC-F', aciklama: 'Sarkopeni Taraması', href: '/degerlendirme#sarcf', renk: 'bg-blue-100 text-blue-900' },
+    { baslik: 'TUG Testi', aciklama: 'Düşme Riski', href: '/degerlendirme#tug', renk: 'bg-red-100 text-red-900' },
+    { baslik: 'FES-I', aciklama: 'Düşme Korkusu', href: '/degerlendirme#fesi', renk: 'bg-amber-100 text-amber-900' },
+    { baslik: 'Charlson', aciklama: 'Komorbiditeler', href: '/degerlendirme#charlson', renk: 'bg-purple-100 text-purple-900' },
+];
 ---
-<DiabeticLayout title="DiyabetikAyak — Hasta Takip Sistemi">
-  <div class="min-h-screen bg-gradient-to-br from-blue-900 to-blue-700 flex flex-col items-center justify-center p-6">
-    <div class="text-center mb-12">
-      <div style="font-size:4rem;margin-bottom:1rem">🦶</div>
-      <h1 style="font-size:2.5rem;font-weight:800;color:white;margin-bottom:0.5rem">DiyabetikAyak</h1>
-      <p style="color:#bfdbfe;font-size:1.25rem">Hasta Takip ve Yönetim Sistemi</p>
-    </div>
-    <div style="width:100%;max-width:28rem;display:flex;flex-direction:column;gap:1.25rem">
-      <a href="/hasta/giris"
-         style="display:block;background:white;border-radius:1rem;padding:2rem;box-shadow:0 20px 40px rgba(0,0,0,0.2);text-align:center;text-decoration:none;transition:transform 0.2s">
-        <div style="font-size:3.5rem;margin-bottom:0.75rem">👤</div>
-        <h2 style="font-size:1.75rem;font-weight:700;color:#1e3a8a;margin-bottom:0.25rem">Hasta Girişi</h2>
-        <p style="color:#6b7280;font-size:1.1rem">6 haneli kodunuzla giriş yapın</p>
-      </a>
-      <a href="/doktor/giris"
-         style="display:block;background:#1e3a8a;border-radius:1rem;padding:2rem;box-shadow:0 20px 40px rgba(0,0,0,0.3);text-align:center;text-decoration:none;border:2px solid #60a5fa;transition:transform 0.2s">
-        <div style="font-size:3.5rem;margin-bottom:0.75rem">👨‍⚕️</div>
-        <h2 style="font-size:1.75rem;font-weight:700;color:white;margin-bottom:0.25rem">Doktor Paneli</h2>
-        <p style="color:#bfdbfe;font-size:1.1rem">E-posta ile giriş yapın</p>
-      </a>
-    </div>
-    <p style="color:#93c5fd;margin-top:2.5rem;font-size:1rem;text-align:center">
-      Orthosolve Diyabetik Ayak Bakım Merkezi
-    </p>
-  </div>
-</DiabeticLayout>
+
+<ElderlyLayout title="Ana Sayfa" activeNav="home">
+    <!-- Personalized Greeting (client-side, reads localStorage) -->
+    <HomeGreeting client:only="react" />
+
+    <!-- Hero Section -->
+    <section class="bg-gradient-to-br from-blue-900 via-blue-800 to-blue-700 rounded-3xl p-8 lg:p-12 mb-10 text-white relative overflow-hidden">
+        <div class="absolute inset-0 opacity-5">
+            <div class="absolute top-4 right-4 text-9xl">🦴</div>
+            <div class="absolute bottom-4 left-4 text-7xl">💪</div>
+        </div>
+        <div class="relative z-10">
+            <div class="inline-flex items-center gap-2 bg-white/20 rounded-full px-4 py-2 text-blue-100 text-base mb-6">
+                <span>🩺</span>
+                <span>Ortopedi & Travmatoloji Uzmanı</span>
+            </div>
+            <h1 class="text-3xl sm:text-4xl lg:text-5xl font-bold mb-3 leading-tight text-white">
+                Op Dr Taner Aksu
+            </h1>
+            <h2 class="text-2xl sm:text-3xl font-semibold text-blue-200 mb-5">
+                Yaş Ritmi
+            </h2>
+            <p class="text-blue-100 text-xl max-w-2xl leading-relaxed mb-8">
+                Orta ve ileri yaşta kas iskelet sistemi sağlığınızı koruyun.
+                <strong class="text-white">Sarkopeni</strong> ve <strong class="text-white">osteoporoz</strong> takibinizi
+                bilimsel yöntemlerle yapın, düşme riskinizi azaltın.
+            </p>
+            <div class="flex flex-wrap gap-4">
+                <a href="/degerlendirme" class="inline-flex items-center gap-2 bg-white text-blue-900 font-bold px-6 py-4 rounded-xl text-lg hover:bg-blue-50 transition-all no-underline">
+                    📊 Değerlendirmeye Başla
+                </a>
+                <a href="/egzersiz" class="inline-flex items-center gap-2 bg-white/20 text-white font-bold px-6 py-4 rounded-xl text-lg hover:bg-white/30 transition-all no-underline border border-white/30">
+                    💪 Egzersiz Programı
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Daily Motivation -->
+    <section class="bg-amber-50 border-2 border-amber-200 rounded-2xl p-6 mb-10">
+        <div class="flex items-start gap-4">
+            <span class="text-4xl">☀️</span>
+            <div>
+                <h3 class="text-xl font-bold text-amber-900 mb-1">Günün Motivasyonu</h3>
+                <p class="text-amber-800 text-lg leading-relaxed">{bugunMotivasyonu}</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Quick Scales -->
+    <section class="mb-10">
+        <h2 class="text-2xl font-bold text-blue-900 mb-5">⚡ Hızlı Değerlendirmeler</h2>
+        <div class="grid grid-cols-2 sm:grid-cols-4 gap-4">
+            {hizliOlcekler.map((olcek) => (
+                <a href={olcek.href} class={`${olcek.renk} rounded-2xl p-5 text-center no-underline hover:scale-105 transition-all block`}>
+                    <div class="font-bold text-xl mb-1">{olcek.baslik}</div>
+                    <div class="text-sm font-medium opacity-80">{olcek.aciklama}</div>
+                </a>
+            ))}
+        </div>
+    </section>
+
+    <!-- Main Sections Grid -->
+    <section class="mb-10">
+        <h2 class="text-2xl font-bold text-blue-900 mb-5">🗂️ Tüm Bölümler</h2>
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
+            {bolumler.map((bolum) => (
+                <a href={bolum.href} class={`elder-card-hover border-2 ${bolum.sinir} no-underline block`}>
+                    <div class={`w-14 h-14 ${bolum.renk} rounded-2xl flex items-center justify-center text-3xl mb-4`}>
+                        {bolum.icon}
+                    </div>
+                    <h3 class={`text-xl font-bold ${bolum.yaziRenk} mb-2`}>{bolum.baslik}</h3>
+                    <p class="text-slate-600 text-base leading-relaxed">{bolum.aciklama}</p>
+                </a>
+            ))}
+        </div>
+    </section>
+
+    <!-- About the App -->
+    <section class="bg-gradient-to-br from-slate-800 to-slate-900 text-white rounded-3xl p-8 lg:p-10">
+        <h2 class="text-2xl font-bold mb-6 text-white">🎯 Bu Uygulama Ne İşe Yarar?</h2>
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+            <div class="flex items-start gap-4">
+                <span class="text-3xl">🔬</span>
+                <div>
+                    <h4 class="font-bold text-lg text-blue-200 mb-2">Bilimsel Değerlendirme</h4>
+                    <p class="text-slate-300 text-base">SARC-F, TUG, Tinetti, FES-I ve FRAX gibi uluslararası geçerliliği kanıtlanmış ölçeklerle sağlık durumunuzu değerlendirin.</p>
+                </div>
+            </div>
+            <div class="flex items-start gap-4">
+                <span class="text-3xl">💪</span>
+                <div>
+                    <h4 class="font-bold text-lg text-emerald-200 mb-2">Kişiselleştirilmiş Egzersiz</h4>
+                    <p class="text-slate-300 text-base">Sarkopeni ve osteoporoz için kanıta dayalı direnç, denge ve aerobik egzersiz programları.</p>
+                </div>
+            </div>
+            <div class="flex items-start gap-4">
+                <span class="text-3xl">🥗</span>
+                <div>
+                    <h4 class="font-bold text-lg text-orange-200 mb-2">Beslenme Desteği</h4>
+                    <p class="text-slate-300 text-base">Protein, kalsiyum ve D vitamini rehberleriyle kas ve kemik sağlığınızı destekleyin.</p>
+                </div>
+            </div>
+            <div class="flex items-start gap-4">
+                <span class="text-3xl">📈</span>
+                <div>
+                    <h4 class="font-bold text-lg text-purple-200 mb-2">İlerleme Takibi</h4>
+                    <p class="text-slate-300 text-base">Değerlendirmelerinizi ve egzersiz günlüklerinizi takip edin, ilerlemenizi görsel olarak izleyin.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Quick Contact on Home Page -->
+    <section class="mt-8 bg-gradient-to-r from-green-800 to-emerald-700 text-white rounded-3xl p-7">
+        <h2 class="text-2xl font-bold mb-5 text-center">📞 Op Dr Taner Aksu ile İletişim</h2>
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+            <a href="tel:+905424260599"
+               class="flex items-center justify-center gap-4 bg-white text-green-900 font-bold rounded-2xl p-5 no-underline hover:bg-green-50 transition-all group">
+                <span class="text-5xl group-hover:scale-110 transition-transform">📞</span>
+                <div>
+                    <div class="text-3xl font-black tracking-wide">0542 426 05 99</div>
+                    <div class="text-green-700 text-base font-semibold">Hemen Ara</div>
+                </div>
+            </a>
+            <div class="grid grid-cols-2 gap-3">
+                <a href="mailto:taneraksu@gmail.com"
+                   class="flex flex-col items-center justify-center gap-2 bg-white/20 hover:bg-white/30 border border-white/30 rounded-2xl p-4 no-underline text-center transition-all">
+                    <span class="text-4xl">✉️</span>
+                    <span class="text-white font-semibold text-sm">E-posta</span>
+                </a>
+                <a href="https://maps.google.com/?q=40.986004,28.871471" target="_blank" rel="noopener noreferrer"
+                   class="flex flex-col items-center justify-center gap-2 bg-white/20 hover:bg-white/30 border border-white/30 rounded-2xl p-4 no-underline text-center transition-all">
+                    <span class="text-4xl">🗺️</span>
+                    <span class="text-white font-semibold text-sm">Konum</span>
+                </a>
+                <a href="/chatbot"
+                   class="flex flex-col items-center justify-center gap-2 bg-white/20 hover:bg-white/30 border border-white/30 rounded-2xl p-4 no-underline text-center transition-all">
+                    <span class="text-4xl">🤖</span>
+                    <span class="text-white font-semibold text-sm">Asistan</span>
+                </a>
+                <a href="/iletisim"
+                   class="flex flex-col items-center justify-center gap-2 bg-white/20 hover:bg-white/30 border border-white/30 rounded-2xl p-4 no-underline text-center transition-all">
+                    <span class="text-4xl">📍</span>
+                    <span class="text-white font-semibold text-sm">Adres</span>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Important Note -->
+    <section class="mt-6 bg-red-50 border-2 border-red-200 rounded-2xl p-6">
+        <div class="flex items-start gap-4">
+            <span class="text-3xl">⚕️</span>
+            <div>
+                <h3 class="text-xl font-bold text-red-900 mb-2">Önemli Uyarı</h3>
+                <p class="text-red-800 text-base leading-relaxed">
+                    Bu uygulama bilgilendirme ve takip amaçlıdır. Değerlendirme sonuçları ve öneriler profesyonel tıbbi değerlendirmenin yerini tutmaz.
+                    Tedavi kararları için mutlaka Op Dr Taner Aksu veya sağlık ekibinize danışınız.
+                </p>
+            </div>
+        </div>
+    </section>
+</ElderlyLayout>
