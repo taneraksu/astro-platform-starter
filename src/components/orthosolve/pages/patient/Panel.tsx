@@ -1,6 +1,7 @@
 // OrthoSolve - Patient Home Panel (elderly-friendly: large fonts, simple navigation)
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
+import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer, ReferenceLine } from 'recharts';
 import PatientNavbar from '../../components/PatientNavbar';
 import { useAuth } from '../../auth';
 import { glucoseStorage, appointmentStorage, alertStorage, wagnerStorage } from '../../storage';
@@ -21,9 +22,17 @@ function GlucoseStatus({ value }: { value?: number }) {
   return <span className="text-red-700 font-bold text-sm">🔴 Çok Yüksek ({value})</span>;
 }
 
+function formatDateTRShort(iso: string) {
+  try {
+    const d = new Date(iso);
+    return `${String(d.getDate()).padStart(2, '0')}.${String(d.getMonth() + 1).padStart(2, '0')}`;
+  } catch { return iso; }
+}
+
 export default function PatientPanel() {
   const { user } = useAuth();
   const [latestGlucose, setLatestGlucose] = useState<BloodGlucose | null>(null);
+  const [glucoseChartData, setGlucoseChartData] = useState<{ date: string; aclik?: number; tokluk?: number }[]>([]);
   const [nextAppt, setNextAppt] = useState<Appointment | null>(null);
   const [alerts, setAlerts] = useState<Alert[]>([]);
   const [latestWagner, setLatestWagner] = useState<number | null>(null);
@@ -32,6 +41,12 @@ export default function PatientPanel() {
     if (!user?.id) return;
     const glucose = glucoseStorage.getByPatient(user.id);
     setLatestGlucose(glucose[0] || null);
+
+    const chartData = glucose
+      .slice(0, 10)
+      .reverse()
+      .map(r => ({ date: formatDateTRShort(r.tarih), aclik: r.aclik, tokluk: r.tokluk }));
+    setGlucoseChartData(chartData);
 
     const today = new Date().toISOString().slice(0, 10);
     const appts = appointmentStorage.getByPatient(user.id)
@@ -116,6 +131,88 @@ export default function PatientPanel() {
             </Link>
           )}
         </div>
+
+        {/* Blood glucose history chart */}
+        {glucoseChartData.length > 1 && (
+          <div className="bg-white rounded-3xl p-5 shadow-sm mb-4 border border-gray-100">
+            <div className="flex items-center justify-between mb-3">
+              <h2 className="text-base font-bold text-gray-800">📈 Kan Şekeri Geçmişim</h2>
+              <Link to="/hasta/kan-sekeri" className="text-xs font-semibold no-underline" style={{ color: '#0d9488' }}>
+                Tümünü gör →
+              </Link>
+            </div>
+
+            {/* Legend */}
+            <div className="flex gap-4 mb-3">
+              <div className="flex items-center gap-1.5">
+                <span className="w-5 h-0.5 bg-blue-800 rounded inline-block" style={{ height: '3px' }} />
+                <span className="text-xs text-gray-500 font-semibold">Açlık</span>
+              </div>
+              <div className="flex items-center gap-1.5">
+                <span className="w-5 rounded inline-block" style={{ height: '3px', background: '#0d9488', borderTop: '2px dashed #0d9488' }} />
+                <span className="text-xs text-gray-500 font-semibold">Tokluk</span>
+              </div>
+              <div className="flex items-center gap-1.5">
+                <span className="w-5 rounded inline-block" style={{ height: '2px', background: '#16a34a', borderTop: '2px dashed #16a34a' }} />
+                <span className="text-xs text-gray-500">Normal üst sınır (180)</span>
+              </div>
+            </div>
+
+            <ResponsiveContainer width="100%" height={160}>
+              <LineChart data={glucoseChartData} margin={{ top: 4, right: 8, left: -16, bottom: 0 }}>
+                <CartesianGrid strokeDasharray="3 3" stroke="#f0f0f0" />
+                <XAxis dataKey="date" tick={{ fontSize: 10 }} />
+                <YAxis tick={{ fontSize: 10 }} domain={[50, 350]} />
+                <Tooltip
+                  formatter={(value: number, name: string) => [
+                    `${value} mg/dL`,
+                    name === 'aclik' ? 'Açlık' : 'Tokluk',
+                  ]}
+                  contentStyle={{ borderRadius: '12px', fontSize: '12px' }}
+                />
+                <ReferenceLine y={70} stroke="#2563eb" strokeDasharray="4 4" />
+                <ReferenceLine y={180} stroke="#16a34a" strokeDasharray="4 4" />
+                <Line
+                  type="monotone"
+                  dataKey="aclik"
+                  stroke="#1a3c6e"
+                  strokeWidth={2.5}
+                  name="Açlık"
+                  dot={{ fill: '#1a3c6e', r: 4 }}
+                  connectNulls
+                />
+                <Line
+                  type="monotone"
+                  dataKey="tokluk"
+                  stroke="#0d9488"
+                  strokeWidth={2}
+                  name="Tokluk"
+                  dot={false}
+                  strokeDasharray="5 4"
+                  connectNulls
+                />
+              </LineChart>
+            </ResponsiveContainer>
+
+            {/* Range indicators below chart */}
+            <div className="flex gap-2 mt-3 flex-wrap">
+              {(() => {
+                const vals = glucoseChartData.flatMap(d => [d.aclik, d.tokluk]).filter(Boolean) as number[];
+                if (!vals.length) return null;
+                const avg = Math.round(vals.reduce((s, v) => s + v, 0) / vals.length);
+                const max = Math.max(...vals);
+                const min = Math.min(...vals);
+                return (
+                  <>
+                    <span className="text-xs bg-gray-100 rounded-xl px-3 py-1 font-semibold text-gray-600">Ort: {avg} mg/dL</span>
+                    <span className="text-xs bg-red-50 rounded-xl px-3 py-1 font-semibold text-red-600">En yüksek: {max}</span>
+                    <span className="text-xs bg-blue-50 rounded-xl px-3 py-1 font-semibold text-blue-600">En düşük: {min}</span>
+                  </>
+                );
+              })()}
+            </div>
+          </div>
+        )}
 
         {/* Quick actions */}
         <h3 className="text-base font-bold text-gray-600 uppercase tracking-wide mb-3">Hızlı Erişim</h3>
