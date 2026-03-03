@@ -1,6 +1,9 @@
 // OrthoSolve - Patient Blood Glucose Log (elderly-friendly)
 import React, { useState, useEffect } from 'react';
-import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer, ReferenceLine } from 'recharts';
+import {
+  LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip,
+  ResponsiveContainer, ReferenceLine, Legend,
+} from 'recharts';
 import PatientNavbar from '../../components/PatientNavbar';
 import { useAuth } from '../../auth';
 import { glucoseStorage } from '../../storage';
@@ -18,6 +21,26 @@ function formatDateFullTR(iso: string) {
     const d = new Date(iso);
     return `${String(d.getDate()).padStart(2,'0')}.${String(d.getMonth()+1).padStart(2,'0')}.${d.getFullYear()} ${String(d.getHours()).padStart(2,'0')}:${String(d.getMinutes()).padStart(2,'0')}`;
   } catch { return iso; }
+}
+
+function formatMonthTR(iso: string) {
+  try {
+    const d = new Date(iso);
+    return `${String(d.getMonth()+1).padStart(2,'0')}.${d.getFullYear()}`;
+  } catch { return iso; }
+}
+
+function glucoseColor(v: number) {
+  if (v < 70) return 'text-blue-600';
+  if (v > 250) return 'text-red-600';
+  if (v > 180) return 'text-yellow-600';
+  return 'text-green-600';
+}
+
+function hba1cColor(v: number) {
+  if (v < 7) return 'text-green-600';
+  if (v <= 8) return 'text-yellow-600';
+  return 'text-red-600';
 }
 
 function GlucoseIndicator({ value, label }: { value: number; label: string }) {
@@ -43,6 +66,7 @@ export default function PatientGlucoseLog() {
   const [form, setForm] = useState({ aclik: '', tokluk: '', yatmadan: '' });
   const [submitted, setSubmitted] = useState(false);
   const [loading, setLoading] = useState(false);
+  const [showAll, setShowAll] = useState(false);
 
   useEffect(() => {
     if (!user?.id) return;
@@ -72,13 +96,25 @@ export default function PatientGlucoseLog() {
     }, 300);
   };
 
-  const chartData = records
-    .filter(r => r.aclik)
+  // Açlık/Tokluk chart (son 14 gün)
+  const glucoseRecords = records.filter(r => r.aclik || r.tokluk);
+  const chartData = glucoseRecords
     .slice(0, 14)
     .reverse()
     .map(r => ({ date: formatDateTR(r.tarih), aclik: r.aclik, tokluk: r.tokluk }));
 
-  const latest = records[0];
+  // HbA1c chart
+  const hba1cRecords = records.filter(r => r.hba1c !== undefined);
+  const hba1cChartData = hba1cRecords
+    .slice(0, 12)
+    .reverse()
+    .map(r => ({ date: formatMonthTR(r.tarih), hba1c: r.hba1c, hedef: r.hedefHba1c ?? 7.0 }));
+
+  const latestHba1c = hba1cRecords[0];
+  const latest = glucoseRecords[0];
+
+  // History list
+  const historyRecords = showAll ? records : records.slice(0, 10);
 
   return (
     <div className="min-h-screen" style={{ background: '#f0f4f8', paddingBottom: '90px' }}>
@@ -86,7 +122,7 @@ export default function PatientGlucoseLog() {
       <main className="max-w-lg mx-auto px-4 pt-4">
         <h1 className="text-2xl font-bold text-gray-800 mb-5">💉 Kan Şekeri Takibim</h1>
 
-        {/* Latest values */}
+        {/* Latest glucose values */}
         {latest && (
           <div className="mb-5">
             <p className="text-sm text-gray-500 font-semibold mb-3 uppercase tracking-wide">Son Değerlerim</p>
@@ -110,18 +146,11 @@ export default function PatientGlucoseLog() {
           ) : (
             <form onSubmit={handleSubmit} className="space-y-4">
               <div>
-                <label className="block text-base font-bold text-gray-700 mb-2">
-                  🌅 Açlık (Sabah ölçümü)
-                </label>
+                <label className="block text-base font-bold text-gray-700 mb-2">🌅 Açlık (Sabah ölçümü)</label>
                 <div className="flex gap-3 items-center">
                   <input
-                    type="number"
-                    value={form.aclik}
-                    onChange={e => set('aclik', e.target.value)}
-                    inputMode="numeric"
-                    min={20}
-                    max={600}
-                    placeholder="Örnek: 120"
+                    type="number" value={form.aclik} onChange={e => set('aclik', e.target.value)}
+                    inputMode="numeric" min={20} max={600} placeholder="Örnek: 120"
                     className="flex-1 border-2 border-gray-200 rounded-2xl px-4 text-xl font-bold text-center focus:outline-none focus:border-blue-500 focus:ring-2 focus:ring-blue-100"
                     style={{ minHeight: '56px' }}
                   />
@@ -129,18 +158,11 @@ export default function PatientGlucoseLog() {
                 </div>
               </div>
               <div>
-                <label className="block text-base font-bold text-gray-700 mb-2">
-                  🍽️ Tokluk (Yemekten 2 saat sonra)
-                </label>
+                <label className="block text-base font-bold text-gray-700 mb-2">🍽️ Tokluk (Yemekten 2 saat sonra)</label>
                 <div className="flex gap-3 items-center">
                   <input
-                    type="number"
-                    value={form.tokluk}
-                    onChange={e => set('tokluk', e.target.value)}
-                    inputMode="numeric"
-                    min={20}
-                    max={600}
-                    placeholder="Örnek: 160"
+                    type="number" value={form.tokluk} onChange={e => set('tokluk', e.target.value)}
+                    inputMode="numeric" min={20} max={600} placeholder="Örnek: 160"
                     className="flex-1 border-2 border-gray-200 rounded-2xl px-4 text-xl font-bold text-center focus:outline-none focus:border-blue-500 focus:ring-2 focus:ring-blue-100"
                     style={{ minHeight: '56px' }}
                   />
@@ -148,25 +170,17 @@ export default function PatientGlucoseLog() {
                 </div>
               </div>
               <div>
-                <label className="block text-base font-bold text-gray-700 mb-2">
-                  🌙 Gece (Yatmadan önce)
-                </label>
+                <label className="block text-base font-bold text-gray-700 mb-2">🌙 Gece (Yatmadan önce)</label>
                 <div className="flex gap-3 items-center">
                   <input
-                    type="number"
-                    value={form.yatmadan}
-                    onChange={e => set('yatmadan', e.target.value)}
-                    inputMode="numeric"
-                    min={20}
-                    max={600}
-                    placeholder="Örnek: 140"
+                    type="number" value={form.yatmadan} onChange={e => set('yatmadan', e.target.value)}
+                    inputMode="numeric" min={20} max={600} placeholder="Örnek: 140"
                     className="flex-1 border-2 border-gray-200 rounded-2xl px-4 text-xl font-bold text-center focus:outline-none focus:border-blue-500 focus:ring-2 focus:ring-blue-100"
                     style={{ minHeight: '56px' }}
                   />
                   <span className="text-gray-500 font-semibold">mg/dL</span>
                 </div>
               </div>
-
               <button
                 type="submit"
                 disabled={loading || (!form.aclik && !form.tokluk && !form.yatmadan)}
@@ -179,74 +193,149 @@ export default function PatientGlucoseLog() {
           )}
         </div>
 
-        {/* Color guide */}
-        <div className="bg-white rounded-3xl p-4 shadow-sm mb-5">
-          <h3 className="text-base font-bold text-gray-700 mb-3">Renk Kılavuzu</h3>
-          <div className="space-y-2">
-            <div className="flex items-center gap-3 text-sm">
-              <span className="w-5 h-5 rounded-full bg-blue-400 flex-shrink-0" />
-              <span><strong>Mavi:</strong> &lt;70 mg/dL — Düşük kan şekeri, hemen tatlı bir şey yeyin</span>
-            </div>
-            <div className="flex items-center gap-3 text-sm">
-              <span className="w-5 h-5 rounded-full bg-green-400 flex-shrink-0" />
-              <span><strong>Yeşil:</strong> 70-180 mg/dL — Normal, sürdürmeye devam edin</span>
-            </div>
-            <div className="flex items-center gap-3 text-sm">
-              <span className="w-5 h-5 rounded-full bg-yellow-400 flex-shrink-0" />
-              <span><strong>Sarı:</strong> 180-250 mg/dL — Yüksek, dikkatli olun</span>
-            </div>
-            <div className="flex items-center gap-3 text-sm">
-              <span className="w-5 h-5 rounded-full bg-red-500 flex-shrink-0" />
-              <span><strong>Kırmızı:</strong> &gt;250 mg/dL — Doktorunuzu arayın</span>
-            </div>
-          </div>
-        </div>
-
-        {/* Chart */}
-        {chartData.length > 1 && (
+        {/* Glucose trend chart */}
+        {chartData.length > 0 && (
           <div className="bg-white rounded-3xl p-5 shadow-sm mb-5">
-            <h3 className="text-base font-bold text-gray-700 mb-3">📈 Son 14 Günüm</h3>
+            <h3 className="text-base font-bold text-gray-700 mb-1">📈 Kan Şekeri Trendi</h3>
+            <p className="text-xs text-gray-400 mb-3">Son 14 giriş</p>
             <ResponsiveContainer width="100%" height={180}>
-              <LineChart data={chartData}>
+              <LineChart data={chartData} margin={{ top: 4, right: 8, left: -16, bottom: 0 }}>
                 <CartesianGrid strokeDasharray="3 3" stroke="#f0f0f0" />
                 <XAxis dataKey="date" tick={{ fontSize: 10 }} />
                 <YAxis tick={{ fontSize: 10 }} domain={[50, 350]} />
-                <Tooltip formatter={(v: number) => [`${v} mg/dL`]} />
+                <Tooltip
+                  formatter={(v: number, name: string) => [`${v} mg/dL`, name === 'aclik' ? 'Açlık' : 'Tokluk']}
+                  contentStyle={{ borderRadius: '12px', fontSize: '12px' }}
+                />
+                <Legend formatter={n => n === 'aclik' ? 'Açlık' : 'Tokluk'} wrapperStyle={{ fontSize: '11px' }} />
                 <ReferenceLine y={70} stroke="#2563eb" strokeDasharray="4 4" />
-                <ReferenceLine y={180} stroke="#16a34a" strokeDasharray="4 4" />
-                <Line type="monotone" dataKey="aclik" stroke="#1a3c6e" strokeWidth={2.5} name="Açlık" dot={{ fill: '#1a3c6e', r: 4 }} />
-                <Line type="monotone" dataKey="tokluk" stroke="#0d9488" strokeWidth={2} name="Tokluk" dot={false} strokeDasharray="4 4" />
+                <ReferenceLine y={180} stroke="#16a34a" strokeDasharray="4 4" label={{ value: '180', position: 'right', fontSize: 9, fill: '#16a34a' }} />
+                <Line type="monotone" dataKey="aclik" stroke="#1a3c6e" strokeWidth={2.5} name="aclik" dot={{ fill: '#1a3c6e', r: 4 }} connectNulls />
+                <Line type="monotone" dataKey="tokluk" stroke="#0d9488" strokeWidth={2} name="tokluk" dot={false} strokeDasharray="4 4" connectNulls />
               </LineChart>
             </ResponsiveContainer>
           </div>
         )}
 
-        {/* Recent records */}
-        <div className="bg-white rounded-3xl p-5 shadow-sm">
-          <h3 className="text-base font-bold text-gray-700 mb-3">Son Kayıtlarım</h3>
-          <div className="space-y-3">
-            {records.slice(0, 7).map(r => (
-              <div key={r.id} className="flex items-center justify-between p-3 bg-gray-50 rounded-2xl">
-                <span className="text-sm text-gray-500">{formatDateFullTR(r.tarih)}</span>
-                <div className="flex gap-3">
-                  {r.aclik && (
-                    <span className={`text-sm font-bold ${r.aclik < 70 ? 'text-blue-600' : r.aclik > 250 ? 'text-red-600' : r.aclik > 180 ? 'text-yellow-600' : 'text-green-600'}`}>
-                      {r.aclik}
-                    </span>
-                  )}
-                  {r.tokluk && (
-                    <span className={`text-sm font-bold ${r.tokluk > 250 ? 'text-red-600' : r.tokluk > 180 ? 'text-yellow-600' : 'text-green-600'}`}>
-                      / {r.tokluk}
-                    </span>
-                  )}
-                  {r.hba1c && <span className="text-sm font-bold text-purple-600">HbA1c: {r.hba1c}%</span>}
-                </div>
-              </div>
-            ))}
-            {records.length === 0 && (
-              <p className="text-center text-gray-400 py-4">Henüz kayıt yok</p>
-            )}
+        {/* HbA1c chart */}
+        {hba1cChartData.length > 0 && (
+          <div className="bg-white rounded-3xl p-5 shadow-sm mb-5" style={{ border: '2px solid #e9d5ff' }}>
+            <div className="flex items-center justify-between mb-1">
+              <h3 className="text-base font-bold text-gray-700">🧪 HbA1c Geçmişim</h3>
+              {latestHba1c?.hba1c && (
+                <span className={`text-lg font-bold ${hba1cColor(latestHba1c.hba1c)}`}>
+                  {latestHba1c.hba1c}%
+                </span>
+              )}
+            </div>
+            <p className="text-xs text-gray-400 mb-1">Hedef: &lt;{latestHba1c?.hedefHba1c ?? 7.0}% — Doktorunuzun girdiği değerler</p>
+            <p className="text-xs text-gray-400 mb-3">
+              {latestHba1c?.hba1c && latestHba1c.hba1c < 7
+                ? '✅ Hedefe ulaşıldı!'
+                : latestHba1c?.hba1c && latestHba1c.hba1c <= 8
+                ? '⚠️ Hedefe yakın, devam edin'
+                : '🔴 Hedefin üzerinde, doktorunuzla görüşün'}
+            </p>
+            <ResponsiveContainer width="100%" height={160}>
+              <LineChart data={hba1cChartData} margin={{ top: 4, right: 8, left: -20, bottom: 0 }}>
+                <CartesianGrid strokeDasharray="3 3" stroke="#f3e8ff" />
+                <XAxis dataKey="date" tick={{ fontSize: 10 }} />
+                <YAxis tick={{ fontSize: 10 }} domain={[4, 12]} tickFormatter={v => `${v}%`} />
+                <Tooltip
+                  formatter={(v: number, name: string) => [
+                    `${v}%`,
+                    name === 'hba1c' ? 'HbA1c' : 'Hedef',
+                  ]}
+                  contentStyle={{ borderRadius: '12px', fontSize: '12px' }}
+                />
+                <ReferenceLine y={latestHba1c?.hedefHba1c ?? 7.0} stroke="#9333ea" strokeDasharray="5 4"
+                  label={{ value: `Hedef ${latestHba1c?.hedefHba1c ?? 7}%`, position: 'insideTopRight', fontSize: 10, fill: '#9333ea' }}
+                />
+                <Line
+                  type="monotone" dataKey="hba1c" stroke="#7c3aed" strokeWidth={2.5}
+                  dot={(props) => {
+                    const { cx, cy, payload } = props;
+                    const color = payload.hba1c < 7 ? '#16a34a' : payload.hba1c <= 8 ? '#d97706' : '#dc2626';
+                    return <circle key={`dot-${cx}-${cy}`} cx={cx} cy={cy} r={5} fill={color} stroke="#fff" strokeWidth={2} />;
+                  }}
+                  name="hba1c"
+                />
+              </LineChart>
+            </ResponsiveContainer>
+            {/* HbA1c legend */}
+            <div className="flex gap-3 mt-3 text-xs justify-center">
+              <span className="flex items-center gap-1"><span className="w-3 h-3 rounded-full bg-green-500 inline-block" /> &lt;7% İyi</span>
+              <span className="flex items-center gap-1"><span className="w-3 h-3 rounded-full bg-yellow-500 inline-block" /> 7-8% Orta</span>
+              <span className="flex items-center gap-1"><span className="w-3 h-3 rounded-full bg-red-500 inline-block" /> &gt;8% Yüksek</span>
+            </div>
           </div>
+        )}
+
+        {/* History list */}
+        <div className="bg-white rounded-3xl p-5 shadow-sm">
+          <div className="flex items-center justify-between mb-4">
+            <h3 className="text-base font-bold text-gray-700">📋 Kan Şekeri Geçmişi</h3>
+            <span className="text-xs text-gray-400 font-semibold">{records.length} kayıt</span>
+          </div>
+
+          {records.length === 0 ? (
+            <p className="text-center text-gray-400 py-6">Henüz kayıt yok</p>
+          ) : (
+            <>
+              <div className="space-y-2">
+                {historyRecords.map(r => (
+                  <div key={r.id} className="rounded-2xl p-3" style={{ background: '#f8fafc', border: '1px solid #e2e8f0' }}>
+                    <div className="flex items-center justify-between mb-1">
+                      <span className="text-xs text-gray-400 font-semibold">{formatDateFullTR(r.tarih)}</span>
+                      <span className="text-xs px-2 py-0.5 rounded-full font-semibold"
+                        style={{ background: r.girenKisi === 'doktor' ? '#f3e8ff' : '#f0fdf4', color: r.girenKisi === 'doktor' ? '#7c3aed' : '#15803d' }}>
+                        {r.girenKisi === 'doktor' ? '👨‍⚕️ Doktor' : '🧑 Sen'}
+                      </span>
+                    </div>
+                    <div className="flex flex-wrap gap-3">
+                      {r.aclik !== undefined && (
+                        <div className="flex items-center gap-1">
+                          <span className="text-xs text-gray-400">Açlık:</span>
+                          <span className={`text-sm font-bold ${glucoseColor(r.aclik)}`}>{r.aclik} mg/dL</span>
+                        </div>
+                      )}
+                      {r.tokluk !== undefined && (
+                        <div className="flex items-center gap-1">
+                          <span className="text-xs text-gray-400">Tokluk:</span>
+                          <span className={`text-sm font-bold ${glucoseColor(r.tokluk)}`}>{r.tokluk} mg/dL</span>
+                        </div>
+                      )}
+                      {r.yatmadan !== undefined && (
+                        <div className="flex items-center gap-1">
+                          <span className="text-xs text-gray-400">Gece:</span>
+                          <span className={`text-sm font-bold ${glucoseColor(r.yatmadan)}`}>{r.yatmadan} mg/dL</span>
+                        </div>
+                      )}
+                      {r.hba1c !== undefined && (
+                        <div className="flex items-center gap-1">
+                          <span className="text-xs text-gray-400">HbA1c:</span>
+                          <span className={`text-sm font-bold ${hba1cColor(r.hba1c)}`}>{r.hba1c}%</span>
+                          {r.hedefHba1c && (
+                            <span className="text-xs text-gray-400">(Hedef: {r.hedefHba1c}%)</span>
+                          )}
+                        </div>
+                      )}
+                    </div>
+                  </div>
+                ))}
+              </div>
+
+              {records.length > 10 && (
+                <button
+                  onClick={() => setShowAll(v => !v)}
+                  className="w-full mt-4 py-3 text-sm font-bold rounded-2xl transition-colors"
+                  style={{ background: '#f1f5f9', color: '#475569' }}
+                >
+                  {showAll ? '▲ Daha az göster' : `▼ Tümünü gör (${records.length - 10} daha)`}
+                </button>
+              )}
+            </>
+          )}
         </div>
       </main>
     </div>
