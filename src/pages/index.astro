@@ -4,6 +4,40 @@ import DiabeticLayout from '../layouts/DiabeticLayout.astro';
 <DiabeticLayout title="DiyabetikAyak — Hasta Takip Sistemi">
   <div class="min-h-screen bg-gradient-to-br from-blue-900 to-blue-700 flex flex-col items-center justify-center p-6">
     <div class="text-center mb-12">
+      <!-- ORTHOSOLVE Logo -->
+      <div style="margin-bottom:1.5rem">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1600 600" role="img" aria-label="ORTHOSOLVE logo" style="width:340px;max-width:90vw;height:auto;display:inline-block">
+          <defs>
+            <linearGradient id="blueGrad" x1="0" y1="0" x2="0" y2="1">
+              <stop offset="0%"  stop-color="#2E57C6"/>
+              <stop offset="100%" stop-color="#0B2A7A"/>
+            </linearGradient>
+            <mask id="ringMask">
+              <rect width="100%" height="100%" fill="black"/>
+              <circle cx="260" cy="300" r="145" fill="white"/>
+              <circle cx="220" cy="335" r="55" fill="black"/>
+            </mask>
+            <clipPath id="outerClip">
+              <circle cx="260" cy="300" r="145"/>
+            </clipPath>
+          </defs>
+          <circle cx="260" cy="300" r="145" fill="url(#blueGrad)" mask="url(#ringMask)"/>
+          <g clip-path="url(#outerClip)" mask="url(#ringMask)">
+            <rect x="90" y="330" width="340" height="16" fill="#19B7FF"/>
+            <rect x="90" y="355" width="340" height="16" fill="#14AFFF"/>
+            <rect x="90" y="380" width="340" height="16" fill="#10A6FF"/>
+            <rect x="90" y="405" width="340" height="16" fill="#0B9CFF"/>
+            <rect x="90" y="430" width="340" height="16" fill="#0590FF"/>
+          </g>
+          <g font-family="Montserrat, Avenir, 'Helvetica Neue', Arial, sans-serif">
+            <text x="470" y="290" font-size="120" letter-spacing="6" fill="#ffffff" font-weight="700">ORTHOSOLVE</text>
+            <line x1="470" y1="352" x2="640" y2="352" stroke="#19B7FF" stroke-width="3" opacity="0.85"/>
+            <line x1="1035" y1="352" x2="1205" y2="352" stroke="#19B7FF" stroke-width="3" opacity="0.85"/>
+            <text x="840" y="365" font-size="64" text-anchor="middle" letter-spacing="10" fill="#bfdbfe" font-family="Georgia, 'Times New Roman', Times, serif" font-weight="500">EX OS MOTUS</text>
+            <text x="840" y="440" font-size="44" text-anchor="middle" letter-spacing="8" fill="#19B7FF" font-weight="500">SCIENCE OF MOVEMENT</text>
+          </g>
+        </svg>
+      </div>
       <div style="font-size:4rem;margin-bottom:1rem">🦶</div>
       <h1 style="font-size:2.75rem;font-weight:900;margin-bottom:0.5rem;background:linear-gradient(90deg,#f97316,#ef4444,#f59e0b);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;letter-spacing:-0.02em">Diyabetik Ayak</h1>
       <p style="color:#bfdbfe;font-size:1.25rem">Hasta Takip ve Yönetim Sistemi</p>
