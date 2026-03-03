@@ -341,3 +341,344 @@ export async function markMessagesRead(patientId: string, readerType: 'doctor' |
     }));
     await setList(`messages-${patientId}`, updated);
 }
+
+// ---------- Sub-types for Clinical Profile ----------
+
+export interface HbA1cRecord {
+    date: string;
+    value: number;
+    lab?: string;
+}
+
+export interface UlcerEpisode {
+    date: string;
+    location: string;
+    outcome?: string;
+}
+
+export interface AmputationRecord {
+    date: string;
+    level: 'toe' | 'ray' | 'transmetatarsal' | 'BKA' | 'AKA';
+    side: 'left' | 'right';
+    digit?: string;
+}
+
+export interface AntibioticRecord {
+    name: string;
+    startDate: string;
+    endDate?: string;
+    changedByCulture: boolean;
+    cultureResult?: string;
+}
+
+export interface AllergyRecord {
+    allergen: string;
+    type: 'drug' | 'latex' | 'food' | 'other';
+    reaction?: string;
+}
+
+// ---------- Clinical Profile (Sections A–D) ----------
+
+export interface ClinicalProfile {
+    id: string;
+    patientId: string;
+    doctorId: string;
+    // Section A — Identity / Social
+    gender: 'male' | 'female' | 'other';
+    emergencyContactName?: string;
+    emergencyContactPhone?: string;
+    heightCm?: number;
+    weightKg?: number;
+    bmi?: number;
+    smokingStatus: 'never' | 'former' | 'active';
+    packsPerDay?: number;
+    smokingQuitYear?: number;
+    alcoholStatus: 'never' | 'occasional' | 'regular';
+    mobilityLevel: 'independent' | 'with_aid' | 'wheelchair' | 'bed_bound';
+    homeCareSupport: boolean;
+    homeCareType?: string;
+    // Section B — Diabetes & Metabolic
+    diabetesType: 'T1' | 'T2' | 'LADA' | 'MODY' | 'other';
+    diagnosisYear?: number;
+    treatmentInsulin: boolean;
+    insulinType?: string;
+    treatmentOral: boolean;
+    oralAgentNames?: string;
+    treatmentGLP1: boolean;
+    treatmentSGLT2: boolean;
+    treatmentOther?: string;
+    hba1cRecords: HbA1cRecord[];
+    hypoglycemiaHistory: boolean;
+    glycemicVariabilityNotes?: string;
+    // Section C — Comorbidities
+    ulcerHistory: boolean;
+    ulcerEpisodes: UlcerEpisode[];
+    amputationHistory: boolean;
+    amputations: AmputationRecord[];
+    charcotStatus: 'none' | 'active' | 'old';
+    charcotFoot?: 'left' | 'right' | 'both';
+    eichenholtzStage?: 0 | 1 | 2 | 3;
+    padHistory: boolean;
+    revascularizationHistory: boolean;
+    revascularizationDetails?: string;
+    ckd: boolean;
+    ckdStage?: 1 | 2 | 3 | 4 | 5;
+    dialysis: boolean;
+    transplant: boolean;
+    coronaryArteryDisease: boolean;
+    heartFailure: boolean;
+    stroke: boolean;
+    atrialFibrillation: boolean;
+    retinopathy: boolean;
+    depression: boolean;
+    cognitiveImpairment: boolean;
+    otherComorbidities?: string;
+    // Section D — Medications & Allergies
+    antiplatelet: boolean;
+    antiplateletNames?: string;
+    anticoagulant: boolean;
+    anticoagulantNames?: string;
+    statin: boolean;
+    statinName?: string;
+    antihypertensives?: string;
+    immunosuppression: boolean;
+    immunosuppressionDetails?: string;
+    steroids: boolean;
+    steroidDetails?: string;
+    currentAntibiotics: AntibioticRecord[];
+    allergies: AllergyRecord[];
+    updatedAt: string;
+}
+
+export async function getClinicalProfile(patientId: string): Promise<ClinicalProfile | null> {
+    const blob = await store().get(`clinical-profile-${patientId}`, { type: 'json' });
+    return (blob as ClinicalProfile | null);
+}
+
+export async function saveClinicalProfile(profile: ClinicalProfile): Promise<void> {
+    await store().setJSON(`clinical-profile-${profile.patientId}`, profile);
+}
+
+// ---------- Foot Examination (Section E) ----------
+
+export interface FootExamination {
+    id: string;
+    patientId: string;
+    doctorId: string;
+    examDate: string;
+    examiner?: string;
+    // Neuropathy
+    monofilamentLeft: boolean;
+    monofilamentLeftPoints?: number;
+    monofilamentRight: boolean;
+    monofilamentRightPoints?: number;
+    vibrationLeft?: 'normal' | 'reduced' | 'absent';
+    vibrationRight?: 'normal' | 'reduced' | 'absent';
+    pinprickLeft?: 'normal' | 'reduced' | 'absent';
+    pinprickRight?: 'normal' | 'reduced' | 'absent';
+    temperatureLeft?: 'normal' | 'reduced' | 'absent';
+    temperatureRight?: 'normal' | 'reduced' | 'absent';
+    lopsLeft: boolean;
+    lopsRight: boolean;
+    // Circulation
+    dpPulseLeft: 'palpable' | 'doppler_only' | 'absent';
+    dpPulseRight: 'palpable' | 'doppler_only' | 'absent';
+    ptPulseLeft: 'palpable' | 'doppler_only' | 'absent';
+    ptPulseRight: 'palpable' | 'doppler_only' | 'absent';
+    abiLeft?: number;
+    abiRight?: number;
+    tbiLeft?: number;
+    tbiRight?: number;
+    toePressureLeft?: number;
+    toePressureRight?: number;
+    tcpo2Left?: number;
+    tcpo2Right?: number;
+    capillaryRefillLeft: 'normal' | 'delayed';
+    capillaryRefillRight: 'normal' | 'delayed';
+    skinTempLeft: 'normal' | 'cool' | 'warm';
+    skinTempRight: 'normal' | 'cool' | 'warm';
+    colorChangeLeft: 'normal' | 'pallor' | 'rubor' | 'cyanosis';
+    colorChangeRight: 'normal' | 'pallor' | 'rubor' | 'cyanosis';
+    // Skin & Structure — Left
+    leftCallus: boolean;
+    leftFissure: boolean;
+    leftTinea: boolean;
+    leftOnychomycosis: boolean;
+    leftHalluxValgus: boolean;
+    leftHammerToes: boolean;
+    leftCharcotDeformity: boolean;
+    leftPesPlanus: boolean;
+    leftPesCavus: boolean;
+    leftAnkleEquinus: boolean;
+    // Skin & Structure — Right
+    rightCallus: boolean;
+    rightFissure: boolean;
+    rightTinea: boolean;
+    rightOnychomycosis: boolean;
+    rightHalluxValgus: boolean;
+    rightHammerToes: boolean;
+    rightCharcotDeformity: boolean;
+    rightPesPlanus: boolean;
+    rightPesCavus: boolean;
+    rightAnkleEquinus: boolean;
+    // Footwear
+    appropriateFootwear: boolean;
+    orthosis: boolean;
+    pressurePointsIdentified: boolean;
+    footwearNotes?: string;
+    // Risk
+    iwgdfRiskCategory?: 0 | 1 | 2 | 3;
+    notes?: string;
+    createdAt: string;
+}
+
+export async function getFootExams(patientId: string): Promise<FootExamination[]> {
+    const all = await getList<FootExamination>(`foot-exam-${patientId}`);
+    return all.sort((a, b) => new Date(b.examDate).getTime() - new Date(a.examDate).getTime());
+}
+
+export async function saveFootExam(exam: FootExamination): Promise<void> {
+    const all = await getList<FootExamination>(`foot-exam-${exam.patientId}`);
+    const idx = all.findIndex(e => e.id === exam.id);
+    if (idx >= 0) all[idx] = exam; else all.push(exam);
+    await setList(`foot-exam-${exam.patientId}`, all);
+}
+
+// ---------- Infection Assessment (Section G) ----------
+
+export interface CultureRecord {
+    date: string;
+    source: 'superficial_swab' | 'deep_tissue' | 'bone' | 'blood';
+    organisms?: string;
+    sensitivities?: string;
+    resistances?: string;
+}
+
+export interface InfectionRecord {
+    id: string;
+    patientId: string;
+    doctorId: string;
+    assessmentDate: string;
+    erythemaCm?: number;
+    warmth: boolean;
+    edema: boolean;
+    tenderness: boolean;
+    purulence: boolean;
+    fever: boolean;
+    feverTemp?: number;
+    tachycardia: boolean;
+    hypotension: boolean;
+    iwgdfInfectionGrade: 1 | 2 | 3 | 4;
+    osteomyelitisSuspected: boolean;
+    probeToBone?: boolean;
+    imagingDone: 'none' | 'xray' | 'mri' | 'ct' | 'bone_scan';
+    imagingFindings?: string;
+    boneBiopsyDone: boolean;
+    boneBiopsyResults?: string;
+    cultures: CultureRecord[];
+    notes?: string;
+    createdAt: string;
+}
+
+export async function getInfectionRecords(patientId: string): Promise<InfectionRecord[]> {
+    const all = await getList<InfectionRecord>(`infection-${patientId}`);
+    return all.sort((a, b) => new Date(b.assessmentDate).getTime() - new Date(a.assessmentDate).getTime());
+}
+
+export async function saveInfectionRecord(rec: InfectionRecord): Promise<void> {
+    const all = await getList<InfectionRecord>(`infection-${rec.patientId}`);
+    const idx = all.findIndex(e => e.id === rec.id);
+    if (idx >= 0) all[idx] = rec; else all.push(rec);
+    await setList(`infection-${rec.patientId}`, all);
+}
+
+// ---------- Lab Tests (Section H) ----------
+
+export interface LabRecord {
+    id: string;
+    patientId: string;
+    doctorId: string;
+    testDate: string;
+    wbc?: number;
+    wbcDiff?: string;
+    hgb?: number;
+    plt?: number;
+    crp?: number;
+    esr?: number;
+    procalcitonin?: number;
+    creatinine?: number;
+    egfr?: number;
+    bun?: number;
+    hba1c?: number;
+    fastingGlucose?: number;
+    imagingOrdered?: string;
+    imagingResults?: string;
+    notes?: string;
+    createdAt: string;
+}
+
+export async function getLabRecords(patientId: string): Promise<LabRecord[]> {
+    const all = await getList<LabRecord>(`labs-${patientId}`);
+    return all.sort((a, b) => new Date(b.testDate).getTime() - new Date(a.testDate).getTime());
+}
+
+export async function saveLabRecord(rec: LabRecord): Promise<void> {
+    const all = await getList<LabRecord>(`labs-${rec.patientId}`);
+    const idx = all.findIndex(e => e.id === rec.id);
+    if (idx >= 0) all[idx] = rec; else all.push(rec);
+    await setList(`labs-${rec.patientId}`, all);
+}
+
+// ---------- Treatment Plan (Section I) ----------
+
+export interface DebridementEntry {
+    date: string;
+    operator?: string;
+    type: 'sharp' | 'enzymatic' | 'autolytic' | 'biological' | 'hydrosurgical';
+    notes?: string;
+}
+
+export interface TreatmentRecord {
+    id: string;
+    patientId: string;
+    doctorId: string;
+    planDate: string;
+    debridements: DebridementEntry[];
+    dressingType: string;
+    npwt: boolean;
+    biologicalProducts?: string;
+    dressingChangeFrequency?: string;
+    offloadingTCC: boolean;
+    offloadingWalker: boolean;
+    offloadingInsole: boolean;
+    offloadingRest: boolean;
+    offloadingCrutches: boolean;
+    offloadingOther?: string;
+    revascularizationPlanned: boolean;
+    revascularizationType?: 'endovascular' | 'surgical';
+    revascularizationPlannedDate?: string;
+    revascularizationCompletedDate?: string;
+    revascularizationResult?: string;
+    pressureReliefSurgeryPlanned: boolean;
+    pressureReliefType?: string;
+    pressureReliefPlannedDate?: string;
+    nextAppointmentDate?: string;
+    appointmentIntervalWeeks?: number;
+    patientCompliance: 'good' | 'moderate' | 'poor';
+    educationProvided: boolean;
+    educationTopics?: string[];
+    notes?: string;
+    createdAt: string;
+}
+
+export async function getTreatmentRecords(patientId: string): Promise<TreatmentRecord[]> {
+    const all = await getList<TreatmentRecord>(`treatment-${patientId}`);
+    return all.sort((a, b) => new Date(b.planDate).getTime() - new Date(a.planDate).getTime());
+}
+
+export async function saveTreatmentRecord(rec: TreatmentRecord): Promise<void> {
+    const all = await getList<TreatmentRecord>(`treatment-${rec.patientId}`);
+    const idx = all.findIndex(e => e.id === rec.id);
+    if (idx >= 0) all[idx] = rec; else all.push(rec);
+    await setList(`treatment-${rec.patientId}`, all);
+}

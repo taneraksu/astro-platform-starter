@@ -319,6 +319,162 @@ export function getGlycemicRisk(avgGlucose: number): {
     }
 }
 
+// ---------- PEDIS Score ----------
+
+export interface PEDISResult {
+    perfusion: 1 | 2 | 3 | 4;
+    extent: number; // cm²
+    depth: 1 | 2 | 3;
+    infection: 1 | 2 | 3 | 4;
+    sensation: 1 | 2;
+    perfusionLabel: string;
+    depthLabel: string;
+    infectionLabel: string;
+    sensationLabel: string;
+    summary: string;
+}
+
+export const PEDIS_PERFUSION_OPTIONS = [
+    { value: 1, label: 'P1 — Normal periferik dolaşım (ABI >0.9 veya nabız palpe)' },
+    { value: 2, label: 'P2 — PAD var, kritik iskemi yok (ABI 0.5–0.9)' },
+    { value: 3, label: 'P3 — Kritik iskemi (ABI <0.5 veya toe pressure <30 mmHg)' },
+    { value: 4, label: 'P4 — Kritik iskemi + gangren / anjiyografik obstrüksiyon' },
+];
+export const PEDIS_DEPTH_OPTIONS = [
+    { value: 1, label: 'D1 — Yüzeysel: sadece deri ve subkutan doku' },
+    { value: 2, label: 'D2 — Derin: kas, tendon veya kapsül tutulumu' },
+    { value: 3, label: 'D3 — En derin: kemik veya eklem tutulumu' },
+];
+export const PEDIS_INFECTION_OPTIONS = [
+    { value: 1, label: 'I1 — Enfeksiyon yok' },
+    { value: 2, label: 'I2 — Hafif (eritem ≤2 cm, lokal)' },
+    { value: 3, label: 'I3 — Orta (eritem >2 cm veya derin doku)' },
+    { value: 4, label: 'I4 — Ağır (sistemik inflamatuvar cevap)' },
+];
+export const PEDIS_SENSATION_OPTIONS = [
+    { value: 1, label: 'S1 — Duyum sağlam' },
+    { value: 2, label: 'S2 — LOPS mevcut (koruyucu duyu kaybı)' },
+];
+
+export function describePEDIS(p: 1|2|3|4, e: number, d: 1|2|3, i: 1|2|3|4, s: 1|2): PEDISResult {
+    return {
+        perfusion: p, extent: e, depth: d, infection: i, sensation: s,
+        perfusionLabel: PEDIS_PERFUSION_OPTIONS[p-1].label,
+        depthLabel: PEDIS_DEPTH_OPTIONS[d-1].label,
+        infectionLabel: PEDIS_INFECTION_OPTIONS[i-1].label,
+        sensationLabel: PEDIS_SENSATION_OPTIONS[s-1].label,
+        summary: `PEDIS — P${p} E${e.toFixed(1)}cm² D${d} I${i} S${s}`,
+    };
+}
+
+// ---------- SINBAD Score ----------
+
+export interface SINBADResult {
+    site: 0 | 1;
+    ischemia: 0 | 1;
+    neuropathy: 0 | 1;
+    bacterialInfection: 0 | 1 | 2;
+    area: 0 | 1;
+    depth: 0 | 1;
+    total: number;
+    riskLabel: string;
+    color: string;
+}
+
+export function computeSINBAD(
+    site: 0|1,
+    ischemia: 0|1,
+    neuropathy: 0|1,
+    bacterialInfection: 0|1|2,
+    area: 0|1,
+    depth: 0|1
+): SINBADResult {
+    const total = site + ischemia + neuropathy + bacterialInfection + area + depth;
+    const riskMap: [string, string][] = [
+        ['Çok Düşük Risk (0)', '#16a34a'],
+        ['Düşük Risk (1)', '#65a30d'],
+        ['Düşük-Orta Risk (2)', '#84cc16'],
+        ['Orta Risk (3)', '#ca8a04'],
+        ['Orta-Yüksek Risk (4)', '#ea580c'],
+        ['Yüksek Risk (5)', '#dc2626'],
+        ['Çok Yüksek Risk (6)', '#7f1d1d'],
+    ];
+    const [riskLabel, color] = riskMap[Math.min(total, 6)];
+    return { site, ischemia, neuropathy, bacterialInfection, area, depth, total, riskLabel, color };
+}
+
+// ---------- Eichenholtz Staging (Charcot) ----------
+
+export interface EichenholtzInfo {
+    stage: 0 | 1 | 2 | 3;
+    label: string;
+    clinical: string;
+    radiological: string;
+    management: string;
+    color: string;
+}
+
+export const EICHENHOLTZ_STAGES: EichenholtzInfo[] = [
+    {
+        stage: 0,
+        label: 'Evre 0 — Klinik Aktif Charcot (Prodromal)',
+        clinical: 'Belirgin şişlik, ısı artışı, eritem. Ağrı minimal. X-ray normal.',
+        radiological: 'Düz grafide değişiklik yok; MRI\'da kemik ödemi olabilir.',
+        management: 'Acil tam yük boşaltma (TCC veya kısıtlı yürüme). Ağır aktivite kısıtlaması. Bisfosfonat düşünülebilir.',
+        color: '#dc2626',
+    },
+    {
+        stage: 1,
+        label: 'Evre 1 — Gelişim / Fragmentasyon',
+        clinical: 'Şişlik, ısı artışı devam eder. Eklem instabilitesi.',
+        radiological: 'Periartikular osteopeni, kemik fragmentasyonu, subluksasyon, fraktür.',
+        management: 'Tam yük boşaltma zorunlu (TCC tercih). 6–12 hafta veya inflamasyon gerileyene dek.',
+        color: '#ea580c',
+    },
+    {
+        stage: 2,
+        label: 'Evre 2 — Koalisyon / Konsolidasyon',
+        clinical: 'Isı farkı azalmaya başlar. Deformite stabilleşiyor.',
+        radiological: 'Fragmanlar birleşiyor, kallus formasyonu, skleroz.',
+        management: 'Kademeli yük bindirme. Özel tabanlık/ortez planlanır.',
+        color: '#ca8a04',
+    },
+    {
+        stage: 3,
+        label: 'Evre 3 — Rekonstruksiyon / Remodeling',
+        clinical: 'İnflamasyon geçmiş. Deformite sabit (rocker-bottom vb.).',
+        radiological: 'Kemik konsolidasyonu tamamlanmış, deformite kalıcı.',
+        management: 'Koruyucu ayakkabı/ortez ömür boyu. Ülser riskine karşı yakın izlem.',
+        color: '#16a34a',
+    },
+];
+
+export function getEichenholtzInfo(stage: 0|1|2|3): EichenholtzInfo {
+    return EICHENHOLTZ_STAGES[stage];
+}
+
+// ---------- IWGDF Risk Auto-Compute ----------
+
+export function computeIWGDFRisk(opts: {
+    lopsLeft: boolean;
+    lopsRight: boolean;
+    padHistory: boolean;
+    deformity: boolean;
+    ulcerHistory: boolean;
+    amputationHistory: boolean;
+    dialysis: boolean;
+    transplant: boolean;
+}): 0 | 1 | 2 | 3 {
+    const { lopsLeft, lopsRight, padHistory, deformity, ulcerHistory, amputationHistory, dialysis, transplant } = opts;
+    const lops = lopsLeft || lopsRight;
+    if (ulcerHistory || amputationHistory || dialysis || transplant) return 3;
+    if (lops && padHistory) return 2;
+    if (lops && deformity) return 2;
+    if (padHistory && deformity) return 2;
+    if (lops || padHistory) return 1;
+    return 0;
+}
+
 // Risk alert flags
 export function computeRiskFlags(opts: {
     lastGlucose?: number;

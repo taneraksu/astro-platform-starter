@@ -1,12 +1,19 @@
 import { useState, useEffect } from 'react';
 import { getWagnerInfo, getGlycemicRisk } from '../../utils/scoring';
+import ClinicalProfileTab from './ClinicalProfileTab';
+import FootExamTab from './FootExamTab';
+import LabsTab from './LabsTab';
+import TreatmentPlanTab from './TreatmentPlanTab';
+import ClassificationTab from './ClassificationTab';
 
 interface Props { patientId: string; }
+
+type TabId = 'overview' | 'glucose' | 'wounds' | 'procedures' | 'messages' | 'klinik-profil' | 'ayak-muayenesi' | 'tetkikler' | 'tedavi-plani' | 'siniflamalar';
 
 export default function PatientDetail({ patientId }: Props) {
     const [data, setData] = useState<any>(null);
     const [loading, setLoading] = useState(true);
-    const [tab, setTab] = useState<'overview' | 'glucose' | 'wounds' | 'procedures' | 'messages'>('overview');
+    const [tab, setTab] = useState<TabId>('overview');
     const [doctor, setDoctor] = useState<any>(null);
     const [showProcedureForm, setShowProcedureForm] = useState(false);
     const [newMsg, setNewMsg] = useState('');
@@ -82,6 +89,11 @@ export default function PatientDetail({ patientId }: Props) {
         { id: 'wounds', label: `🦶 Yara (${(woundEntries ?? []).length})` },
         { id: 'procedures', label: `⚕️ İşlemler (${(procedures ?? []).length})` },
         { id: 'messages', label: `💬 Mesajlar${unreadFromPatient > 0 ? ` (${unreadFromPatient}!)` : ''}` },
+        { id: 'klinik-profil', label: '🏥 Hasta Profili' },
+        { id: 'ayak-muayenesi', label: '🔬 Ayak Muayenesi' },
+        { id: 'tetkikler', label: '🧪 Tetkikler' },
+        { id: 'tedavi-plani', label: '💊 Tedavi Planı' },
+        { id: 'siniflamalar', label: '📊 Sınıflamalar' },
     ];
 
     return (
@@ -265,6 +277,31 @@ export default function PatientDetail({ patientId }: Props) {
                             </button>
                         </form>
                     </div>
+                )}
+
+                {/* CLINICAL PROFILE */}
+                {tab === 'klinik-profil' && doctor && (
+                    <ClinicalProfileTab patientId={patientId} doctorId={doctor.id} />
+                )}
+
+                {/* FOOT EXAM */}
+                {tab === 'ayak-muayenesi' && doctor && (
+                    <FootExamTab patientId={patientId} doctorId={doctor.id} />
+                )}
+
+                {/* LABS */}
+                {tab === 'tetkikler' && doctor && (
+                    <LabsTab patientId={patientId} doctorId={doctor.id} />
+                )}
+
+                {/* TREATMENT PLAN */}
+                {tab === 'tedavi-plani' && doctor && (
+                    <TreatmentPlanTab patientId={patientId} doctorId={doctor.id} />
+                )}
+
+                {/* CLASSIFICATIONS */}
+                {tab === 'siniflamalar' && (
+                    <ClassificationTab patientId={patientId} />
                 )}
             </div>
 
