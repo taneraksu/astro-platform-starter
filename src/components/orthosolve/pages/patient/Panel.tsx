@@ -22,10 +22,12 @@ function GlucoseStatus({ value }: { value?: number }) {
   return <span className="text-red-700 font-bold text-sm">🔴 Çok Yüksek ({value})</span>;
 }
 
-function formatDateTRShort(iso: string) {
+function formatDateTRShort(iso: string, includeTime = false) {
   try {
     const d = new Date(iso);
-    return `${String(d.getDate()).padStart(2, '0')}.${String(d.getMonth() + 1).padStart(2, '0')}`;
+    const date = `${String(d.getDate()).padStart(2, '0')}.${String(d.getMonth() + 1).padStart(2, '0')}`;
+    if (!includeTime) return date;
+    return `${date} ${String(d.getHours()).padStart(2, '0')}:${String(d.getMinutes()).padStart(2, '0')}`;
   } catch { return iso; }
 }
 
@@ -42,10 +44,12 @@ export default function PatientPanel() {
     const glucose = glucoseStorage.getByPatient(user.id);
     setLatestGlucose(glucose[0] || null);
 
-    const chartData = glucose
-      .slice(0, 10)
+    const filtered = glucose.filter(r => r.aclik || r.tokluk).slice(0, 14);
+    const dates = filtered.map(r => r.tarih.slice(0, 10));
+    const hasDuplicateDates = new Set(dates).size < dates.length;
+    const chartData = filtered
       .reverse()
-      .map(r => ({ date: formatDateTRShort(r.tarih), aclik: r.aclik, tokluk: r.tokluk }));
+      .map(r => ({ date: formatDateTRShort(r.tarih, hasDuplicateDates), aclik: r.aclik, tokluk: r.tokluk }));
     setGlucoseChartData(chartData);
 
     const today = new Date().toISOString().slice(0, 10);
@@ -133,7 +137,7 @@ export default function PatientPanel() {
         </div>
 
         {/* Blood glucose history chart */}
-        {glucoseChartData.length > 1 && (
+        {glucoseChartData.length >= 1 && (
           <div className="bg-white rounded-3xl p-5 shadow-sm mb-4 border border-gray-100">
             <div className="flex items-center justify-between mb-3">
               <h2 className="text-base font-bold text-gray-800">📈 Kan Şekeri Geçmişim</h2>
