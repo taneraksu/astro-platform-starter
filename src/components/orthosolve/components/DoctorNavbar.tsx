@@ -3,6 +3,7 @@ import React, { useState } from 'react';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { useAuth } from '../auth';
 import { alertStorage } from '../storage';
+import OrthoSolveLogo from './OrthoSolveLogo';
 
 export default function DoctorNavbar() {
   const { logout } = useAuth();
@@ -30,12 +31,8 @@ export default function DoctorNavbar() {
       <div className="max-w-7xl mx-auto px-4">
         <div className="flex items-center justify-between h-16">
           {/* Logo */}
-          <Link to="/doktor/dashboard" className="flex items-center gap-2 no-underline">
-            <span className="text-2xl">🦶</span>
-            <div>
-              <span className="text-white font-bold text-base leading-none block">OrthoSolve</span>
-              <span className="text-teal-300 text-xs">Diabetik Ayak</span>
-            </div>
+          <Link to="/doktor/dashboard" className="flex items-center no-underline">
+            <OrthoSolveLogo width={160} />
           </Link>
 
           {/* Desktop Nav */}

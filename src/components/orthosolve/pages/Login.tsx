@@ -3,6 +3,7 @@ import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useAuth } from '../auth';
 import { patientStorage } from '../storage';
+import OrthoSolveLogo from '../components/OrthoSolveLogo';
 
 type LoginMode = 'select' | 'doctor' | 'patient';
 
@@ -38,15 +39,8 @@ export default function Login() {
     <div className="min-h-screen flex flex-col" style={{ background: 'linear-gradient(135deg, #1a3c6e 0%, #0d9488 100%)' }}>
       {/* Header */}
       <div className="flex flex-col items-center pt-10 pb-6 px-4">
-        <div className="flex items-center gap-3 mb-2">
-          <div className="w-14 h-14 bg-white rounded-2xl flex items-center justify-center shadow-lg">
-            <span className="text-3xl">🦶</span>
-          </div>
-          <div>
-            <h1 className="text-white text-2xl font-bold leading-tight">OrthoSolve</h1>
-            <p className="text-teal-200 text-sm font-medium">Diabetik Ayak Takip Sistemi</p>
-          </div>
-        </div>
+        <OrthoSolveLogo width={300} />
+        <p className="text-teal-200 text-sm mt-3 font-medium">Diabetik Ayak Takip Sistemi</p>
         <p className="text-teal-100 text-sm mt-1">Op. Dr. Taner Aksu | Prof. Dr. M. Gökhan Bilgili</p>
       </div>
 

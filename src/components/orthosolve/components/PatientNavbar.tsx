@@ -2,6 +2,7 @@
 import React from 'react';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { useAuth } from '../auth';
+import OrthoSolveLogo from './OrthoSolveLogo';
 
 export default function PatientNavbar() {
   const { user, logout } = useAuth();
@@ -26,12 +27,8 @@ export default function PatientNavbar() {
     <>
       {/* Top bar */}
       <div style={{ background: '#1a3c6e' }} className="px-4 py-3 flex items-center justify-between">
-        <div className="flex items-center gap-2">
-          <span className="text-2xl">🦶</span>
-          <div>
-            <span className="text-white font-bold text-base leading-none block">OrthoSolve</span>
-            <span className="text-teal-300 text-xs">Diabetik Ayak Takip</span>
-          </div>
+        <div className="flex items-center">
+          <OrthoSolveLogo width={160} />
         </div>
         <div className="text-right">
           <p className="text-teal-200 text-sm font-medium">
